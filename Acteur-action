@@ -1,0 +1,6 @@
+Utilisateur:
+    - créer profil
+    - s'authentifier (via profil créé)
+    - créer nouvelle partie
+    - charger partie
+    - consulter ses anciennes parties
