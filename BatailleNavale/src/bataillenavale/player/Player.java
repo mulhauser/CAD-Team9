@@ -15,6 +15,7 @@ public abstract class Player {
     private Map map;
     private ArrayList<Ship> fleet;
 
+
     public Player(String p, int size){
         this.pseudo = p;
         this.score = 0;
@@ -22,6 +23,19 @@ public abstract class Player {
         this.fleet = new ArrayList<Ship>(4);
     }
 
-    public abstract void putShip(Ship s);
+
+
+
+    public  void putShip(Ship s, int x, int y, String direction){
+
+
+    }
+
+
+
+
+
+
+
     public abstract void fire();
 }
