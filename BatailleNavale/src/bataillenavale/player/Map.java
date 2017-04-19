@@ -1,5 +1,7 @@
 package bataillenavale.player;
 
+import bataillenavale.ship.Ship;
+
 /**
  * Created by mulhauser on 12/04/2017.
  */
@@ -15,7 +17,7 @@ public class Map {
      */
     private int[][] mapDispositionBateaux;
 
-    /**
+    /*
      * pour la mapEtatBateau :
      * le code est :
      * 0 = raté
@@ -35,6 +37,15 @@ public class Map {
                 mapEtatBateaux[i][j] = 0;
             }
         }
+    }
+
+
+    /**
+     * va ajouter un bateau dans le tableau disposition
+     * @param s
+     */
+    public void ajouterBateau(Ship s, int x, int y){
+
     }
 
 

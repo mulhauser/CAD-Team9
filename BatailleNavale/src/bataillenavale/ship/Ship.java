@@ -5,6 +5,11 @@ package bataillenavale.ship;
  */
 public abstract class Ship {
 
+    /**
+     * taille petit = 2
+     * taille moyen 3
+     * taille grand 4
+     */
     private int live;
     private boolean alive = true;
     private int size;
