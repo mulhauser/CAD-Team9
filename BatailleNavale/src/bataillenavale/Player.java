@@ -20,6 +20,6 @@ public abstract class Player {
         this.fleet = new ArrayList<Ship>(4);
     }
 
-    public abstract void putShip(Ship s)
+    public abstract void putShip(Ship s);
     public abstract void fire();
 }
