@@ -3,4 +3,12 @@
 /BatailleNavale/build/
 /BatailleNavale/.idea/
 /BatailleNavale/BatailleNavale.iml
+<<<<<<< HEAD
 /bin/
+=======
+/BatailleNavale/bin/
+/BatailleNavale/.settings/
+/BatailleNavale/.classpath
+/BatailleNavale/.project
+/BatailleNavale/out/
+>>>>>>> 19c4def75136d5bd51b0571a5c0f7ad8d0a17dcd
