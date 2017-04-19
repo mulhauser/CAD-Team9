@@ -45,7 +45,9 @@ public class Map {
      * @param s
      */
     public void ajouterBateau(Ship s, int x, int y){
+        if(s.getSize() == 2){
 
+        }
     }
 
 

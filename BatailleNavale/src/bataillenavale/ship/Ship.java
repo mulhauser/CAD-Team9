@@ -24,4 +24,8 @@ public abstract class Ship {
         this.live = l;
         this.size = s;
     }
+
+    public int getSize(){
+        return this.size;
+    }
 }

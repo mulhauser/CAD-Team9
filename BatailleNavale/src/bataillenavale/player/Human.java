@@ -10,12 +10,12 @@ public class Human extends Player {
         super(p, size);
     }
 
-    @Override
+
     public  void putShip(Ship s, int x, int y, String direction){
 
     }
 
-    @Override
+
     public void fire() {
 
     }
