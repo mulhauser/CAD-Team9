@@ -11,8 +11,7 @@ public class IA extends Player {
     }
 
     @Override
-    public  void putShip(Ship s, int x, int y, String direction){
-
+    public void putShip(Ship s) {
 
     }
 

@@ -11,7 +11,7 @@ public class Human extends Player {
     }
 
     @Override
-    public void putShip(Ship s) {
+    public  void putShip(Ship s, int x, int y, String direction){
 
     }
 
