@@ -1,5 +1,7 @@
 package bataillenavale;
 
+import bataillenavale.Ship.Ship;
+
 /**
  * Created by mulhauser on 12/04/2017.
  */

@@ -1,6 +1,8 @@
 package bataillenavale;
 
 
+import bataillenavale.Ship.Ship;
+
 import java.util.ArrayList;
 
 /**

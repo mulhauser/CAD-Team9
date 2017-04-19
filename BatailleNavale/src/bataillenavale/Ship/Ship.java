@@ -1,4 +1,4 @@
-package bataillenavale;
+package bataillenavale.Ship;
 
 /**
  * Created by mulhauser on 12/04/2017.
