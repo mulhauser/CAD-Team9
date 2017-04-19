@@ -31,6 +31,7 @@ public class Map extends AbstractModel {
     public Map(int s){
         this.size = s;
         this.mapDispositionBateaux = new int[this.size][this.size];
+        this.mapEtatBateaux = new int[this.size][this.size];
         for (int i = 0; i < mapDispositionBateaux.length; i++){
             for (int j = 0; j < mapDispositionBateaux[i].length; j++){
                 mapDispositionBateaux[i][j] = 0;

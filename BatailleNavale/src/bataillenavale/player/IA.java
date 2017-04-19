@@ -10,7 +10,7 @@ public class IA extends Player {
         super(p, size);
     }
 
-    @Override
+
     public  void putShip(Ship s, int x, int y, String direction){
 
     }

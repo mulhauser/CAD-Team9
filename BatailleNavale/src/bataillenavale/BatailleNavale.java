@@ -5,6 +5,10 @@
  */
 package bataillenavale;
 
+import bataillenavale.controler.MapControler;
+import bataillenavale.player.Map;
+import bataillenavale.view.Game;
+
 /**
  * @author mulhauser
  */
@@ -15,14 +19,12 @@ public class BatailleNavale {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        /*
-        Modele modele = new Modele();
-        Vue vue = new Vue(modele);
-        Controleur controleur =  new Controleur(modele, vue);
 
-        vue.trace.addActionListener(controleur);
-        vue.efface.addActionListener(controleur);
-        */
+        Map modele = new Map(5);
+        Game vue = new Game(modele, null);
+        MapControler controleur =  new MapControler(modele, vue);
+
+
     }
 
 }
