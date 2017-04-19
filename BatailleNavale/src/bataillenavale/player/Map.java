@@ -24,6 +24,8 @@ public class Map {
     private int[][] mapEtatBateaux;
     private int size;
 
+
+
     public Map(int s){
         this.size = s;
         this.mapDispositionBateaux = new int[this.size][this.size];
@@ -33,5 +35,15 @@ public class Map {
                 mapEtatBateaux[i][j] = 0;
             }
         }
+    }
+
+
+    public int[][] getMapDispositionBateaux() {
+        return mapDispositionBateaux;
+    }
+
+    
+    public int[][] getMapEtatBateaux() {
+        return mapEtatBateaux;
     }
 }
