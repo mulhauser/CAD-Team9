@@ -8,6 +8,12 @@ public abstract class Ship {
     private int live;
     private boolean alive = true;
     private int size;
+    public enum Orientation{
+        TOP,
+        BOTTOM,
+        RIGHT,
+        LEFT;
+    }
 
     public Ship(int l, int s){
         this.live = l;

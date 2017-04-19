@@ -12,21 +12,23 @@ public abstract class Player {
 
     private String pseudo;
     private int score;
-    private Map map;
+    private Map mapPerso;
+    private Map mapAdver;
     private ArrayList<Ship> fleet;
 
 
     public Player(String p, int size){
         this.pseudo = p;
         this.score = 0;
-        this.map = new Map(size);
+        this.mapPerso = new Map(size);
+        this.mapAdver = new Map(size);
         this.fleet = new ArrayList<Ship>(4);
     }
 
 
 
 
-    public  void putShip(Ship s, int x, int y, String direction){
+    public  void putShip(Ship s, int x, int y, Ship.Orientation orientation){
 
     }
 
