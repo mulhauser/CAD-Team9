@@ -1,7 +1,7 @@
-package bataillenavale;
+package bataillenavale.player;
 
 
-import bataillenavale.Ship.Ship;
+import bataillenavale.ship.Ship;
 
 import java.util.ArrayList;
 

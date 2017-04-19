@@ -1,12 +1,12 @@
-package bataillenavale;
+package bataillenavale.player;
 
-import bataillenavale.Ship.Ship;
+import bataillenavale.ship.Ship;
 
 /**
  * Created by mulhauser on 12/04/2017.
  */
-public class Human extends Player {
-    public Human(String p, int size) {
+public class IA extends Player {
+    public IA(String p, int size) {
         super(p, size);
     }
 
