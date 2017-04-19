@@ -5,7 +5,7 @@ import bataillenavale.ship.Ship;
 /**
  * Created by mulhauser on 12/04/2017.
  */
-public class Map {
+public class Map extends AbstractModel {
 
     /*
     pour la mapDispositionBateau :

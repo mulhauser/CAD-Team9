@@ -8,7 +8,7 @@ import java.util.ArrayList;
 /**
  * Created by mulhauser on 12/04/2017.
  */
-public abstract class Player {
+public abstract class Player extends AbstractModel{
 
     private String pseudo;
     private int score;

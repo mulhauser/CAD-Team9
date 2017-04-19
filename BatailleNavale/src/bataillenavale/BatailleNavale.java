@@ -6,7 +6,6 @@
 package bataillenavale;
 
 /**
- *
  * @author mulhauser
  */
 public class BatailleNavale {
@@ -16,7 +15,14 @@ public class BatailleNavale {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        /*
+        Modele modele = new Modele();
+        Vue vue = new Vue(modele);
+        Controleur controleur =  new Controleur(modele, vue);
 
+        vue.trace.addActionListener(controleur);
+        vue.efface.addActionListener(controleur);
+        */
     }
-    
+
 }
