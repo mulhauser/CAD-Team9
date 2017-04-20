@@ -11,9 +11,9 @@ public class Map extends AbstractModel {
     pour la mapDispositionBateau :
     le code est :
     0 = rien
-    1 = petit bateau
-    2 = moyen bateau
-    3 = grand bateau
+    2 = petit bateau
+    3 = moyen bateau
+    4 = grand bateau
      */
     private int[][] mapDispositionBateaux;
 
@@ -50,7 +50,8 @@ public class Map extends AbstractModel {
         if(s.getSize() == 2){
             // verificationDeplacement retourne true si tout est bien, sinon false
             if(verificationsDepacement(x, y, s.getSize(), orientation)){
-               // mapDispositionBateaux[x][y]
+                // si les vérifications concernant le placement sont validés alorts on peut placer le bateau
+               placementBateau(x, y, s.getSize(), orientation);
             }
         }
     }
@@ -106,19 +107,40 @@ public class Map extends AbstractModel {
 
     public void placementBateau(int x, int y, int size, Ship.Orientation orientation){
         // ajouter un switch sur la taille
+        // problème !!!!
+        // le prof aime pas du tout un switch avec des case où il y a des nombres
+        int tailleDuBateau = 0;
+        switch (size){
+            case 2:
+                tailleDuBateau = 2;
+                break;
+            case 3:
+                tailleDuBateau = 3;
+                break;
+            case 4:
+                tailleDuBateau = 4;
+                break;
+        }
+
         switch (orientation){
             case TOP:
-
+                for(int i = x; i < x + size; i--){
+                    mapDispositionBateaux[x][i] = tailleDuBateau;
+                }
                 break;
             case BOTTOM:
-
+                for(int i = x; i < x + size; i++){
+                    mapDispositionBateaux[x][i] = tailleDuBateau;
+                }
                 break;
             case LEFT:
-
+                for(int i = x; i < x + size; i--){
+                    mapDispositionBateaux[i][y] = tailleDuBateau;
+                }
                 break;
             case RIGHT:
                 for(int i = x; i < x + size; i++){
-                    mapDispositionBateaux[i][y] = 3;
+                    mapDispositionBateaux[i][y] = tailleDuBateau;
                 }
                 break;
         }

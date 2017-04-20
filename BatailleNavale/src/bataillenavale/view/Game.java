@@ -3,6 +3,7 @@ package bataillenavale.view;
 import bataillenavale.player.Map;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -16,7 +17,13 @@ public class Game extends JFrame implements Observer{
 
     public Game(Map m, Map m1){
         this.mapPlayer = m;
-        JPanel lesBoutons = new JPanel();
+
+        // vues qui composent la fenetre
+        viewGrilleMe grilleMe = new viewGrilleMe();
+        viewGrilleEnnemy grilleEnnemy = new viewGrilleEnnemy();
+        this.add(grilleMe, BorderLayout.SOUTH);
+        this.add(grilleEnnemy, BorderLayout.NORTH);
+
 
         m.addObserver(this);
 
