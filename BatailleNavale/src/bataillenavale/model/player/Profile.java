@@ -1,4 +1,4 @@
-package bataillenavale.player;
+package bataillenavale.model.player;
 
 /**
  * Created by mulhauser on 12/04/2017.

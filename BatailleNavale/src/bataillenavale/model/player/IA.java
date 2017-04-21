@@ -1,12 +1,12 @@
-package bataillenavale.player;
+package bataillenavale.model.player;
 
-import bataillenavale.ship.Ship;
+import bataillenavale.model.ship.Ship;
 
 /**
  * Created by mulhauser on 12/04/2017.
  */
-public class Human extends Player {
-    public Human(String p, int size) {
+public class IA extends Player {
+    public IA(String p, int size) {
         super(p, size);
     }
 
@@ -15,7 +15,7 @@ public class Human extends Player {
 
     }
 
-
+    @Override
     public void fire() {
 
     }

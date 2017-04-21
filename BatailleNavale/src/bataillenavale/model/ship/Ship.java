@@ -1,4 +1,7 @@
-package bataillenavale.ship;
+package bataillenavale.model.ship;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by mulhauser on 12/04/2017.
@@ -13,6 +16,8 @@ public abstract class Ship {
     private int live;
     private boolean alive = true;
     private int size;
+    private Orientation orientation;
+
     public enum Orientation{
         TOP,
         BOTTOM,
@@ -20,12 +25,19 @@ public abstract class Ship {
         LEFT;
     }
 
+    private List<ShipPiece> pieceShipList;
+
     public Ship(int l, int s){
         this.live = l;
         this.size = s;
+        pieceShipList = new ArrayList<>(size);
     }
 
     public int getSize(){
         return this.size;
+    }
+
+    public List<ShipPiece> getPieceShipList(){
+        return this.pieceShipList;
     }
 }

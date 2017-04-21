@@ -2,14 +2,16 @@ package bataillenavale.view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Observable;
+import java.util.Observer;
 
 
 /**
  * Created by wolkowicz on 20/04/2017.
  */
-public class viewGrilleEnnemy extends JPanel {
+public class ViewGrilleEnnemy extends JPanel implements Observer{
 
-    public viewGrilleEnnemy(){
+    public ViewGrilleEnnemy(){
 
 
         int width = 10;
@@ -24,6 +26,11 @@ public class viewGrilleEnnemy extends JPanel {
             }
         }
         this.setBorder(BorderFactory.createLineBorder(Color.black));
+
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
 
     }
 }

@@ -1,11 +1,14 @@
-package bataillenavale.player;
+package bataillenavale.model;
 
-import bataillenavale.ship.Ship;
+import bataillenavale.model.ship.Ship;
+import bataillenavale.model.ship.ShipPiece;
+
+import java.util.Observable;
 
 /**
  * Created by mulhauser on 12/04/2017.
  */
-public class Map extends AbstractModel {
+public class Map extends Observable {
 
     /*
     pour la mapDispositionBateau :
@@ -15,7 +18,7 @@ public class Map extends AbstractModel {
     3 = moyen bateau
     4 = grand bateau
      */
-    private int[][] mapDispositionBateaux;
+    private ShipPiece[][] mapDispositionBateaux;
 
     /*
      * pour la mapEtatBateau :
@@ -23,19 +26,19 @@ public class Map extends AbstractModel {
      * 0 = raté
      * 1 = touché
      */
-    private int[][] mapEtatBateaux;
+    //private int[][] mapEtatBateaux;
     private int size;
 
 
 
     public Map(int s){
         this.size = s;
-        this.mapDispositionBateaux = new int[this.size][this.size];
-        this.mapEtatBateaux = new int[this.size][this.size];
+        this.mapDispositionBateaux = new ShipPiece[this.size][this.size];
+        //this.mapEtatBateaux = new int[this.size][this.size];
         for (int i = 0; i < mapDispositionBateaux.length; i++){
             for (int j = 0; j < mapDispositionBateaux[i].length; j++){
-                mapDispositionBateaux[i][j] = 0;
-                mapEtatBateaux[i][j] = 0;
+                mapDispositionBateaux[i][j] = null;
+                //mapEtatBateaux[i][j] = 0;
             }
         }
     }
@@ -154,7 +157,7 @@ public class Map extends AbstractModel {
     }
 
     
-    public int[][] getMapEtatBateaux() {
+    //public int[][] getMapEtatBateaux() {
         return mapEtatBateaux;
     }
 }

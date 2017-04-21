@@ -1,14 +1,16 @@
-package bataillenavale.player;
+package bataillenavale.model.player;
 
 
-import bataillenavale.ship.Ship;
+import bataillenavale.model.Map;
+import bataillenavale.model.ship.Ship;
 
 import java.util.ArrayList;
+import java.util.Observable;
 
 /**
  * Created by mulhauser on 12/04/2017.
  */
-public abstract class Player extends AbstractModel{
+public abstract class Player extends Observable {
 
     private String pseudo;
     private int score;

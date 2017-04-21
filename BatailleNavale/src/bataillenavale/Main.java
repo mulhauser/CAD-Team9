@@ -6,13 +6,15 @@
 package bataillenavale;
 
 import bataillenavale.controler.MapControler;
-import bataillenavale.player.Map;
-import bataillenavale.view.Game;
+import bataillenavale.model.Map;
+import bataillenavale.view.ViewMain;
+
+import javax.swing.*;
 
 /**
  * @author mulhauser
  */
-public class BatailleNavale {
+public class Main extends JFrame{
 
     /**
      * @param args the command line arguments
@@ -21,7 +23,7 @@ public class BatailleNavale {
         // TODO code application logic here
 
         Map modele = new Map(5);
-        Game vue = new Game(modele, null);
+        ViewMain vue = new ViewMain(modele, null);
         MapControler controleur =  new MapControler(modele, vue);
 
 

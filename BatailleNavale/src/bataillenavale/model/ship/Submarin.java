@@ -1,4 +1,4 @@
-package bataillenavale.ship;
+package bataillenavale.model.ship;
 
 /**
  * Created by mulhauser on 19/04/2017.

@@ -3,14 +3,16 @@ package bataillenavale.view;
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 import java.awt.*;
+import java.util.Observable;
+import java.util.Observer;
 
 
 /**
  * Created by wolkowicz on 20/04/2017.
  */
-public class viewGrilleMe extends JPanel {
+public class ViewGrilleMe extends JPanel implements Observer{
 
-    public viewGrilleMe(){
+    public ViewGrilleMe(){
 
 
         int width = 10;
@@ -25,5 +27,10 @@ public class viewGrilleMe extends JPanel {
             }
         }
         this.setBorder(BorderFactory.createLineBorder(Color.black));
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+
     }
 }
