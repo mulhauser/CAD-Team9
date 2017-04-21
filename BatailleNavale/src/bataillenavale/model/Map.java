@@ -3,12 +3,15 @@ package bataillenavale.model;
 import bataillenavale.model.ship.Ship;
 import bataillenavale.model.ship.ShipPiece;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 
 /**
  * Created by mulhauser on 12/04/2017.
  */
-public class Map extends Observable {
+public class Map implements Serializable {
 
     /*
     pour la mapDispositionBateau :
@@ -30,13 +33,12 @@ public class Map extends Observable {
     private int size;
 
 
-
-    public Map(int s){
+    public Map(int s) {
         this.size = s;
         this.mapDispositionBateaux = new ShipPiece[this.size][this.size];
         //this.mapEtatBateaux = new int[this.size][this.size];
-        for (int i = 0; i < mapDispositionBateaux.length; i++){
-            for (int j = 0; j < mapDispositionBateaux[i].length; j++){
+        for (int i = 0; i < mapDispositionBateaux.length; i++) {
+            for (int j = 0; j < mapDispositionBateaux[i].length; j++) {
                 mapDispositionBateaux[i][j] = null;
                 //mapEtatBateaux[i][j] = 0;
             }
@@ -46,118 +48,178 @@ public class Map extends Observable {
 
     /**
      * va ajouter un bateau dans le tableau disposition
-     * appèle une fonction qui vérifie puis une qui place
+     * appelle une fonction qui vérifie puis une qui place
+     *
      * @param s
      */
-    public void ajouterBateau(Ship s, int x, int y, Ship.Orientation orientation){
-        if(s.getSize() == 2){
+    public void ajouterBateau(Ship s, int x, int y, Ship.Orientation orientation) {
+        //if (s.getSize() == 2) {
             // verificationDeplacement retourne true si tout est bien, sinon false
-            if(verificationsDepacement(x, y, s.getSize(), orientation)){
-                // si les vérifications concernant le placement sont validés alorts on peut placer le bateau
-               placementBateau(x, y, s.getSize(), orientation);
+            if (verificationsPlacement(x, y, s.getSize(), orientation)) {
+                // si les vérifications concernant le placement sont validés alors on peut placer le bateau
+                // On modifie également les coordonnées du bateau et son orientation
+                s.setCoordinate(new Coordinate(x, y));
+                s.setOrientation(orientation);
+                placementBateau(s);
+                System.out.println("Placement OK");
             }
-        }
+        //}
     }
-
 
 
     /**
      * fonction qui vérifie si le bateau peut être placé à l'endoit séléctionné
+     *
      * @param x
      * @param y
      * @param size
      * @param orientation
      * @return
      */
-    public boolean verificationsDepacement(int x, int y, int size, Ship.Orientation orientation){
+    public boolean verificationsPlacement(int x, int y, int size, Ship.Orientation orientation) {
         boolean result = false;
-        switch (orientation){
-            case TOP:
-                if(y + size > mapDispositionBateaux.length){
-                    result = false;
-                }else{
-                    result = true;
-                }
-                break;
-            case BOTTOM:
-                if(y - size < mapDispositionBateaux.length){
-                    result = false;
-                }else{
-                    result = true;
-                }
-                break;
-            case LEFT:
-                if(x - size < mapDispositionBateaux.length){
-                    result = false;
-                }else{
-                    result = true;
-                }
-                break;
-            case RIGHT:
-                if(x + size < mapDispositionBateaux.length){
-                    result = false;
-                }else{
-                    result = true;
-                }
-                break;
+        // On verifie que les coordonnées sont correctes
+        if(verificationCoordinate(x, y)) {
+            switch (orientation) {
+                // On parcours le tableau de gauche à droite et de haut en bas
+                case TOP:
+                    // On vérifie si on dépasse pas la map
+                    if (y - size + 1 >= 0) {
+                        // On vérifie ensuite si il n'y a pas déjà un bateau sur les cases
+                        for (int i = y; i > y - size; i--) {
+                            // Si il y a déjà un bateau on met à false et on arrête la boucle
+                            if (this.getShip(x, i) != null) {
+                                result = false;
+                                break;
+                            } else {
+                                result = true;
+                            }
+                        }
+                    }
+                    break;
+                case BOTTOM:
+                    // On vérifie si on dépasse pas la map
+                    if (y + size <= mapDispositionBateaux.length) {
+                        // On vérifie ensuite si il n'y a pas déjà un bateau sur les cases
+                        for (int i = y; i < y + size; i++) {
+                            // Si il y a déjà un bateau on met à false et on arrête la boucle
+                            if (this.getShip(x, i) != null) {
+                                result = false;
+                                break;
+                            } else {
+                                result = true;
+                            }
+                        }
+                    }
+                    break;
+                case LEFT:
+                    if (x - size + 1 >= 0) {
+                        // On vérifie ensuite si il n'y a pas déjà un bateau sur les cases
+                        for (int i = x; i > x - size; i--) {
+                            // Si il y a déjà un bateau on met à false et on arrête la boucle
+                            if (this.getShip(i, y) != null) {
+                                result = false;
+                                break;
+                            } else {
+                                result = true;
+                            }
+                        }
+                    }
+                    break;
+                case RIGHT:
+                    if (x + size <= mapDispositionBateaux[y].length) {
+                        // On vérifie ensuite si il n'y a pas déjà un bateau sur les cases
+                        for (int i = x; i < x + size; i++) {
+                            // Si il y a déjà un bateau on met à false et on arrête la boucle
+                            if (this.getShip(i, y) != null) {
+                                result = false;
+                                break;
+                            } else {
+                                result = true;
+                            }
+                        }
+                    }
+                    break;
+            }
         }
 
-        return true;
+        return result;
+    }
+
+    public boolean verificationCoordinate(int x, int y){
+        return (x >= 0 && x < mapDispositionBateaux.length) && (y >= 0 && y < mapDispositionBateaux.length);
     }
 
 
+    /**
+     * On parcourt le tableau de gauche à droite et de haut en bas
+     *
+     * @param x la ligne, abscisse
+     * @param y la colonne, ordonnée
+     * @return le morceau de bateau à la position x, y
+     */
+    public ShipPiece getShip(int x, int y) {
+        return mapDispositionBateaux[y][x];
+    }
 
 
-    public void placementBateau(int x, int y, int size, Ship.Orientation orientation){
-        // ajouter un switch sur la taille
-        // problème !!!!
-        // le prof aime pas du tout un switch avec des case où il y a des nombres
-        int tailleDuBateau = 0;
-        switch (size){
-            case 2:
-                tailleDuBateau = 2;
-                break;
-            case 3:
-                tailleDuBateau = 3;
-                break;
-            case 4:
-                tailleDuBateau = 4;
-                break;
-        }
-
-        switch (orientation){
+    public void placementBateau(Ship s) {
+        int taille = s.getSize();
+        Coordinate c = s.getCoordinate();
+        Ship.Orientation o = s.getOrientation();
+        List<ShipPiece> shipList = s.getPieceShipList();
+        int j;
+        switch (o) {
             case TOP:
-                for(int i = x; i < x + size; i--){
-                    mapDispositionBateaux[x][i] = tailleDuBateau;
+                j = 0;
+                for (int i = c.getY(); i > c.getY() - taille; i--) {
+                    mapDispositionBateaux[i][c.getX()] = shipList.get(j);
+                    j++;
                 }
                 break;
             case BOTTOM:
-                for(int i = x; i < x + size; i++){
-                    mapDispositionBateaux[x][i] = tailleDuBateau;
+                j = 0;
+                for (int i = c.getY(); i < c.getY() + taille; i++) {
+                    mapDispositionBateaux[i][c.getX()] = shipList.get(j);
+                    j++;
                 }
                 break;
             case LEFT:
-                for(int i = x; i < x + size; i--){
-                    mapDispositionBateaux[i][y] = tailleDuBateau;
+                j = 0;
+                for (int i = c.getX(); i > c.getX() - taille; i--) {
+                    mapDispositionBateaux[c.getY()][i] = shipList.get(j);
+                    j++;
                 }
                 break;
             case RIGHT:
-                for(int i = x; i < x + size; i++){
-                    mapDispositionBateaux[i][y] = tailleDuBateau;
+                j = 0;
+                for (int i = c.getX(); i < c.getX() + taille; i++) {
+                    mapDispositionBateaux[c.getY()][i] = shipList.get(j);
+                    j++;
                 }
                 break;
         }
     }
 
 
-
-
-    public int[][] getMapDispositionBateaux() {
+    public ShipPiece[][] getMapDispositionBateaux() {
         return mapDispositionBateaux;
     }
 
-    
-    //public int[][] getMapEtatBateaux() {
-        return mapEtatBateaux;
+    public String toString(){
+        StringBuffer sb = new StringBuffer();
+        for(int y = 0; y < mapDispositionBateaux.length; y++){
+            for(int x = 0; x < mapDispositionBateaux[y].length; x++){
+                sb.append("|");
+                if(mapDispositionBateaux[y][x] == null) sb.append(" X ");
+                else sb.append(" O ");
+                sb.append("|");
+            }
+            sb.append("\n--------------------------\n");
+        }
+        return sb.toString();
     }
+    /*public int[][] getMapEtatBateaux() {
+        return mapEtatBateaux;
+    }*/
 }

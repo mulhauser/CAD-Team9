@@ -25,7 +25,7 @@ public class ViewMain extends JFrame implements Observer{
         this.add(grilleEnnemy, BorderLayout.NORTH);
 
 
-        m.addObserver(this);
+        //m.addObserver(this);
 
 
 
