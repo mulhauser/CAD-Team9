@@ -4,13 +4,14 @@ package bataillenavale.model.player;
 import bataillenavale.model.Map;
 import bataillenavale.model.ship.Ship;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Observable;
 
 /**
  * Created by mulhauser on 12/04/2017.
  */
-public abstract class Player extends Observable {
+public abstract class Player implements Serializable {
 
     private String pseudo;
     private int score;
