@@ -37,25 +37,26 @@ public class Main extends JFrame{
 
         //Build the first menu.
         JMenu menu = new JMenu("Fichier");
-        //menu.getAccessibleContext().setAccessibleDescription(
-                //"The only menu in this program that has menu items");
+        menu.getAccessibleContext().setAccessibleDescription(
+                "The only menu in this program that has menu items");
         menuBar.add(menu);
 
 
-        JMenuItem acceuil = new JMenuItem("accueil");
-        acceuil.addActionListener(new MenuListener(model, cards, Accueil.id));
-        menu.add(acceuil);
+        JMenuItem accueil = new JMenuItem("accueil");
+        accueil.addActionListener(new MenuListener(model, cards, Accueil.id));
+        menu.add(accueil);
+
+        //JMenuItem nouvellePartie = new JMenuItem("nouvelle partie");
+        //nouvellePartie.addActionListener(new MenuListener(model, cards, ));
 
 
 
 
         setJMenuBar(menuBar);
-        //finalisation de la JFrame
         setPreferredSize(new Dimension(250, 200));
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
-//        setResizable(false);
         pack();
     }
 
