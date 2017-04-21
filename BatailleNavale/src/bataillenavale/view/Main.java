@@ -29,6 +29,7 @@ public class Main extends JFrame{
         //Create the panel that contains the "cards".
         cards = new JPanelCards(model);
 
+
         add(cards, BorderLayout.CENTER);
 
         // les menus
@@ -53,10 +54,11 @@ public class Main extends JFrame{
 
 
         setJMenuBar(menuBar);
-        setPreferredSize(new Dimension(250, 200));
+        setPreferredSize(new Dimension(300, 250));
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
+        setResizable(false);
         pack();
     }
 
