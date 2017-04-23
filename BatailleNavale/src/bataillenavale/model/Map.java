@@ -205,6 +205,10 @@ public class Map implements Serializable {
         return mapDispositionBateaux;
     }
 
+    public int getSize(){
+        return this.size;
+    }
+
     public String toString(){
         StringBuffer sb = new StringBuffer();
         for(int y = 0; y < mapDispositionBateaux.length; y++){

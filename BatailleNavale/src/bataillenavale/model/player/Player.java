@@ -2,6 +2,9 @@ package bataillenavale.model.player;
 
 
 import bataillenavale.model.Map;
+import bataillenavale.model.ship.BlackPearl;
+import bataillenavale.model.ship.Boat;
+import bataillenavale.model.ship.Galion;
 import bataillenavale.model.ship.Ship;
 
 import java.io.Serializable;
@@ -40,10 +43,17 @@ public abstract class Player implements Serializable {
 
     }
 
+    public Map getMapPerso(){
+        return this.mapPerso;
+    }
 
-
-
-
+    // Mettre epoque plus tard en commentaire
+    public void constructFlotte(){
+        fleet.add(new Boat(2));
+        fleet.add(new Galion(3));
+        fleet.add(new Galion(3));
+        fleet.add(new BlackPearl(4));
+    }
 
 
     public abstract void fire();
