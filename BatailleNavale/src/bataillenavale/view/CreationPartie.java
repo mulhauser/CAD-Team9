@@ -48,12 +48,11 @@ public class CreationPartie extends JPanel implements Observer {
 
         valider = new JButton("Valider");
         valider.addActionListener(new ActionListener() {
+
             @Override
-            public void actionPerformed(ActionEvent e) {
-                // On modifie le model avec le pseudo et tout...
-                // On créer les joueurs
-                // On créer la partie
-                // On affiche la grille pour placer les bateaux
+            public void actionPerformed(ActionEvent ae) {
+                model.getHuman().setPseudo(pseudo.getText());
+                card.show(PlacementBateaux.id);
             }
         });
 

@@ -14,8 +14,10 @@ public class JPanelCards extends JPanel implements Observer{
 
     private final CardLayout cl;
     private Accueil accueil;
-
     private CreationPartie partie;
+
+    //une fois que la partie est créé (une fois qu'un a saisi un pseudo)
+    private PlacementBateaux placement;
 
     private String currentPanelId = null;
     private JPanel currentPanel;
@@ -31,9 +33,11 @@ public class JPanelCards extends JPanel implements Observer{
 
         accueil = new Accueil(model, this);
         partie = new CreationPartie(model, this);
+        placement = new PlacementBateaux(model, this);
 
         add(accueil, Accueil.id);
         add(partie, CreationPartie.id);
+        add(placement, PlacementBateaux.id);
 
         currentPanelId = Accueil.id;
         currentPanel = accueil;
@@ -56,6 +60,12 @@ public class JPanelCards extends JPanel implements Observer{
             case CreationPartie.id:
                 currentPanel = partie;
                 Main.getInstance().setPreferredSize(new Dimension(250, 200));
+                break;
+            case PlacementBateaux.id:
+                currentPanel = partie;
+                Main.getInstance().setPreferredSize(new Dimension(500, 400));
+                //pour vérifier que le pseudo est modifié
+                System.out.print(model.getHuman().getPseudo());
                 break;
         }
     }

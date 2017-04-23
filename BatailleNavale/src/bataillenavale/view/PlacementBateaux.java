@@ -18,6 +18,7 @@ public class PlacementBateaux extends JPanel implements Observer{
         super(new BorderLayout());
     }
 
+
     @Override
     public void update(Observable o, Object arg) {
 

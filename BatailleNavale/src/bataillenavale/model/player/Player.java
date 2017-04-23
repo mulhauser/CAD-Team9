@@ -20,7 +20,7 @@ public abstract class Player implements Serializable {
     private ArrayList<Ship> fleet;
 
 
-    public Player(String p, int size){
+    public Player(String p){
         this.pseudo = p;
         this.score = 0;
         this.mapPerso = new Map();
@@ -28,8 +28,13 @@ public abstract class Player implements Serializable {
         this.fleet = new ArrayList<Ship>(4);
     }
 
+    public String getPseudo() {
+        return pseudo;
+    }
 
-
+    public void setPseudo(String pseudo) {
+        this.pseudo = pseudo;
+    }
 
     public  void putShip(Ship s, int x, int y, Ship.Orientation orientation){
 
