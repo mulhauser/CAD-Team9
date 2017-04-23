@@ -16,9 +16,10 @@ public class Accueil extends JPanel implements Observer{
     public static final String id = "accueil";
 
     public Accueil(final BatailleNavale model, final JPanelCards card){
+        //buttons affiche tout les boutons possibles
         JPanel buttons = new JPanel(new GridLayout(3,1));
         model.addObserver(this);
-        JButton creerPartie = new JButton("Créer Partie");
+        JButton creerPartie = new JButton("Nouvelle Partie");
         creerPartie.addActionListener(new MenuListener(model, card, "creation"));
         buttons.add(creerPartie);
 

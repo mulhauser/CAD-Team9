@@ -46,12 +46,6 @@ public class Main extends JFrame{
         accueil.addActionListener(new MenuListener(model, cards, Accueil.id));
         menu.add(accueil);
 
-        //JMenuItem nouvellePartie = new JMenuItem("nouvelle partie");
-        //nouvellePartie.addActionListener(new MenuListener(model, cards, ));
-
-
-
-
         setJMenuBar(menuBar);
         setPreferredSize(new Dimension(250, 200));
         setLocationRelativeTo(null);
@@ -75,6 +69,7 @@ public class Main extends JFrame{
 
     public static void main(String[] args) throws UnsupportedLookAndFeelException {
 
+        //Utilisation d'un Singleton
         Main.getInstance();
     }
 }
