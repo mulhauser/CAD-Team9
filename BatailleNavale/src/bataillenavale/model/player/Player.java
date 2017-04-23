@@ -23,8 +23,8 @@ public abstract class Player implements Serializable {
     public Player(String p, int size){
         this.pseudo = p;
         this.score = 0;
-        this.mapPerso = new Map(size);
-        this.mapAdver = new Map(size);
+        this.mapPerso = new Map();
+        this.mapAdver = new Map();
         this.fleet = new ArrayList<Ship>(4);
     }
 

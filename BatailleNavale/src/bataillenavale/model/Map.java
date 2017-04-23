@@ -30,11 +30,10 @@ public class Map implements Serializable {
      * 1 = touché
      */
     //private int[][] mapEtatBateaux;
-    private int size;
+    private static final int size = 10;
 
 
-    public Map(int s) {
-        this.size = s;
+    public Map() {
         this.mapDispositionBateaux = new ShipPiece[this.size][this.size];
         //this.mapEtatBateaux = new int[this.size][this.size];
         for (int i = 0; i < mapDispositionBateaux.length; i++) {
