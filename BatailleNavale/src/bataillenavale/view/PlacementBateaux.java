@@ -96,7 +96,6 @@ public class PlacementBateaux extends JPanel implements Observer{
 
         // Menu des bateaux à droite
 
-        ships.add(new JLabel("caca"));
         add(ships, BorderLayout.EAST);
 
     }
