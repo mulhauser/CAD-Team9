@@ -23,8 +23,8 @@ public abstract class Ship {
 
     public enum Orientation{
         TOP,
-        BOTTOM,
-        RIGHT,
+        VERTICAL,
+        HORIZONTAL,
         LEFT
     }
 

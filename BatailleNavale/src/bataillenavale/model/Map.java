@@ -4,9 +4,7 @@ import bataillenavale.model.ship.Ship;
 import bataillenavale.model.ship.ShipPiece;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
 
 /**
  * Created by mulhauser on 12/04/2017.
@@ -48,6 +46,8 @@ public class Map implements Serializable {
     /**
      * va ajouter un bateau dans le tableau disposition
      * appelle une fonction qui vérifie puis une qui place
+     * on peut seulement placer le bateau en vertical ou horizontal,
+     * on n'utilise plus haut, bas gauche, droite
      *
      * @param s
      */
@@ -81,7 +81,7 @@ public class Map implements Serializable {
         if(verificationCoordinate(x, y)) {
             switch (orientation) {
                 // On parcours le tableau de gauche à droite et de haut en bas
-                case TOP:
+                /*case TOP:
                     // On vérifie si on dépasse pas la map
                     if (y - size + 1 >= 0) {
                         // On vérifie ensuite si il n'y a pas déjà un bateau sur les cases
@@ -95,8 +95,8 @@ public class Map implements Serializable {
                             }
                         }
                     }
-                    break;
-                case BOTTOM:
+                    break;*/
+                case VERTICAL:
                     // On vérifie si on dépasse pas la map
                     if (y + size <= mapDispositionBateaux.length) {
                         // On vérifie ensuite si il n'y a pas déjà un bateau sur les cases
@@ -111,7 +111,7 @@ public class Map implements Serializable {
                         }
                     }
                     break;
-                case LEFT:
+                /*case LEFT:
                     if (x - size + 1 >= 0) {
                         // On vérifie ensuite si il n'y a pas déjà un bateau sur les cases
                         for (int i = x; i > x - size; i--) {
@@ -124,8 +124,8 @@ public class Map implements Serializable {
                             }
                         }
                     }
-                    break;
-                case RIGHT:
+                    break;*/
+                case HORIZONTAL:
                     if (x + size <= mapDispositionBateaux[y].length) {
                         // On vérifie ensuite si il n'y a pas déjà un bateau sur les cases
                         for (int i = x; i < x + size; i++) {
@@ -169,28 +169,28 @@ public class Map implements Serializable {
         List<ShipPiece> shipList = s.getPieceShipList();
         int j;
         switch (o) {
-            case TOP:
+            /*case TOP:
                 j = 0;
                 for (int i = c.getY(); i > c.getY() - taille; i--) {
                     mapDispositionBateaux[i][c.getX()] = shipList.get(j);
                     j++;
                 }
-                break;
-            case BOTTOM:
+                break;*/
+            case VERTICAL:
                 j = 0;
                 for (int i = c.getY(); i < c.getY() + taille; i++) {
                     mapDispositionBateaux[i][c.getX()] = shipList.get(j);
                     j++;
                 }
                 break;
-            case LEFT:
+            /*case LEFT:
                 j = 0;
                 for (int i = c.getX(); i > c.getX() - taille; i--) {
                     mapDispositionBateaux[c.getY()][i] = shipList.get(j);
                     j++;
                 }
-                break;
-            case RIGHT:
+                break;*/
+            case HORIZONTAL:
                 j = 0;
                 for (int i = c.getX(); i < c.getX() + taille; i++) {
                     mapDispositionBateaux[c.getY()][i] = shipList.get(j);
