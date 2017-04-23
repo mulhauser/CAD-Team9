@@ -19,9 +19,8 @@ public class Accueil extends JPanel implements Observer{
         JPanel buttons = new JPanel(new GridLayout(3,1));
         model.addObserver(this);
         JButton creerPartie = new JButton("Créer Partie");
-        creerPartie.addActionListener(new MenuListener(model, card, "accueil"));
+        creerPartie.addActionListener(new MenuListener(model, card, "creation"));
         buttons.add(creerPartie);
-
 
         JButton chargerPartie = new JButton("Charger Partie");
         chargerPartie.addActionListener(new MenuListener(model, card, "accueil"));

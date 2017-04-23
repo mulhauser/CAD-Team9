@@ -23,17 +23,5 @@ public class MenuListener implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         card.show(idPanel);
-        if(e.getActionCommand()=="Créer Partie"){
-           System.out.println("Ici on doit créer la map");
-        }
-        if(e.getActionCommand()=="Charger Partie"){
-            System.out.println("Ici on doit proposer les parties sauvegardées");
-        }
-        if(e.getActionCommand()=="Voir scores"){
-            System.out.println("Ici doit afficher les score");
-        }
-        if(e.getActionCommand()=="accueil"){
-            System.out.println("Ici on ne fait rien");
-        }
     }
 }

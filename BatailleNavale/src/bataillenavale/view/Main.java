@@ -1,6 +1,5 @@
 package bataillenavale.view;
 
-
 import bataillenavale.controler.MenuListener;
 import bataillenavale.model.BatailleNavale;
 
@@ -54,7 +53,7 @@ public class Main extends JFrame{
 
 
         setJMenuBar(menuBar);
-        setPreferredSize(new Dimension(300, 250));
+        setPreferredSize(new Dimension(250, 200));
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
