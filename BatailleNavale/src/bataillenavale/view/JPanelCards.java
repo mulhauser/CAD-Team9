@@ -15,6 +15,8 @@ public class JPanelCards extends JPanel implements Observer{
     private final CardLayout cl;
     private Accueil accueil;
 
+   // private CreationPartie partie;
+
     private String currentPanelId = null;
     private JPanel currentPanel;
 
@@ -29,6 +31,8 @@ public class JPanelCards extends JPanel implements Observer{
 
         accueil = new Accueil(model, this);
 
+       // partie = new CreationPartie(model, this);
+
         add(accueil, Accueil.id);
 
         currentPanelId = Accueil.id;
@@ -41,6 +45,11 @@ public class JPanelCards extends JPanel implements Observer{
         //Main.getInstance().updateMenu();
         Main.getInstance().pack();
     }
+
+    /*public void switchPanel(){
+        remove(accueil);
+        add(partie,CreationPartie.id);
+    }*/
 
     @Override
     public void update(Observable o, Object arg) {
