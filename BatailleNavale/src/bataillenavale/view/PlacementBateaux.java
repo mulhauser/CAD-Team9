@@ -138,6 +138,9 @@ public class PlacementBateaux extends JPanel implements Observer {
 
 
     public void constructGrillePlacement(){
+        if(grille != null){
+            remove(grille);
+        }
         grille = new JPanel(new GridLayout(size, size));
 
         listButton = new JButtonBateau[size][size];
@@ -153,6 +156,9 @@ public class PlacementBateaux extends JPanel implements Observer {
         }
         add(grille, BorderLayout.CENTER);
 
+        if(ships != null){
+            remove(ships);
+        }
         ships = new JPanel(new GridLayout(6, 3));
 
         JLabel pseudo = new JLabel("Placez vos bateaux ");
@@ -197,7 +203,7 @@ public class PlacementBateaux extends JPanel implements Observer {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 //il faut ici pouvoir placer un bateau
-                permission(0, 2);
+                permission(0, 3);
             }
         });
 
