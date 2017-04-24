@@ -45,6 +45,8 @@ public class PlacementBateaux extends JPanel implements Observer {
     private JButtonBateau[][] listButton;
     private BatailleNavale model;
 
+    private int bateauxPlaces = 0;
+
     private class JButtonBateau extends JButton implements Observer {
 
         // x = colonne du tableau, y = ligne du tableau
@@ -109,6 +111,14 @@ public class PlacementBateaux extends JPanel implements Observer {
 
                 //wizard.getJpanelJouer().initialize();
                 //wizard.show(JPanelJouer.id);
+                System.out.println(model.getHuman().getPseudo());
+                if(bateauxPlaces<4){
+                    JOptionPane.showMessageDialog(null, "Veuillez placer l'ensemble de la flotte.", "Erreur",
+                            JOptionPane.ERROR_MESSAGE);
+                }else {
+                    JOptionPane.showMessageDialog(null, "Flotte prête", "Erreur",
+                            JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
         buttons.add(valider);
@@ -135,8 +145,11 @@ public class PlacementBateaux extends JPanel implements Observer {
         }
         add(grille, BorderLayout.CENTER);
 
-        ships = new JPanel(new GridLayout(4, 3));
+        ships = new JPanel(new GridLayout(6, 3));
 
+        JLabel pseudo = new JLabel("Placez vos bateaux ");
+        JButton annulerPlacement = new JButton("Annuler");
+        annulerPlacement.setVisible(false);
 
         // Menu des bateaux à droite
         bigShip = new JLabel("BlackPearl");
@@ -171,6 +184,224 @@ public class PlacementBateaux extends JPanel implements Observer {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        bigH.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                //il faut ici pouvoir placer un bateau
+                for(int y = 0; y < listButton.length; y ++){
+                    for(int x = 0; x < listButton[y].length; x++){
+                        listButton[y][x].setEnabled(true);
+                    }
+                }
+
+                bigH.setEnabled(false);
+                bigV.setEnabled(false);
+                mediumH.setEnabled(false);
+                mediumHBis.setEnabled(false);
+                mediumV.setEnabled(false);
+                mediumVBis.setEnabled(false);
+                smallV.setEnabled(false);
+                smallH.setEnabled(false);
+                annulerPlacement.setVisible(true);
+
+                bateauxPlaces++;
+            }
+        });
+
+        bigV.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                //il faut ici pouvoir placer un bateau
+                for(int y = 0; y < listButton.length; y ++){
+                    for(int x = 0; x < listButton[y].length; x++){
+                        listButton[y][x].setEnabled(true);
+                    }
+                }
+
+                bigH.setEnabled(false);
+                bigV.setEnabled(false);
+                mediumH.setEnabled(false);
+                mediumHBis.setEnabled(false);
+                mediumV.setEnabled(false);
+                mediumVBis.setEnabled(false);
+                smallV.setEnabled(false);
+                smallH.setEnabled(false);
+                annulerPlacement.setVisible(true);
+
+                bateauxPlaces++;
+            }
+        });
+
+        mediumH.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                //il faut ici pouvoir placer un bateau
+                for(int y = 0; y < listButton.length; y ++){
+                    for(int x = 0; x < listButton[y].length; x++){
+                        listButton[y][x].setEnabled(true);
+                    }
+                }
+
+                bigH.setEnabled(false);
+                bigV.setEnabled(false);
+                mediumH.setEnabled(false);
+                mediumHBis.setEnabled(false);
+                mediumV.setEnabled(false);
+                mediumVBis.setEnabled(false);
+                smallV.setEnabled(false);
+                smallH.setEnabled(false);
+                annulerPlacement.setVisible(true);
+
+                bateauxPlaces++;
+            }
+        });
+
+        mediumHBis.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                //il faut ici pouvoir placer un bateau
+                for(int y = 0; y < listButton.length; y ++){
+                    for(int x = 0; x < listButton[y].length; x++){
+                        listButton[y][x].setEnabled(true);
+                    }
+                }
+
+                bigH.setEnabled(false);
+                bigV.setEnabled(false);
+                mediumH.setEnabled(false);
+                mediumHBis.setEnabled(false);
+                mediumV.setEnabled(false);
+                mediumVBis.setEnabled(false);
+                smallV.setEnabled(false);
+                smallH.setEnabled(false);
+                annulerPlacement.setVisible(true);
+
+                bateauxPlaces++;
+            }
+        });
+
+        mediumV.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                //il faut ici pouvoir placer un bateau
+                for(int y = 0; y < listButton.length; y ++){
+                    for(int x = 0; x < listButton[y].length; x++){
+                        listButton[y][x].setEnabled(true);
+                    }
+                }
+
+                bigH.setEnabled(false);
+                bigV.setEnabled(false);
+                mediumH.setEnabled(false);
+                mediumHBis.setEnabled(false);
+                mediumV.setEnabled(false);
+                mediumVBis.setEnabled(false);
+                smallV.setEnabled(false);
+                smallH.setEnabled(false);
+                annulerPlacement.setVisible(true);
+
+                bateauxPlaces++;
+            }
+        });
+
+        mediumVBis.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                //il faut ici pouvoir placer un bateau
+                for(int y = 0; y < listButton.length; y ++){
+                    for(int x = 0; x < listButton[y].length; x++){
+                        listButton[y][x].setEnabled(true);
+                    }
+                }
+
+                bigH.setEnabled(false);
+                bigV.setEnabled(false);
+                mediumH.setEnabled(false);
+                mediumHBis.setEnabled(false);
+                mediumV.setEnabled(false);
+                mediumVBis.setEnabled(false);
+                smallV.setEnabled(false);
+                smallH.setEnabled(false);
+                annulerPlacement.setVisible(true);
+
+                bateauxPlaces++;
+            }
+        });
+
+        smallV.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                //il faut ici pouvoir placer un bateau
+                for(int y = 0; y < listButton.length; y ++){
+                    for(int x = 0; x < listButton[y].length; x++){
+                        listButton[y][x].setEnabled(true);
+                    }
+                }
+
+                bigH.setEnabled(false);
+                bigV.setEnabled(false);
+                mediumH.setEnabled(false);
+                mediumHBis.setEnabled(false);
+                mediumV.setEnabled(false);
+                mediumVBis.setEnabled(false);
+                smallV.setEnabled(false);
+                smallH.setEnabled(false);
+                annulerPlacement.setVisible(true);
+
+                bateauxPlaces++;
+            }
+        });
+        smallH.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                //il faut ici pouvoir placer un bateau
+                for(int y = 0; y < listButton.length; y ++){
+                    for(int x = 0; x < listButton[y].length; x++){
+                        listButton[y][x].setEnabled(true);
+                    }
+                }
+                bigH.setEnabled(false);
+                bigV.setEnabled(false);
+                mediumH.setEnabled(false);
+                mediumHBis.setEnabled(false);
+                mediumV.setEnabled(false);
+                mediumVBis.setEnabled(false);
+                smallV.setEnabled(false);
+                smallH.setEnabled(false);
+                annulerPlacement.setVisible(true);
+
+                bateauxPlaces++;
+            }
+        });
+
+        annulerPlacement.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                //il faut ici pouvoir placer un bateau
+                for(int y = 0; y < listButton.length; y ++){
+                    for(int x = 0; x < listButton[y].length; x++){
+                        listButton[y][x].setEnabled(false);
+                    }
+                }
+
+                bigH.setEnabled(true);
+                bigV.setEnabled(true);
+                mediumH.setEnabled(true);
+                mediumHBis.setEnabled(true);
+                mediumV.setEnabled(true);
+                mediumVBis.setEnabled(true);
+                smallV.setEnabled(true);
+                smallH.setEnabled(true);
+                annulerPlacement.setVisible(false);
+
+                bateauxPlaces--;
+            }
+        });
+
+        ships.add(new JLabel());
+        ships.add(pseudo);
+        ships.add(new JLabel());
         ships.add(bigShip);
         ships.add(bigH);
         ships.add(bigV);
@@ -183,6 +414,9 @@ public class PlacementBateaux extends JPanel implements Observer {
         ships.add(smallShip);
         ships.add(smallH);
         ships.add(smallV);
+        ships.add(new JLabel());
+        ships.add(annulerPlacement);
+        ships.add(new JLabel());
         add(ships, BorderLayout.EAST);
     }
     @Override

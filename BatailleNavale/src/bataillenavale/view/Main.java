@@ -28,7 +28,6 @@ public class Main extends JFrame{
         //Create the panel that contains the "cards".
         cards = new JPanelCards(model);
 
-
         add(cards, BorderLayout.CENTER);
 
         // les menus
@@ -41,10 +40,12 @@ public class Main extends JFrame{
                 "The only menu in this program that has menu items");
         menuBar.add(menu);
 
-
-        JMenuItem accueil = new JMenuItem("accueil");
+        JMenuItem accueil = new JMenuItem("Accueil");
         accueil.addActionListener(new MenuListener(model, cards, Accueil.id));
         menu.add(accueil);
+        JMenuItem quitter = new JMenuItem("Quitter");
+        quitter.addActionListener(new MenuListener(model, cards, "Quit"));
+        menu.add(quitter);
 
         setJMenuBar(menuBar);
         setPreferredSize(new Dimension(250, 200));
@@ -55,8 +56,7 @@ public class Main extends JFrame{
         setResizable(false);
         pack();
     }
-
-
+    
     /*public void updateMenu() {
         switch (cards.getCurrentPanelId()) {
             case JPanelJouer.id:
