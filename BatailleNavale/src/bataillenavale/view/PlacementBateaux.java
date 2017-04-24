@@ -48,11 +48,6 @@ public class PlacementBateaux extends JPanel implements Observer {
     private BatailleNavale model;
 
     private int bateauxPlaces = 0;
-    //idée non approuvée par rémy
-    //private int newShipSize = 0;
-    //0 = petit, 1 = moyen, 2 = moyenbis et 3 = grand
-    //private int newShipDirection = 0;
-    //0 = horizontal et 1 = vertical
 
     private class JButtonBateau extends JButton implements Observer {
 
