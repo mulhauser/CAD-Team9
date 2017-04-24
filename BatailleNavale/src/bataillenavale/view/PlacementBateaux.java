@@ -192,7 +192,7 @@ public class PlacementBateaux extends JPanel implements Observer {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 //il faut ici pouvoir placer un bateau
-                permission(0, 2);
+                permission(0, 3);
             }
         });
 
