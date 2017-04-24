@@ -62,8 +62,8 @@ public class JPanelCards extends JPanel implements Observer{
                 Main.getInstance().setPreferredSize(new Dimension(250, 200));
                 break;
             case PlacementBateaux.id:
-                currentPanel = partie;
-                Main.getInstance().setPreferredSize(new Dimension(500, 400));
+                currentPanel = placement;
+                Main.getInstance().setPreferredSize(new Dimension(700, 600));
                 //pour vérifier que le pseudo est modifié
                 System.out.print(model.getHuman().getPseudo());
                 break;
@@ -77,5 +77,9 @@ public class JPanelCards extends JPanel implements Observer{
 
     public String getCurrentPanelId() {
         return currentPanelId;
+    }
+
+    public PlacementBateaux getPlacementPanel(){
+        return this.placement;
     }
 }
