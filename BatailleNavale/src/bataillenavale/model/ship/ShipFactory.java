@@ -1,6 +1,7 @@
 package bataillenavale.model.ship;
 
 import bataillenavale.model.Epoque;
+import bataillenavale.model.ship.xvi.*;
 import bataillenavale.model.ship.xx.*;
 
 import java.util.ArrayList;
@@ -34,8 +35,12 @@ public class ShipFactory {
                 shipList.add(new SousMarin(3));
                 shipList.add(new Torpilleur(2));
                 break;
-            case XIX:
-
+            case XVI:
+                shipList.add(new Fregate(5));
+                shipList.add(new Corsaire(4));
+                shipList.add(new Galion(3));
+                shipList.add(new Caravelle(3));
+                shipList.add(new Galere(2));
                 break;
         }
         return shipList;
