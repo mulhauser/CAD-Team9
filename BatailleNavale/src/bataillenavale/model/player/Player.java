@@ -2,6 +2,7 @@ package bataillenavale.model.player;
 
 
 import bataillenavale.model.Epoque;
+import bataillenavale.model.Flotte;
 import bataillenavale.model.Map;
 import bataillenavale.model.ship.*;
 
@@ -18,7 +19,7 @@ public abstract class Player implements Serializable {
     private int score;
     private Map mapPerso;
     private Map mapAdver;
-    private List<Ship> fleet;
+    private Flotte flotte;
 
 
     public Player(String p){
@@ -26,7 +27,6 @@ public abstract class Player implements Serializable {
         this.score = 0;
         this.mapPerso = new Map();
         this.mapAdver = new Map();
-        this.fleet = new ArrayList<>(4);
     }
 
     public String getPseudo() {
@@ -48,7 +48,7 @@ public abstract class Player implements Serializable {
     public void constructFlotte(Epoque e){
         ShipFactory shipFactory = ShipFactory.getInstance();
         List<Ship> shipList = shipFactory.getShipsByEpoque(e);
-        fleet.add((Ship) shipList);
+        flotte = new Flotte(shipList);
     }
 
 
