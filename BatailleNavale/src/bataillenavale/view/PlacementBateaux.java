@@ -47,7 +47,6 @@ public class PlacementBateaux extends JPanel implements Observer {
     private JButton annulerPlacement = new JButton("Annuler");
     private JButton validerPlacement = new JButton("Valider Placement");
 
-    private int size;
     private JLabelBateau[][] listButton;
     private BatailleNavale model;
 
@@ -58,6 +57,9 @@ public class PlacementBateaux extends JPanel implements Observer {
     private String newBoat = "";
     private String newX = "";
     private String newY = "";
+    private int size;
+    //0=vertical, 1=horizontal
+    private int direction;
     //le but est qu'il devienne par exemple "A0 - A3"
 
     private String[] alphabet = {"","A", "B","C","D","E","F","G","H","I","J"};
@@ -257,6 +259,8 @@ public class PlacementBateaux extends JPanel implements Observer {
             public void actionPerformed(ActionEvent ae) {
                 //il faut ici pouvoir placer un bateau
                 permission(0, 3);
+                size = 4;
+                direction = 1;
             }
         });
 
@@ -265,6 +269,8 @@ public class PlacementBateaux extends JPanel implements Observer {
             public void actionPerformed(ActionEvent ae) {
                 //il faut ici pouvoir placer un bateau
                 permission(3, 0);
+                size = 4;
+                direction = 0;
             }
         });
 
@@ -273,6 +279,8 @@ public class PlacementBateaux extends JPanel implements Observer {
             public void actionPerformed(ActionEvent ae) {
                 //il faut ici pouvoir placer un bateau
                 permission(0, 2);
+                size = 3;
+                direction = 1;
             }
         });
 
@@ -281,6 +289,8 @@ public class PlacementBateaux extends JPanel implements Observer {
             public void actionPerformed(ActionEvent ae) {
                 //il faut ici pouvoir placer un bateau
                 permission(0, 2);
+                size = 3;
+                direction = 1;
             }
         });
 
@@ -289,6 +299,8 @@ public class PlacementBateaux extends JPanel implements Observer {
             public void actionPerformed(ActionEvent ae) {
                 //il faut ici pouvoir placer un bateau
                 permission(2, 0);
+                size = 3;
+                direction = 0;
             }
         });
 
@@ -297,6 +309,8 @@ public class PlacementBateaux extends JPanel implements Observer {
             public void actionPerformed(ActionEvent ae) {
                 //il faut ici pouvoir placer un bateau
                 permission(2, 0);
+                size = 3;
+                direction = 0;
             }
         });
 
@@ -305,6 +319,8 @@ public class PlacementBateaux extends JPanel implements Observer {
             public void actionPerformed(ActionEvent ae) {
                 //il faut ici pouvoir placer un bateau
                 permission(1, 0);
+                size = 2;
+                direction = 0;
             }
         });
         smallH.addActionListener(new ActionListener() {
@@ -312,6 +328,8 @@ public class PlacementBateaux extends JPanel implements Observer {
             public void actionPerformed(ActionEvent ae) {
                 //il faut ici pouvoir placer un bateau
                 permission(0, 1);
+                size = 2;
+                direction = 1;
             }
         });
 
@@ -490,6 +508,15 @@ public class PlacementBateaux extends JPanel implements Observer {
         }
 
         listButton[y][x].setVisible(false);
+        if(this.direction==0){
+            for(int i=0; i<this.size;i++){
+                listButton[y+i][x].setVisible(false);
+            }
+        }else{
+            for(int i=0; i<this.size;i++){
+                listButton[y][x+i].setVisible(false);
+            }
+        }
         System.out.print(x+"-"+y);
 
     };
