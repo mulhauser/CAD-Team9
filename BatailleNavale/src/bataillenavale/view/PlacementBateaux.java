@@ -54,9 +54,8 @@ public class PlacementBateaux extends JPanel implements Observer {
 
 
     //temporaire pour stocker le nouveau bateau
-    private String newBoat = "";
-    private String newX = "";
-    private String newY = "";
+    private int newX = 0;
+    private int newY = 0;
     private int size;
     //0=vertical, 1=horizontal
     private int direction;
@@ -131,7 +130,7 @@ public class PlacementBateaux extends JPanel implements Observer {
         buttons.add(backToCreer);
 
         JButton valider = new JButton("valider");
-
+        valider.setEnabled(false);
 
         validerPlacement.addActionListener(new ActionListener() {
 
@@ -152,11 +151,27 @@ public class PlacementBateaux extends JPanel implements Observer {
                 }
                 */
                 if(boolX==true && boolY==true){
-                    newBoat=newX+newY;
-                    //il faut ajouter la direction et la taille maintenant
-                    updateMap(newX,newY);
-                    JOptionPane.showMessageDialog(null, "Bateau Placé en "+newBoat, "Erreur",
-                            JOptionPane.ERROR_MESSAGE);
+                    //on check la taille du bateau ne doit pas depasser le cadre
+                    if(direction==0){
+                        if((newY+size)>10){
+                            JOptionPane.showMessageDialog(null, "Bateau hors map", "Erreur",
+                                    JOptionPane.ERROR_MESSAGE);
+                        }else{
+                            updateMap(newX,newY);
+                            JOptionPane.showMessageDialog(null, "Bateau Placé", "Erreur",
+                                    JOptionPane.ERROR_MESSAGE);
+                        }
+                    }else{
+                        if((newX+size)>10){
+                            JOptionPane.showMessageDialog(null, "Bateau hors map", "Erreur",
+                                    JOptionPane.ERROR_MESSAGE);
+                        }else{
+                            updateMap(newX,newY);
+                            JOptionPane.showMessageDialog(null, "Bateau Placé", "Erreur",
+                                    JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+
                 }else{
                     JOptionPane.showMessageDialog(null, "Error", "Erreur",
                             JOptionPane.ERROR_MESSAGE);
@@ -365,7 +380,39 @@ public class PlacementBateaux extends JPanel implements Observer {
             public void actionPerformed(ActionEvent e) {
                 if(positionX.getSelectedItem()!=""){
                     boolX = true;
-                    newX = (String) positionX.getSelectedItem();
+                    switch((String) positionX.getSelectedItem()){
+                        case "A" :
+                            newX = 0;
+                            break;
+                        case "B" :
+                            newX = 1;
+                            break;
+                        case "C" :
+                            newX = 2;
+                            break;
+                        case "D" :
+                            newX = 3;
+                            break;
+                        case "E" :
+                            newX = 4;
+                            break;
+                        case "F" :
+                            newX = 5;
+                            break;
+                        case "G" :
+                            newX = 6;
+                            break;
+                        case "H" :
+                            newX = 7;
+                            break;
+                        case "I" :
+                            newX = 8;
+                            break;
+                        case "J" :
+                            newX = 9;
+                            break;
+                    }
+
                 }else{
                     boolX = false;
                 }
@@ -377,7 +424,39 @@ public class PlacementBateaux extends JPanel implements Observer {
             public void actionPerformed(ActionEvent e) {
                 if(positionY.getSelectedItem()!=""){
                     boolY = true;
-                    newY = (String) positionY.getSelectedItem();
+                    switch((String) positionY.getSelectedItem()){
+                        case "O" :
+                            newY = 0;
+                            break;
+                        case "1" :
+                            newY = 1;
+                            break;
+                        case "2" :
+                            newY = 2;
+                            break;
+                        case "3" :
+                            newY = 3;
+                            break;
+                        case "4" :
+                            newY = 4;
+                            break;
+                        case "5" :
+                            newY = 5;
+                            break;
+                        case "6" :
+                            newY = 6;
+                            break;
+                        case "7" :
+                            newY = 7;
+                            break;
+                        case "8" :
+                            newY = 8;
+                            break;
+                        case "9" :
+                            newY = 9;
+                            break;
+
+                    }
                 }else{
                     boolY = false;
                 }
@@ -437,75 +516,9 @@ public class PlacementBateaux extends JPanel implements Observer {
         bateauxPlaces++;
     }
 
-    public void updateMap(String newX,String newY){
-        int x = 0;
-        int y = 0;
-
-        switch (newX){
-            case "A":
-                x = 0;
-                break;
-            case "B":
-                x = 1;
-                break;
-            case "C":
-                x = 2;
-                break;
-            case "D":
-                x = 3;
-                break;
-            case "E":
-                x = 4;
-                break;
-            case "F":
-                x = 5;
-                break;
-            case "G":
-                x = 6;
-                break;
-            case "H":
-                x = 7;
-                break;
-            case "I":
-                x = 8;
-                break;
-            case "J":
-                x = 9;
-                break;
-        }
-
-        switch (newY){
-            case "0":
-                y = 0;
-                break;
-            case "1":
-                y = 1;
-                break;
-            case "2":
-                y = 2;
-                break;
-            case "3":
-                y = 3;
-                break;
-            case "4":
-                y = 4;
-                break;
-            case "5":
-                y = 5;
-                break;
-            case "6":
-                y = 6;
-                break;
-            case "7":
-                y = 7;
-                break;
-            case "8":
-                y = 8;
-                break;
-            case "9":
-                y = 9;
-                break;
-        }
+    public void updateMap(int newX,int newY){
+        int x = newX;
+        int y = newY;
 
         listButton[y][x].setVisible(false);
         if(this.direction==0){
