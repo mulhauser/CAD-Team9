@@ -50,13 +50,13 @@ public class PlacementBateaux extends JPanel implements Observer {
     private JLabelBateau[][] listButton;
     private BatailleNavale model;
 
-    private int bateauxPlaces = 0;
+    //private int bateauxPlaces = 0;
 
 
     //temporaire pour stocker le nouveau bateau
     private int newX = 0;
     private int newY = 0;
-    private int size;
+    private int size = 0;
     //0=vertical, 1=horizontal
     private int direction;
     //le but est qu'il devienne par exemple "A0 - A3"
@@ -68,6 +68,9 @@ public class PlacementBateaux extends JPanel implements Observer {
 
     private boolean boolX = false;
     private boolean boolY = false;
+
+    //chaque 0 représente un bateau
+    private int[] shipsAdded = {0,0,0,0};
 
     private class JLabelBateau extends JLabel implements Observer {
 
@@ -160,6 +163,8 @@ public class PlacementBateaux extends JPanel implements Observer {
                             updateMap(newX,newY);
                             JOptionPane.showMessageDialog(null, "Bateau Placé", "Erreur",
                                     JOptionPane.ERROR_MESSAGE);
+                            deleteCase();
+                            permissionFin();
                         }
                     }else{
                         if((newX+size)>10){
@@ -169,12 +174,18 @@ public class PlacementBateaux extends JPanel implements Observer {
                             updateMap(newX,newY);
                             JOptionPane.showMessageDialog(null, "Bateau Placé", "Erreur",
                                     JOptionPane.ERROR_MESSAGE);
+                            deleteCase();
+                            permissionFin();
                         }
                     }
 
                 }else{
                     JOptionPane.showMessageDialog(null, "Error", "Erreur",
                             JOptionPane.ERROR_MESSAGE);
+                }
+                if(shipsAdded[0]==1&&shipsAdded[1]==1&&shipsAdded[2]==1&&shipsAdded[3]==1){
+                    //si tout les bateaux sont placés
+                    valider.setEnabled(true);
                 }
             }
         });
@@ -352,26 +363,7 @@ public class PlacementBateaux extends JPanel implements Observer {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 //il faut ici pouvoir placer un bateau
-                for(int y = 0; y < listButton.length; y ++){
-                    for(int x = 0; x < listButton[y].length; x++){
-                        listButton[y][x].setEnabled(false);
-                    }
-                }
-
-                bigH.setEnabled(true);
-                bigV.setEnabled(true);
-                mediumH.setEnabled(true);
-                mediumHBis.setEnabled(true);
-                mediumV.setEnabled(true);
-                mediumVBis.setEnabled(true);
-                smallV.setEnabled(true);
-                smallH.setEnabled(true);
-                annulerPlacement.setVisible(false);
-                validerPlacement.setVisible(false);
-                positionX.setVisible(false);
-                positionY.setVisible(false);
-
-                bateauxPlaces--;
+                permissionFin();
             }
         });
 
@@ -513,7 +505,40 @@ public class PlacementBateaux extends JPanel implements Observer {
         positionX.setVisible(true);
         positionY.setVisible(true);
 
-        bateauxPlaces++;
+        //bateauxPlaces++;
+    }
+
+    public void permissionFin() {
+        for (int y = 0; y < listButton.length; y++) {
+            for (int x = 0; x < listButton[y].length; x++) {
+                listButton[y][x].setEnabled(false);
+            }
+        }
+
+        //on check si les bateaux sont placés ou non
+        if(shipsAdded[0]==0){
+            smallV.setEnabled(true);
+            smallH.setEnabled(true);
+        }
+        if(shipsAdded[1]==0){
+            mediumH.setEnabled(true);
+            mediumV.setEnabled(true);
+        }
+        if(shipsAdded[2]==0){
+            mediumVBis.setEnabled(true);
+            mediumHBis.setEnabled(true);
+        }
+        if(shipsAdded[3]==0){
+            bigH.setEnabled(true);
+            bigV.setEnabled(true);
+        }
+
+        annulerPlacement.setVisible(false);
+        validerPlacement.setVisible(false);
+        positionX.setVisible(false);
+        positionY.setVisible(false);
+
+       // bateauxPlaces--;
     }
 
     public void updateMap(int newX,int newY){
@@ -533,5 +558,23 @@ public class PlacementBateaux extends JPanel implements Observer {
         System.out.print(x+"-"+y);
 
     };
+
+    public void deleteCase(){
+        switch(size){
+            case 2 :
+                shipsAdded[0]=1;
+                break;
+            case 3:
+                if(shipsAdded[1]==0){
+                    shipsAdded[1]=1;
+                }else{
+                    shipsAdded[2]=1;
+                }
+                break;
+            case 4:
+                shipsAdded[3] = 1;
+                break;
+        }
+    }
 
 }
