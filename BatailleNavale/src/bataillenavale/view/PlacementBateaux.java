@@ -5,6 +5,7 @@ import bataillenavale.model.ship.Ship;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -44,23 +45,26 @@ public class PlacementBateaux extends JPanel implements Observer {
     private JButton annulerPlacement = new JButton("Annuler");
 
     private int size;
-    private JButtonBateau[][] listButton;
+    private JLabelBateau[][] listButton;
     private BatailleNavale model;
 
     private int bateauxPlaces = 0;
 
-    private class JButtonBateau extends JButton implements Observer {
+    private class JLabelBateau extends JLabel implements Observer {
 
         // x = colonne du tableau, y = ligne du tableau
         final int posX, posY;
         final BatailleNavale model;
 
-        public JButtonBateau(BatailleNavale model, int x, int y) {
+        public JLabelBateau(BatailleNavale model, int x, int y) {
             super();
             this.model = model;
             this.posX = x;
             this.posY = y;
             this.setEnabled(false);
+            this.setOpaque(true);
+            this.setBackground(Color.BLUE);
+            this.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
            /* try {
                 BufferedImage buttonIcon = ImageIO.read(new File("./BatailleNavale/img/ocean.png"));
                 this.setIcon(new ImageIcon(buttonIcon));
@@ -69,12 +73,12 @@ public class PlacementBateaux extends JPanel implements Observer {
                 e.printStackTrace();
             }
             */
-            this.addActionListener(new ActionListener() {
+            /*this.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
 
                 }
-            });
+            });*/
         }
 
         @Override
@@ -132,25 +136,44 @@ public class PlacementBateaux extends JPanel implements Observer {
     }
 
 
-    public void constructGrillePlacement(){
-        if(grille != null){
+    public void constructGrillePlacement() {
+
+        // Construction de la grille des bateaux
+        if (grille != null) {
             remove(grille);
         }
-        grille = new JPanel(new GridLayout(size, size));
+        grille = new JPanel(new GridLayout(size+1, size+1));
 
-        listButton = new JButtonBateau[size][size];
+        listButton = new JLabelBateau[size][size];
 
         // On créer la grille de boutons pour le positionnement des bateaux
+        grille.add(new JLabel("", SwingConstants.CENTER));
+        grille.add(new JLabel("0", SwingConstants.CENTER));
+        grille.add(new JLabel("1", SwingConstants.CENTER));
+        grille.add(new JLabel("2", SwingConstants.CENTER));
+        grille.add(new JLabel("3", SwingConstants.CENTER));
+        grille.add(new JLabel("4", SwingConstants.CENTER));
+        grille.add(new JLabel("5", SwingConstants.CENTER));
+        grille.add(new JLabel("6", SwingConstants.CENTER));
+        grille.add(new JLabel("7", SwingConstants.CENTER));
+        grille.add(new JLabel("8", SwingConstants.CENTER));
+        grille.add(new JLabel("9", SwingConstants.CENTER));
         for (int y = 0; y < listButton.length; y++) {
+            grille.add(new JLabel(Integer.toString(y), SwingConstants.CENTER));
             for (int x = 0; x < listButton[y].length; x++) {
-                JButtonBateau btn = new JButtonBateau(model, x, y);
+                JLabelBateau btn = new JLabelBateau(model, x, y);
 
                 listButton[y][x] = btn;
                 grille.add(btn);
             }
+
         }
         add(grille, BorderLayout.CENTER);
 
+    }
+
+    public void constructMenuBateaux(){
+        // Construction du menu de placement à droite
         if(ships != null){
             remove(ships);
         }

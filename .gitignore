@@ -9,6 +9,7 @@
 .project/
 .metadata/
 .DS_Store
-.idea/
+.idea
 */.DS_Store
 /BatailleNavale/img/bateauPS.psd
+out/
