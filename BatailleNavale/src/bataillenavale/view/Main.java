@@ -69,7 +69,6 @@ public class Main extends JFrame{
     }*/
 
     public static void main(String[] args) throws UnsupportedLookAndFeelException {
-
         //Utilisation d'un Singleton
         Main.getInstance();
     }

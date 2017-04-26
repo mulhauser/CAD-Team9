@@ -6,6 +6,8 @@ import bataillenavale.model.ship.Ship;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -43,12 +45,28 @@ public class PlacementBateaux extends JPanel implements Observer {
     private JButton smallV;
 
     private JButton annulerPlacement = new JButton("Annuler");
+    private JButton validerPlacement = new JButton("Valider Placement");
 
     private int size;
     private JLabelBateau[][] listButton;
     private BatailleNavale model;
 
     private int bateauxPlaces = 0;
+
+
+    //temporaire pour stocker le nouveau bateau
+    private String newBoat = "";
+    private String newX = "";
+    private String newY = "";
+    //le but est qu'il devienne par exemple "A0 - A3"
+
+    private String[] alphabet = {"","A", "B","C","D","E","F","G","H","I","J"};
+    private JComboBox positionX = new JComboBox(alphabet);
+    private String[] numbers = {"","0", "1","2","3","4","5","6","7","8","9"};
+    private JComboBox positionY = new JComboBox(numbers);
+
+    private boolean boolX = false;
+    private boolean boolY = false;
 
     private class JLabelBateau extends JLabel implements Observer {
 
@@ -79,6 +97,8 @@ public class PlacementBateaux extends JPanel implements Observer {
 
                 }
             });*/
+
+
         }
 
         @Override
@@ -91,7 +111,7 @@ public class PlacementBateaux extends JPanel implements Observer {
         super(new BorderLayout());
         model.addObserver(this);
         this.model = model;
-        this.size = model.getHuman().getMapPerso().getSize();
+        this.size = model.getPartie().getHuman().getMapPerso().getSize();
 
         buttons = new JPanel(new GridLayout(1, 2));
 
@@ -109,7 +129,9 @@ public class PlacementBateaux extends JPanel implements Observer {
         buttons.add(backToCreer);
 
         JButton valider = new JButton("valider");
-        valider.addActionListener(new ActionListener() {
+
+
+        validerPlacement.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -118,12 +140,23 @@ public class PlacementBateaux extends JPanel implements Observer {
 
                 //wizard.getJpanelJouer().initialize();
                 //wizard.show(JPanelJouer.id);
-                System.out.println(model.getHuman().getPseudo());
+                /*System.out.println(model.getPartie().getHuman().getPseudo());
                 if(bateauxPlaces<4){
                     JOptionPane.showMessageDialog(null, "Veuillez placer l'ensemble de la flotte.", "Erreur",
                             JOptionPane.ERROR_MESSAGE);
                 }else {
                     JOptionPane.showMessageDialog(null, "Flotte prête", "Erreur",
+                            JOptionPane.ERROR_MESSAGE);
+                }
+                */
+                if(boolX==true && boolY==true){
+                    newBoat=newX+newY;
+                    //il faut ajouter la direction et la taille maintenant
+                    updateMap(newX,newY);
+                    JOptionPane.showMessageDialog(null, "Bateau Placé en "+newBoat, "Erreur",
+                            JOptionPane.ERROR_MESSAGE);
+                }else{
+                    JOptionPane.showMessageDialog(null, "Error", "Erreur",
                             JOptionPane.ERROR_MESSAGE);
                 }
             }
@@ -148,21 +181,20 @@ public class PlacementBateaux extends JPanel implements Observer {
 
         // On créer la grille de boutons pour le positionnement des bateaux
         grille.add(new JLabel("", SwingConstants.CENTER));
-        grille.add(new JLabel("0", SwingConstants.CENTER));
-        grille.add(new JLabel("1", SwingConstants.CENTER));
-        grille.add(new JLabel("2", SwingConstants.CENTER));
-        grille.add(new JLabel("3", SwingConstants.CENTER));
-        grille.add(new JLabel("4", SwingConstants.CENTER));
-        grille.add(new JLabel("5", SwingConstants.CENTER));
-        grille.add(new JLabel("6", SwingConstants.CENTER));
-        grille.add(new JLabel("7", SwingConstants.CENTER));
-        grille.add(new JLabel("8", SwingConstants.CENTER));
-        grille.add(new JLabel("9", SwingConstants.CENTER));
+        grille.add(new JLabel("A", SwingConstants.CENTER));
+        grille.add(new JLabel("B", SwingConstants.CENTER));
+        grille.add(new JLabel("C", SwingConstants.CENTER));
+        grille.add(new JLabel("D", SwingConstants.CENTER));
+        grille.add(new JLabel("E", SwingConstants.CENTER));
+        grille.add(new JLabel("F", SwingConstants.CENTER));
+        grille.add(new JLabel("G", SwingConstants.CENTER));
+        grille.add(new JLabel("H", SwingConstants.CENTER));
+        grille.add(new JLabel("I", SwingConstants.CENTER));
+        grille.add(new JLabel("J", SwingConstants.CENTER));
         for (int y = 0; y < listButton.length; y++) {
             grille.add(new JLabel(Integer.toString(y), SwingConstants.CENTER));
             for (int x = 0; x < listButton[y].length; x++) {
                 JLabelBateau btn = new JLabelBateau(model, x, y);
-
                 listButton[y][x] = btn;
                 grille.add(btn);
             }
@@ -177,11 +209,14 @@ public class PlacementBateaux extends JPanel implements Observer {
         if(ships != null){
             remove(ships);
         }
-        ships = new JPanel(new GridLayout(6, 3));
+        ships = new JPanel(new GridLayout(7, 3));
 
         JLabel pseudo = new JLabel("Placez vos bateaux ");
 
         annulerPlacement.setVisible(false);
+        validerPlacement.setVisible(false);
+        positionX.setVisible(false);
+        positionY.setVisible(false);
 
         // Menu des bateaux à droite
         bigShip = new JLabel("BlackPearl");
@@ -299,8 +334,35 @@ public class PlacementBateaux extends JPanel implements Observer {
                 smallV.setEnabled(true);
                 smallH.setEnabled(true);
                 annulerPlacement.setVisible(false);
+                validerPlacement.setVisible(false);
+                positionX.setVisible(false);
+                positionY.setVisible(false);
 
                 bateauxPlaces--;
+            }
+        });
+
+        positionX.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(positionX.getSelectedItem()!=""){
+                    boolX = true;
+                    newX = (String) positionX.getSelectedItem();
+                }else{
+                    boolX = false;
+                }
+            }
+        });
+
+        positionY.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(positionY.getSelectedItem()!=""){
+                    boolY = true;
+                    newY = (String) positionY.getSelectedItem();
+                }else{
+                    boolY = false;
+                }
             }
         });
 
@@ -320,8 +382,11 @@ public class PlacementBateaux extends JPanel implements Observer {
         ships.add(smallH);
         ships.add(smallV);
         ships.add(new JLabel());
-        ships.add(annulerPlacement);
+        ships.add(positionX);
+        ships.add(positionY);
         ships.add(new JLabel());
+        ships.add(validerPlacement);
+        ships.add(annulerPlacement);
         add(ships, BorderLayout.EAST);
     }
     @Override
@@ -347,7 +412,86 @@ public class PlacementBateaux extends JPanel implements Observer {
         smallV.setEnabled(false);
         smallH.setEnabled(false);
         annulerPlacement.setVisible(true);
+        validerPlacement.setVisible(true);
+        positionX.setVisible(true);
+        positionY.setVisible(true);
 
         bateauxPlaces++;
     }
+
+    public void updateMap(String newX,String newY){
+        int x = 0;
+        int y = 0;
+
+        switch (newX){
+            case "A":
+                x = 0;
+                break;
+            case "B":
+                x = 1;
+                break;
+            case "C":
+                x = 2;
+                break;
+            case "D":
+                x = 3;
+                break;
+            case "E":
+                x = 4;
+                break;
+            case "F":
+                x = 5;
+                break;
+            case "G":
+                x = 6;
+                break;
+            case "H":
+                x = 7;
+                break;
+            case "I":
+                x = 8;
+                break;
+            case "J":
+                x = 9;
+                break;
+        }
+
+        switch (newY){
+            case "0":
+                y = 0;
+                break;
+            case "1":
+                y = 1;
+                break;
+            case "2":
+                y = 2;
+                break;
+            case "3":
+                y = 3;
+                break;
+            case "4":
+                y = 4;
+                break;
+            case "5":
+                y = 5;
+                break;
+            case "6":
+                y = 6;
+                break;
+            case "7":
+                y = 7;
+                break;
+            case "8":
+                y = 8;
+                break;
+            case "9":
+                y = 9;
+                break;
+        }
+
+        listButton[y][x].setVisible(false);
+        System.out.print(x+"-"+y);
+
+    };
+
 }

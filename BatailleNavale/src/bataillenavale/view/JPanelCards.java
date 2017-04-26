@@ -65,7 +65,7 @@ public class JPanelCards extends JPanel implements Observer{
                 currentPanel = placement;
                 Main.getInstance().setPreferredSize(new Dimension(700, 600));
                 //pour vérifier que le pseudo est modifié
-                System.out.print(model.getHuman().getPseudo());
+                System.out.print(model.getPartie().getHuman().getPseudo());
                 break;
         }
     }

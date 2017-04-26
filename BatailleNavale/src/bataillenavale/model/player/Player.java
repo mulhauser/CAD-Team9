@@ -18,15 +18,15 @@ public abstract class Player implements Serializable {
     private String pseudo;
     private int score;
     private Map mapPerso;
-    private Map mapAdver;
-    private Flotte flotte;
+    //private Map mapAdver;
+    //private Flotte flotte;
 
 
     public Player(String p){
         this.pseudo = p;
         this.score = 0;
         this.mapPerso = new Map();
-        this.mapAdver = new Map();
+        //this.mapAdver = new Map();
     }
 
     public String getPseudo() {
@@ -45,12 +45,13 @@ public abstract class Player implements Serializable {
         return this.mapPerso;
     }
 
+    /*
     public void constructFlotte(Epoque e){
         ShipFactory shipFactory = ShipFactory.getInstance();
         List<Ship> shipList = shipFactory.getShipsByEpoque(e);
         flotte = new Flotte(shipList);
     }
-
+    */
 
     public abstract void fire();
 }

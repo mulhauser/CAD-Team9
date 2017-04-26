@@ -51,7 +51,7 @@ public class CreationPartie extends JPanel implements Observer {
 
             @Override
             public void actionPerformed(ActionEvent ae) {
-                model.getHuman().setPseudo(pseudo.getText());
+                model.getPartie().getHuman().setPseudo(pseudo.getText());
                 // On construit la grille et la liste des bateaux a placer
                 card.getPlacementPanel().constructGrillePlacement();
                 card.getPlacementPanel().constructMenuBateaux();

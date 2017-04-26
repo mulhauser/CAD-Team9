@@ -17,9 +17,17 @@ public class BatailleNavale extends Observable {
     private Profile profile;
 
     public BatailleNavale(){
-
+        //disons que par défaut l'époque est moderne et le pseudo ne vaut rien
+        this.partie = new Partie("", Epoque.XX);
+        this.profile = new Profile();
     }
 
+    public Partie getPartie(){
+        return this.partie;
+    }
 
+    public Profile getProfile(){
+        return this.profile;
+    }
 
 }
