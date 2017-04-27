@@ -89,9 +89,12 @@ public class ViewMain extends JPanel implements Observer{
                 //retourne un booléan : true si touché, false sinon
                 if(fire(fireX,fireY)){
                     JOptionPane.showMessageDialog(null, "Touché");
+                    //il faut changer la couleur de la case en rouge
                 }else{
                     JOptionPane.showMessageDialog(null, "Plouf");
+                    //il faut changer la couleur de la case en noir
                 }
+                //il faut ne plus pouvoir jouer fire(fireX,fireY);
             }
         });
 
