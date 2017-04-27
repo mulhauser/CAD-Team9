@@ -13,10 +13,10 @@ public class Flotte {
     private List<Ship> shipList;
 
     public Flotte(List<Ship> shipList) {
-        shipList.add((Ship) shipList);
+        shipList.addAll(shipList);
     }
 
-    public List<Ship> getShipList(){
-        return this.shipList;
+    public ArrayList<Ship> getShipList(){
+        return (ArrayList<Ship>) this.shipList;
     }
 }

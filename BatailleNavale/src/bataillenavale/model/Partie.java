@@ -13,15 +13,16 @@ import java.util.Observable;
 public class Partie extends Observable{
 
     private Player human;
-    //Player bot;
+    Player bot;
     private Epoque epoque;
-    //AttackStrategies strategy;
+    AttackStrategies strategy;
 
-    //public Partie(String pseudo, Epoque e, AttackStrategies strat){
-    public Partie(String pseudo, Epoque e){
+    public Partie(String pseudo, Epoque e, AttackStrategies strat){
+
         human = new Human(pseudo);
         this.epoque = e;
-        //human.constructFlotte(e);
+        human.constructFlotte(e);
+        bot = new Bot("Bot", strat);
     }
 
     public Player getHuman(){

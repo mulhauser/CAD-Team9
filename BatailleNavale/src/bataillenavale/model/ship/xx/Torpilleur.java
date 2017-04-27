@@ -1,7 +1,6 @@
 package bataillenavale.model.ship.xx;
 
 import bataillenavale.model.ship.EpoqueXX;
-import bataillenavale.model.ship.Ship;
 
 /**
  * Created by mulhauser on 25/04/2017.
@@ -9,7 +8,7 @@ import bataillenavale.model.ship.Ship;
 public class Torpilleur extends EpoqueXX {
 
     // 2 CASES
-    public Torpilleur(int s) {
-        super(s);
+    public Torpilleur() {
+        super("Torpilleur",2);
     }
 }

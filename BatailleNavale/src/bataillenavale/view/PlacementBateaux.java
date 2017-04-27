@@ -3,17 +3,15 @@ package bataillenavale.view;
 import bataillenavale.model.BatailleNavale;
 import bataillenavale.model.ship.Ship;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
-import javax.swing.event.AncestorEvent;
-import javax.swing.event.AncestorListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -28,21 +26,9 @@ public class PlacementBateaux extends JPanel implements Observer {
     private JPanel ships;
     private JPanel buttons;
 
-    private JLabel bigShip;
-    private JButton bigH;
-    private JButton bigV;
+    protected static Ship currentShip;
 
-    private JLabel mediumShip;
-    private JButton mediumH;
-    private JButton mediumV;
 
-    private JLabel mediumShipBis;
-    private JButton mediumHBis;
-    private JButton mediumVBis;
-
-    private JLabel smallShip;
-    private JButton smallH;
-    private JButton smallV;
 
     private JButton annulerPlacement = new JButton("Annuler");
     private JButton validerPlacement = new JButton("Valider Placement");
@@ -71,45 +57,6 @@ public class PlacementBateaux extends JPanel implements Observer {
 
     //chaque 0 représente un bateau
     private int[] shipsAdded = {0,0,0,0};
-
-    private class JLabelBateau extends JLabel implements Observer {
-
-        // x = colonne du tableau, y = ligne du tableau
-        final int posX, posY;
-        final BatailleNavale model;
-
-        public JLabelBateau(BatailleNavale model, int x, int y) {
-            super();
-            this.model = model;
-            this.posX = x;
-            this.posY = y;
-            this.setEnabled(false);
-            this.setOpaque(true);
-            this.setBackground(Color.BLUE);
-            this.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
-           /* try {
-                BufferedImage buttonIcon = ImageIO.read(new File("./BatailleNavale/img/ocean.png"));
-                this.setIcon(new ImageIcon(buttonIcon));
-                this.setDisabledIcon(new ImageIcon(buttonIcon));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            */
-            /*this.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-
-                }
-            });*/
-
-
-        }
-
-        @Override
-        public void update(Observable o, Object arg) {
-            // modifier couleur bouton quand bateau placé
-        }
-    }
 
     public PlacementBateaux(final BatailleNavale model, final JPanelCards card) {
         super(new BorderLayout());
@@ -237,9 +184,13 @@ public class PlacementBateaux extends JPanel implements Observer {
         if(ships != null){
             remove(ships);
         }
-        ships = new JPanel(new GridLayout(7, 3));
+        ships = new JPanel(new GridLayout(8, 1));
 
         JLabel pseudo = new JLabel("Placez vos bateaux ");
+
+        ships.add(new JLabel());
+        ships.add(pseudo);
+        ships.add(new JLabel());
 
         annulerPlacement.setVisible(false);
         validerPlacement.setVisible(false);
@@ -247,117 +198,13 @@ public class PlacementBateaux extends JPanel implements Observer {
         positionY.setVisible(false);
 
         // Menu des bateaux à droite
-        bigShip = new JLabel("BlackPearl");
-        bigShip.setHorizontalAlignment(SwingConstants.TRAILING);
-        mediumShip = new JLabel("Galion");
-        mediumShip.setHorizontalAlignment(SwingConstants.TRAILING);
-        mediumShipBis = new JLabel("Galion");
-        mediumShipBis.setHorizontalAlignment(SwingConstants.TRAILING);
-        smallShip = new JLabel("Boat");
-        smallShip.setHorizontalAlignment(SwingConstants.TRAILING);
-
-        BufferedImage buttonIcon = null;
-        try {
-            buttonIcon = ImageIO.read(new File("./BatailleNavale/img/bigShipH.png"));
-            bigH = new JButton(new ImageIcon(buttonIcon));
-            buttonIcon = ImageIO.read(new File("./BatailleNavale/img/bigShipV.png"));
-            bigV = new JButton(new ImageIcon(buttonIcon));
-
-            buttonIcon = ImageIO.read(new File("./BatailleNavale/img/mediumShipH.png"));
-            mediumH = new JButton(new ImageIcon(buttonIcon));
-            mediumHBis = new JButton(new ImageIcon(buttonIcon));
-
-            buttonIcon = ImageIO.read(new File("./BatailleNavale/img/mediumShipV.png"));
-            mediumV = new JButton(new ImageIcon(buttonIcon));
-            mediumVBis = new JButton(new ImageIcon(buttonIcon));
-
-            buttonIcon = ImageIO.read(new File("./BatailleNavale/img/smallShipH.png"));
-            smallH = new JButton(new ImageIcon(buttonIcon));
-            buttonIcon = ImageIO.read(new File("./BatailleNavale/img/smallShipV.png"));
-            smallV = new JButton(new ImageIcon(buttonIcon));
-
-        } catch (IOException e) {
-            e.printStackTrace();
+        // On récupère la flotte du joueur
+        ArrayList<Ship> shipList = model.getPartie().getHuman().getFlotte().getShipList();
+        for(Ship s : shipList){
+            ships.add(new JPanelBateau(s, ships));
         }
 
-        bigH.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                //il faut ici pouvoir placer un bateau
-                permission(0, 3);
-                size = 4;
-                direction = 1;
-            }
-        });
 
-        bigV.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                //il faut ici pouvoir placer un bateau
-                permission(3, 0);
-                size = 4;
-                direction = 0;
-            }
-        });
-
-        mediumH.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                //il faut ici pouvoir placer un bateau
-                permission(0, 2);
-                size = 3;
-                direction = 1;
-            }
-        });
-
-        mediumHBis.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                //il faut ici pouvoir placer un bateau
-                permission(0, 2);
-                size = 3;
-                direction = 1;
-            }
-        });
-
-        mediumV.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                //il faut ici pouvoir placer un bateau
-                permission(2, 0);
-                size = 3;
-                direction = 0;
-            }
-        });
-
-        mediumVBis.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                //il faut ici pouvoir placer un bateau
-                permission(2, 0);
-                size = 3;
-                direction = 0;
-            }
-        });
-
-        smallV.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                //il faut ici pouvoir placer un bateau
-                permission(1, 0);
-                size = 2;
-                direction = 0;
-            }
-        });
-        smallH.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                //il faut ici pouvoir placer un bateau
-                permission(0, 1);
-                size = 2;
-                direction = 1;
-            }
-        });
 
         annulerPlacement.addActionListener(new ActionListener() {
             @Override
@@ -455,21 +302,7 @@ public class PlacementBateaux extends JPanel implements Observer {
             }
         });
 
-        ships.add(new JLabel());
-        ships.add(pseudo);
-        ships.add(new JLabel());
-        ships.add(bigShip);
-        ships.add(bigH);
-        ships.add(bigV);
-        ships.add(mediumShip);
-        ships.add(mediumH);
-        ships.add(mediumV);
-        ships.add(mediumShipBis);
-        ships.add(mediumHBis);
-        ships.add(mediumVBis);
-        ships.add(smallShip);
-        ships.add(smallH);
-        ships.add(smallV);
+
         ships.add(new JLabel());
         ships.add(positionX);
         ships.add(positionY);
@@ -574,6 +407,86 @@ public class PlacementBateaux extends JPanel implements Observer {
             case 4:
                 shipsAdded[3] = 1;
                 break;
+        }
+    }
+
+    /**
+     * Classe privee qui pour chaque case de la grille de placement
+     */
+    private class JLabelBateau extends JLabel implements Observer {
+
+        // x = colonne du tableau, y = ligne du tableau
+        final int posX, posY;
+        final BatailleNavale model;
+
+        public JLabelBateau(BatailleNavale model, int x, int y) {
+            super();
+            this.model = model;
+            this.posX = x;
+            this.posY = y;
+            this.setEnabled(false);
+            this.setOpaque(true);
+            this.setBackground(Color.BLUE);
+            this.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+
+
+        }
+
+        @Override
+        public void update(Observable o, Object arg) {
+            // modifier couleur bouton quand bateau placé
+        }
+    }
+
+    /**
+     * Classe privee qui permet de construire pour chaque bateau, le label et ses deux boutons associés pour son placement
+     */
+    private class JPanelBateau extends JPanel{
+
+        Ship ship;
+        JLabel nom;
+        JButton horizontalButton;
+        JButton verticalButton;
+        public JPanelBateau(Ship s, JPanel ships){
+            super(new GridLayout(1,3));
+            this.ship = s;
+
+            // Creation du label du bateau associé
+            this.nom = new JLabel(s.getNom());
+            this.nom.setHorizontalAlignment(SwingConstants.TRAILING);
+            this.add(nom);
+
+
+            BufferedImage imgH = s.getImage();
+            BufferedImage imgV = new BufferedImage(imgH.getWidth(), imgH.getHeight(), imgH.getType());
+            this.horizontalButton = new JButton(new ImageIcon(imgH));
+            this.horizontalButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    s.setOrientation(Ship.Orientation.HORIZONTAL);
+                    currentShip = s;
+                }
+            });
+            this.add(horizontalButton);
+
+            // Rotation de l'image de 90° pour l'affichage vertical
+            AffineTransform tx = new AffineTransform();
+            tx.setToTranslation((imgV.getWidth() - imgH.getWidth())/2, (imgV.getHeight() - imgH.getHeight())/2);
+            tx.rotate(Math.toRadians(90), imgH.getWidth()/2, imgH.getHeight()/2);
+
+            AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
+
+            op.filter(imgH, imgV);
+
+            this.verticalButton = new JButton(new ImageIcon(imgV));
+            this.verticalButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    s.setOrientation(Ship.Orientation.VERTICAL);
+                    currentShip = s;
+                }
+            });
+            this.add(verticalButton);
         }
     }
 

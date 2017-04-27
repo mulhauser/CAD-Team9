@@ -4,11 +4,10 @@ package bataillenavale.model.player;
 import bataillenavale.model.Epoque;
 import bataillenavale.model.Flotte;
 import bataillenavale.model.Map;
-import bataillenavale.model.ship.*;
+import bataillenavale.model.ship.Ship;
+import bataillenavale.model.ship.ShipFactory;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by mulhauser on 12/04/2017.
@@ -19,7 +18,7 @@ public abstract class Player implements Serializable {
     private int score;
     private Map mapPerso;
     //private Map mapAdver;
-    //private Flotte flotte;
+    private Flotte flotte;
 
 
     public Player(String p){
@@ -37,13 +36,22 @@ public abstract class Player implements Serializable {
         this.pseudo = pseudo;
     }
 
-    public  void putShip(Ship s, int x, int y, Ship.Orientation orientation){
+    public Flotte getFlotte() {
+        return flotte;
+    }
 
+    public void setFlotte(Flotte flotte) {
+        this.flotte = flotte;
     }
 
     public Map getMapPerso(){
         return this.mapPerso;
     }
+
+    public  void putShip(Ship s, int x, int y, Ship.Orientation orientation){
+
+    }
+
 
     /*
     public void constructFlotte(Epoque e){
@@ -54,4 +62,8 @@ public abstract class Player implements Serializable {
     */
 
     public abstract void fire();
+
+    public void constructFlotte(Epoque e) {
+        this.flotte = new Flotte(ShipFactory.getInstance().getShipsByEpoque(e));
+    }
 }

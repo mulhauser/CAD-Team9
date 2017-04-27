@@ -51,18 +51,19 @@ public class Map implements Serializable {
      *
      * @param s
      */
-    public void ajouterBateau(Ship s, int x, int y, Ship.Orientation orientation) {
+    public boolean ajouterBateau(Ship s, int x, int y, Ship.Orientation orientation) {
+        boolean ajout = false;
         //if (s.getSize() == 2) {
-            // verificationDeplacement retourne true si tout est bien, sinon false
-            if (verificationsPlacement(x, y, s.getSize(), orientation)) {
-                // si les vérifications concernant le placement sont validés alors on peut placer le bateau
-                // On modifie également les coordonnées du bateau et son orientation
-                s.setCoordinate(new Coordinate(x, y));
-                s.setOrientation(orientation);
-                placementBateau(s);
-                System.out.println("Placement OK");
-            }
+        // verificationDeplacement retourne true si tout est bien, sinon false
+        if (verificationsPlacement(x, y, s.getSize(), s.getOrientation())) {
+            // si les vérifications concernant le placement sont validés alors on peut placer le bateau
+            // On modifie également les coordonnées du bateau et son orientation
+            s.setCoordinate(new Coordinate(x, y));
+            placementBateau(s);
+            ajout = true;
+        }
         //}
+        return ajout;
     }
 
 
@@ -78,7 +79,7 @@ public class Map implements Serializable {
     public boolean verificationsPlacement(int x, int y, int size, Ship.Orientation orientation) {
         boolean result = false;
         // On verifie que les coordonnées sont correctes
-        if(verificationCoordinate(x, y)) {
+        if (verificationCoordinate(x, y)) {
             switch (orientation) {
                 // On parcours le tableau de gauche à droite et de haut en bas
                 /*case TOP:
@@ -145,7 +146,7 @@ public class Map implements Serializable {
         return result;
     }
 
-    public boolean verificationCoordinate(int x, int y){
+    public boolean verificationCoordinate(int x, int y) {
         return (x >= 0 && x < mapDispositionBateaux.length) && (y >= 0 && y < mapDispositionBateaux.length);
     }
 
@@ -205,16 +206,16 @@ public class Map implements Serializable {
         return mapDispositionBateaux;
     }
 
-    public int getSize(){
+    public int getSize() {
         return this.size;
     }
 
-    public String toString(){
+    public String toString() {
         StringBuffer sb = new StringBuffer();
-        for(int y = 0; y < mapDispositionBateaux.length; y++){
-            for(int x = 0; x < mapDispositionBateaux[y].length; x++){
+        for (int y = 0; y < mapDispositionBateaux.length; y++) {
+            for (int x = 0; x < mapDispositionBateaux[y].length; x++) {
                 sb.append("|");
-                if(mapDispositionBateaux[y][x] == null) sb.append(" X ");
+                if (mapDispositionBateaux[y][x] == null) sb.append(" X ");
                 else sb.append(" O ");
                 sb.append("|");
             }

@@ -5,7 +5,6 @@ import bataillenavale.model.ship.xvi.*;
 import bataillenavale.model.ship.xx.*;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by mulhauser on 25/04/2017.
@@ -29,18 +28,18 @@ public class ShipFactory {
         ArrayList<Ship> shipList = new ArrayList<>();
         switch (e){
             case XX:
-                shipList.add(new PorteAvion(5));
-                shipList.add(new Croiseur(4));
-                shipList.add(new ContreTorpilleur(3));
-                shipList.add(new SousMarin(3));
-                shipList.add(new Torpilleur(2));
+                shipList.add(new PorteAvion());
+                shipList.add(new Croiseur());
+                shipList.add(new ContreTorpilleur());
+                shipList.add(new SousMarin());
+                shipList.add(new Torpilleur());
                 break;
             case XVI:
-                shipList.add(new Fregate(5));
-                shipList.add(new Corsaire(4));
-                shipList.add(new Galion(3));
-                shipList.add(new Caravelle(3));
-                shipList.add(new Galere(2));
+                shipList.add(new Fregate());
+                shipList.add(new Corsaire());
+                shipList.add(new Galion());
+                shipList.add(new Caravelle());
+                shipList.add(new Galere());
                 break;
         }
         return shipList;

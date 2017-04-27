@@ -1,12 +1,9 @@
 package bataillenavale.model;
 
-import bataillenavale.model.player.Human;
-import bataillenavale.model.player.Player;
 import bataillenavale.model.player.Profile;
-import bataillenavale.view.JPanelCards;
+import bataillenavale.model.player.strategies.IAFactory;
 
 import java.util.Observable;
-import java.util.Observer;
 
 /**
  * Created by mulhauser on 21/04/2017.
@@ -18,7 +15,8 @@ public class BatailleNavale extends Observable {
 
     public BatailleNavale(){
         //disons que par défaut l'époque est moderne et le pseudo ne vaut rien
-        this.partie = new Partie("", Epoque.XX);
+
+        this.partie = new Partie("fsd", Epoque.XX, IAFactory.getInstance().getStrategy("random"));
         this.profile = new Profile();
     }
 
