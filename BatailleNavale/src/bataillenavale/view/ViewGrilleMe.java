@@ -14,7 +14,6 @@ public class ViewGrilleMe extends JPanel implements Observer{
 
     public ViewGrilleMe(){
 
-
         int width = 10;
         int length = 10;
         this.setSize(500, 500);

@@ -1,6 +1,7 @@
 package bataillenavale.view;
 
 import bataillenavale.model.BatailleNavale;
+import bataillenavale.model.Map;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,6 +25,9 @@ public class JPanelCards extends JPanel implements Observer{
 
     private BatailleNavale model;
 
+    //ajout de la grille de la partie en cours
+    private ViewMain partieEnCours;
+
     public JPanelCards(BatailleNavale model) {
         super();
         this.model = model;
@@ -35,12 +39,18 @@ public class JPanelCards extends JPanel implements Observer{
         partie = new CreationPartie(model, this);
         placement = new PlacementBateaux(model, this);
 
+        partieEnCours = new ViewMain(model, this);
+        add(partieEnCours, ViewMain.id);
+
         add(accueil, Accueil.id);
         add(partie, CreationPartie.id);
         add(placement, PlacementBateaux.id);
 
-        currentPanelId = Accueil.id;
-        currentPanel = accueil;
+        //currentPanelId = Accueil.id;
+        //currentPanel = accueil;
+
+        currentPanelId = ViewMain.id;
+        currentPanel = partieEnCours;
     }
 
     public void show(String id) {
@@ -67,6 +77,13 @@ public class JPanelCards extends JPanel implements Observer{
                 //pour vérifier que le pseudo est modifié
                 System.out.print(model.getPartie().getHuman().getPseudo());
                 break;
+                //ajout de la grille de jeu lorsque la partie commence
+            case ViewMain.id:
+                currentPanel = partieEnCours;
+                Main.getInstance().setPreferredSize(new Dimension(900, 600));
+                break;
+            case "Quit":
+                System.exit(0);
         }
     }
 

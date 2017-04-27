@@ -48,7 +48,9 @@ public class Main extends JFrame{
         menu.add(quitter);
 
         setJMenuBar(menuBar);
-        setPreferredSize(new Dimension(250, 200));
+        //setPreferredSize(new Dimension(250, 200));
+
+        this.setPreferredSize(new Dimension(900, 600));
         // modifie la position d'apparition de la fenetre, à voir plus tard si besoin
         //setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
