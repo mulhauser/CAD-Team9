@@ -47,11 +47,6 @@ public class PlacementBateaux extends JPanel implements Observer {
     private int direction;
     //le but est qu'il devienne par exemple "A0 - A3"
 
-    private String[] alphabet = {"","A", "B","C","D","E","F","G","H","I","J"};
-    private JComboBox positionX = new JComboBox(alphabet);
-    private String[] numbers = {"","0", "1","2","3","4","5","6","7","8","9"};
-    private JComboBox positionY = new JComboBox(numbers);
-
     private boolean boolX = false;
     private boolean boolY = false;
 
@@ -64,80 +59,8 @@ public class PlacementBateaux extends JPanel implements Observer {
         this.model = model;
         this.size = model.getPartie().getHuman().getMapPerso().getSize();
 
-        buttons = new JPanel(new GridLayout(1, 2));
 
-
-        // Menu des boutons en bas
-        JButton backToCreer = new JButton("retour");
-        backToCreer.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                //state = NOTHING_SELECTED;
-                card.show(CreationPartie.id);
-            }
-        });
-        buttons.add(backToCreer);
-
-        JButton valider = new JButton("valider");
-        valider.setEnabled(false);
-
-        validerPlacement.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                // on dit au bot de placer ses bateaux
-                //((Bot)model.getJ2()).placerBateaux(bateauxChoisis);
-
-                //wizard.getJpanelJouer().initialize();
-                //wizard.show(JPanelJouer.id);
-                /*System.out.println(model.getPartie().getHuman().getPseudo());
-                if(bateauxPlaces<4){
-                    JOptionPane.showMessageDialog(null, "Veuillez placer l'ensemble de la flotte.", "Erreur",
-                            JOptionPane.ERROR_MESSAGE);
-                }else {
-                    JOptionPane.showMessageDialog(null, "Flotte prête", "Erreur",
-                            JOptionPane.ERROR_MESSAGE);
-                }
-                */
-                if(boolX==true && boolY==true){
-                    //on check la taille du bateau ne doit pas depasser le cadre
-                    if(direction==0){
-                        if((newY+size)>10){
-                            JOptionPane.showMessageDialog(null, "Bateau hors map", "Erreur",
-                                    JOptionPane.ERROR_MESSAGE);
-                        }else{
-                            updateMap(newX,newY);
-                            JOptionPane.showMessageDialog(null, "Bateau Placé", "Erreur",
-                                    JOptionPane.ERROR_MESSAGE);
-                            deleteCase();
-                            permissionFin();
-                        }
-                    }else{
-                        if((newX+size)>10){
-                            JOptionPane.showMessageDialog(null, "Bateau hors map", "Erreur",
-                                    JOptionPane.ERROR_MESSAGE);
-                        }else{
-                            updateMap(newX,newY);
-                            JOptionPane.showMessageDialog(null, "Bateau Placé", "Erreur",
-                                    JOptionPane.ERROR_MESSAGE);
-                            deleteCase();
-                            permissionFin();
-                        }
-                    }
-
-                }else{
-                    JOptionPane.showMessageDialog(null, "Error", "Erreur",
-                            JOptionPane.ERROR_MESSAGE);
-                }
-                if(shipsAdded[0]==1&&shipsAdded[1]==1&&shipsAdded[2]==1&&shipsAdded[3]==1){
-                    //si tout les bateaux sont placés
-                    valider.setEnabled(true);
-                }
-            }
-        });
-        buttons.add(valider);
-        add(buttons, BorderLayout.SOUTH);
+        add(new JPanelSouth(card), BorderLayout.SOUTH);
 
 
 
@@ -184,18 +107,16 @@ public class PlacementBateaux extends JPanel implements Observer {
         if(ships != null){
             remove(ships);
         }
-        ships = new JPanel(new GridLayout(8, 1));
+        ships = new JPanel(new GridLayout(8, 0));
 
         JLabel pseudo = new JLabel("Placez vos bateaux ");
 
-        ships.add(new JLabel());
         ships.add(pseudo);
-        ships.add(new JLabel());
 
-        annulerPlacement.setVisible(false);
+        /*annulerPlacement.setVisible(false);
         validerPlacement.setVisible(false);
         positionX.setVisible(false);
-        positionY.setVisible(false);
+        positionY.setVisible(false);*/
 
         // Menu des bateaux à droite
         // On récupère la flotte du joueur
@@ -204,7 +125,7 @@ public class PlacementBateaux extends JPanel implements Observer {
             ships.add(new JPanelBateau(s, ships));
         }
 
-
+        ships.add(new JPanelCoordonnees());
 
         annulerPlacement.addActionListener(new ActionListener() {
             @Override
@@ -214,101 +135,13 @@ public class PlacementBateaux extends JPanel implements Observer {
             }
         });
 
-        positionX.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(positionX.getSelectedItem()!=""){
-                    boolX = true;
-                    switch((String) positionX.getSelectedItem()){
-                        case "A" :
-                            newX = 0;
-                            break;
-                        case "B" :
-                            newX = 1;
-                            break;
-                        case "C" :
-                            newX = 2;
-                            break;
-                        case "D" :
-                            newX = 3;
-                            break;
-                        case "E" :
-                            newX = 4;
-                            break;
-                        case "F" :
-                            newX = 5;
-                            break;
-                        case "G" :
-                            newX = 6;
-                            break;
-                        case "H" :
-                            newX = 7;
-                            break;
-                        case "I" :
-                            newX = 8;
-                            break;
-                        case "J" :
-                            newX = 9;
-                            break;
-                    }
-
-                }else{
-                    boolX = false;
-                }
-            }
-        });
-
-        positionY.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(positionY.getSelectedItem()!=""){
-                    boolY = true;
-                    switch((String) positionY.getSelectedItem()){
-                        case "O" :
-                            newY = 0;
-                            break;
-                        case "1" :
-                            newY = 1;
-                            break;
-                        case "2" :
-                            newY = 2;
-                            break;
-                        case "3" :
-                            newY = 3;
-                            break;
-                        case "4" :
-                            newY = 4;
-                            break;
-                        case "5" :
-                            newY = 5;
-                            break;
-                        case "6" :
-                            newY = 6;
-                            break;
-                        case "7" :
-                            newY = 7;
-                            break;
-                        case "8" :
-                            newY = 8;
-                            break;
-                        case "9" :
-                            newY = 9;
-                            break;
-
-                    }
-                }else{
-                    boolY = false;
-                }
-            }
-        });
 
 
-        ships.add(new JLabel());
-        ships.add(positionX);
+
+        /*ships.add(positionX);
         ships.add(positionY);
-        ships.add(new JLabel());
         ships.add(validerPlacement);
-        ships.add(annulerPlacement);
+        ships.add(annulerPlacement);*/
         add(ships, BorderLayout.EAST);
     }
     @Override
@@ -325,18 +158,11 @@ public class PlacementBateaux extends JPanel implements Observer {
                 listButton[y][x].setEnabled(true);
             }
         }
-        bigH.setEnabled(false);
-        bigV.setEnabled(false);
-        mediumH.setEnabled(false);
-        mediumHBis.setEnabled(false);
-        mediumV.setEnabled(false);
-        mediumVBis.setEnabled(false);
-        smallV.setEnabled(false);
-        smallH.setEnabled(false);
+
         annulerPlacement.setVisible(true);
         validerPlacement.setVisible(true);
-        positionX.setVisible(true);
-        positionY.setVisible(true);
+        //positionX.setVisible(true);
+        //positionY.setVisible(true);
 
         //bateauxPlaces++;
     }
@@ -348,28 +174,12 @@ public class PlacementBateaux extends JPanel implements Observer {
             }
         }
 
-        //on check si les bateaux sont placés ou non
-        if(shipsAdded[0]==0){
-            smallV.setEnabled(true);
-            smallH.setEnabled(true);
-        }
-        if(shipsAdded[1]==0){
-            mediumH.setEnabled(true);
-            mediumV.setEnabled(true);
-        }
-        if(shipsAdded[2]==0){
-            mediumVBis.setEnabled(true);
-            mediumHBis.setEnabled(true);
-        }
-        if(shipsAdded[3]==0){
-            bigH.setEnabled(true);
-            bigV.setEnabled(true);
-        }
+
 
         annulerPlacement.setVisible(false);
         validerPlacement.setVisible(false);
-        positionX.setVisible(false);
-        positionY.setVisible(false);
+        //positionX.setVisible(false);
+        //positionY.setVisible(false);
 
        // bateauxPlaces--;
     }
@@ -458,7 +268,7 @@ public class PlacementBateaux extends JPanel implements Observer {
 
 
             BufferedImage imgH = s.getImage();
-            BufferedImage imgV = new BufferedImage(imgH.getWidth(), imgH.getHeight(), imgH.getType());
+            BufferedImage imgV = new BufferedImage(imgH.getHeight(), imgH.getWidth(), imgH.getType());
             this.horizontalButton = new JButton(new ImageIcon(imgH));
             this.horizontalButton.addActionListener(new ActionListener() {
                 @Override
@@ -490,4 +300,117 @@ public class PlacementBateaux extends JPanel implements Observer {
         }
     }
 
+    /**
+     * Classe privee qui permet de créer le panel de validation et de retour à l'accueil en bas de la fenetre
+     */
+    private class JPanelSouth extends JPanel{
+
+        public JPanelSouth(JPanelCards card) {
+            super(new GridLayout(1, 2));
+
+            // Menu des boutons en bas
+            JButton backToCreer = new JButton("retour");
+            backToCreer.addActionListener(new ActionListener() {
+
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                    //state = NOTHING_SELECTED;
+                    card.show(CreationPartie.id);
+                }
+            });
+            this.add(backToCreer);
+
+            JButton valider = new JButton("valider");
+            valider.setEnabled(false);
+
+            validerPlacement.addActionListener(new ActionListener() {
+
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                    // on dit au bot de placer ses bateaux
+                    //((Bot)model.getJ2()).placerBateaux(bateauxChoisis);
+
+                    //wizard.getJpanelJouer().initialize();
+                    //wizard.show(JPanelJouer.id);
+                    /*System.out.println(model.getPartie().getHuman().getPseudo());
+                    if(bateauxPlaces<4){
+                        JOptionPane.showMessageDialog(null, "Veuillez placer l'ensemble de la flotte.", "Erreur",
+                                JOptionPane.ERROR_MESSAGE);
+                    }else {
+                        JOptionPane.showMessageDialog(null, "Flotte prête", "Erreur",
+                                JOptionPane.ERROR_MESSAGE);
+                    }
+                    */
+                    if (boolX == true && boolY == true) {
+                        //on check la taille du bateau ne doit pas depasser le cadre
+                        if (direction == 0) {
+                            if ((newY + size) > 10) {
+                                JOptionPane.showMessageDialog(null, "Bateau hors map", "Erreur",
+                                        JOptionPane.ERROR_MESSAGE);
+                            } else {
+                                updateMap(newX, newY);
+                                JOptionPane.showMessageDialog(null, "Bateau Placé", "Erreur",
+                                        JOptionPane.ERROR_MESSAGE);
+                                deleteCase();
+                                permissionFin();
+                            }
+                        } else {
+                            if ((newX + size) > 10) {
+                                JOptionPane.showMessageDialog(null, "Bateau hors map", "Erreur",
+                                        JOptionPane.ERROR_MESSAGE);
+                            } else {
+                                updateMap(newX, newY);
+                                JOptionPane.showMessageDialog(null, "Bateau Placé", "Erreur",
+                                        JOptionPane.ERROR_MESSAGE);
+                                deleteCase();
+                                permissionFin();
+                            }
+                        }
+
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Error", "Erreur",
+                                JOptionPane.ERROR_MESSAGE);
+                    }
+                    if (shipsAdded[0] == 1 && shipsAdded[1] == 1 && shipsAdded[2] == 1 && shipsAdded[3] == 1) {
+                        //si tout les bateaux sont placés
+                        valider.setEnabled(true);
+                    }
+                }
+            });
+            this.add(valider);
+        }
+    }
+    /**
+     * Classe privee pour la selection des coordonnées
+     */
+    private class JPanelCoordonnees extends JPanel{
+
+        private String[] alphabet = {"A", "B","C","D","E","F","G","H","I","J"};
+        private JComboBox positionX;
+        private String[] numbers = {"0", "1","2","3","4","5","6","7","8","9"};
+        private JComboBox positionY;
+
+        public JPanelCoordonnees(){
+            super(new GridLayout(1, 2));
+            positionX = new JComboBox(alphabet);
+            positionX.setSelectedIndex(0);
+            positionX.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    currentShip.getCoordinate().setX(positionX.getSelectedIndex());
+                }
+            });
+            this.add(positionX);
+
+            positionY = new JComboBox(numbers);
+            positionY.setSelectedIndex(0);
+            positionY.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    currentShip.getCoordinate().setY(positionY.getSelectedIndex());
+                }
+            });
+            this.add(positionY);
+        }
+    }
 }

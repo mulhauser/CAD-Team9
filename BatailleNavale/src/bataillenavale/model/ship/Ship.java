@@ -42,7 +42,7 @@ public abstract class Ship {
         try {
             this.nom = n;
             this.size = s;
-
+            this.coordinate = new Coordinate();
             // Construction de l'image du bateau de base
             this.image = ImageIO.read(new File("./BatailleNavale/img/1.png"));
 

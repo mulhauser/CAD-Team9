@@ -13,7 +13,8 @@ public class Flotte {
     private List<Ship> shipList;
 
     public Flotte(List<Ship> shipList) {
-        shipList.addAll(shipList);
+        this.shipList = new ArrayList<Ship>();
+        this.shipList.addAll(shipList);
     }
 
     public ArrayList<Ship> getShipList(){
