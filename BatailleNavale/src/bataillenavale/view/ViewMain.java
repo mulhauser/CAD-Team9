@@ -40,6 +40,10 @@ public class ViewMain extends JPanel implements Observer{
     //parametre 4 = taille
     private int[] shipEnnemy = {3,3,0,4};
 
+    //sert pour le tire
+    private int fireX;
+    private int fireY;
+
     public ViewMain(final BatailleNavale model, final JPanelCards card){
         //buttons affiche tout les boutons possibles
         super(new BorderLayout());
@@ -63,6 +67,34 @@ public class ViewMain extends JPanel implements Observer{
         String[] numbers = {"0", "1","2","3","4","5","6","7","8","9"};
         JComboBox chooseY = new JComboBox(numbers);
         JButton fire = new JButton("FIRE");
+
+        chooseX.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                fireX = chooseX.getSelectedIndex();
+            }
+        });
+        chooseY.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                fireY = chooseY.getSelectedIndex();
+            }
+        });
+
+        fire.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //test
+                System.out.println("X: "+fireX+". Y: "+fireY);
+                //retourne un booléan : true si touché, false sinon
+                if(fire(fireX,fireY)){
+                    JOptionPane.showMessageDialog(null, "Touché");
+                }else{
+                    JOptionPane.showMessageDialog(null, "Plouf");
+                }
+            }
+        });
+
         panelFire.add(chooseX);
         panelFire.add(chooseY);
         panelFire.add(fire);
@@ -164,6 +196,23 @@ public class ViewMain extends JPanel implements Observer{
                 }
             }
         }
+    }
+
+    public boolean fire(int x, int y){
+
+        for(int i=0;i<shipEnnemy[3];i++){
+            if(shipEnnemy[2]==0){
+                if(shipEnnemy[0]+i==x && shipEnnemy[1]==y) {
+                    return true;
+                }
+            }else{
+                if(shipEnnemy[0]==x && shipEnnemy[1]+i==y) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     @Override
