@@ -90,11 +90,15 @@ public class ViewMain extends JPanel implements Observer{
                 if(fire(fireX,fireY)){
                     JOptionPane.showMessageDialog(null, "Touché");
                     //il faut changer la couleur de la case en rouge
+                    //il faut ne plus pouvoir jouer fire(fireX,fireY);
+                    updateGrille(grilleEnnemy);
                 }else{
                     JOptionPane.showMessageDialog(null, "Plouf");
                     //il faut changer la couleur de la case en noir
+                    //il faut ne plus pouvoir jouer fire(fireX,fireY);
+                    updateGrille(grilleEnnemy);
                 }
-                //il faut ne plus pouvoir jouer fire(fireX,fireY);
+
             }
         });
 
@@ -184,6 +188,10 @@ public class ViewMain extends JPanel implements Observer{
         //pour la taille de la grille
         grille.setPreferredSize(new Dimension(sizeScreen,sizeScreen));
         return grille;
+    }
+
+    public void updateGrille(JPanel currentGrille){
+        //réussir à obtenir le label à la position [fireX,fireY]
     }
 
     public void checkColor(JLabel btn,int x, int y,int[] ship){
