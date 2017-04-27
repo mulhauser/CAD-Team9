@@ -5,11 +5,12 @@ import bataillenavale.model.ship.ShipPiece;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Observable;
 
 /**
  * Created by mulhauser on 12/04/2017.
  */
-public class Map implements Serializable {
+public class Map extends Observable implements Serializable {
 
     /*
     pour la mapDispositionBateau :
@@ -51,14 +52,14 @@ public class Map implements Serializable {
      *
      * @param s
      */
-    public boolean ajouterBateau(Ship s, int x, int y, Ship.Orientation orientation) {
+    public boolean ajouterBateau(Ship s) {
         boolean ajout = false;
         //if (s.getSize() == 2) {
         // verificationDeplacement retourne true si tout est bien, sinon false
-        if (verificationsPlacement(x, y, s.getSize(), s.getOrientation())) {
+        if (verificationsPlacement(s.getCoordinate().getX(), s.getCoordinate().getY(), s.getSize(), s.getOrientation())) {
             // si les vérifications concernant le placement sont validés alors on peut placer le bateau
             // On modifie également les coordonnées du bateau et son orientation
-            s.setCoordinate(new Coordinate(x, y));
+            s.setCoordinate(new Coordinate(s.getCoordinate().getX(), s.getCoordinate().getY()));
             placementBateau(s);
             ajout = true;
         }

@@ -4,6 +4,7 @@ import bataillenavale.model.player.Bot;
 import bataillenavale.model.player.Human;
 import bataillenavale.model.player.Player;
 import bataillenavale.model.player.strategies.AttackStrategies;
+import bataillenavale.model.ship.Ship;
 
 import java.util.Observable;
 
@@ -26,6 +27,8 @@ public class Partie extends Observable{
     }
 
     public Player getHuman(){
+        setChanged();
+        notifyObservers();
         return this.human;
     }
 
@@ -33,4 +36,7 @@ public class Partie extends Observable{
         return this.epoque;
     }
 
+    public boolean ajouterShip(Ship s) {
+        return human.putShip(s);
+    }
 }

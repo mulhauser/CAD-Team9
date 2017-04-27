@@ -8,11 +8,12 @@ import bataillenavale.model.ship.Ship;
 import bataillenavale.model.ship.ShipFactory;
 
 import java.io.Serializable;
+import java.util.Observable;
 
 /**
  * Created by mulhauser on 12/04/2017.
  */
-public abstract class Player implements Serializable {
+public abstract class Player extends Observable implements Serializable {
 
     private String pseudo;
     private int score;
@@ -48,8 +49,8 @@ public abstract class Player implements Serializable {
         return this.mapPerso;
     }
 
-    public  void putShip(Ship s, int x, int y, Ship.Orientation orientation){
-
+    public boolean putShip(Ship s){
+        return mapPerso.ajouterBateau(s);
     }
 
 

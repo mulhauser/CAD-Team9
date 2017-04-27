@@ -2,6 +2,7 @@ package bataillenavale.model;
 
 import bataillenavale.model.player.Profile;
 import bataillenavale.model.player.strategies.IAFactory;
+import bataillenavale.model.ship.Ship;
 
 import java.util.Observable;
 
@@ -22,6 +23,14 @@ public class BatailleNavale extends Observable {
 
     public Partie getPartie(){
         return this.partie;
+    }
+
+    public void ajouterShip(Ship s){
+
+        if(partie.ajouterShip(s)) {
+            setChanged();
+            notifyObservers();
+        }
     }
 
     public Profile getProfile(){
