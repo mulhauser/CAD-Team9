@@ -105,7 +105,9 @@ public class ViewMain extends JPanel implements Observer{
         System.out.println(this.mapPlayer.toString());
 
         this.size = model.getPartie().getHuman().getMapPerso().getSize();
-        this.grilleHuman = newGrille(400,this.mapPlayer,false);
+        //this.grilleHuman = newGrille(400,this.mapPlayer,false);
+        this.grilleHuman = new JPanelGrille(this.model,this.model.getPartie().getHuman().getMapPerso().getSize());
+        this.grilleHuman.setPreferredSize(new Dimension(400,400));
         this.grilleEnnemy = newGrille(400,this.mapAdver,true);
 
 
