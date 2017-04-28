@@ -108,8 +108,9 @@ public class ViewMain extends JPanel implements Observer{
         //this.grilleHuman = newGrille(400,this.mapPlayer,false);
         this.grilleHuman = new JPanelGrille(this.model,this.model.getPartie().getHuman().getMapPerso().getSize());
         this.grilleHuman.setPreferredSize(new Dimension(400,400));
-        this.grilleEnnemy = newGrille(400,this.mapAdver,true);
-
+        //this.grilleEnnemy = newGrille(400,this.mapAdver,true);
+        //placé à false pour voir les bateaux pour les tests de tire
+        this.grilleEnnemy = newGrille(400,this.mapAdver,false);
 
         //après affichage des 2 maps, place au tir
 
