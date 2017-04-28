@@ -108,6 +108,9 @@ public class ViewMain extends JPanel implements Observer{
         this.grilleHuman = newGrille(400,this.mapPlayer);
         this.grilleEnnemy = newGrille(400,this.mapAdver);
 
+
+        //après affichage des 2 maps, place au tir
+
         JPanel panelFire = new JPanel(new GridLayout(1,3));
         String[] alphabet = {"A", "B","C","D","E","F","G","H","I","J"};
         JComboBox chooseX = new JComboBox(alphabet);
@@ -136,14 +139,8 @@ public class ViewMain extends JPanel implements Observer{
                 //retourne un booléan : true si touché, false sinon
                 if(fire(fireX,fireY)){
                     JOptionPane.showMessageDialog(null, "Touché");
-                    //il faut changer la couleur de la case en rouge
-                    //il faut ne plus pouvoir jouer fire(fireX,fireY);
-                    updateGrille(grilleEnnemy);
                 }else{
                     JOptionPane.showMessageDialog(null, "Plouf");
-                    //il faut changer la couleur de la case en noir
-                    //il faut ne plus pouvoir jouer fire(fireX,fireY);
-                    updateGrille(grilleEnnemy);
                 }
 
             }
@@ -187,7 +184,7 @@ public class ViewMain extends JPanel implements Observer{
                 btn.setEnabled(false);
                 btn.setOpaque(true);
                 //on vérifie un bateau s'y trouve
-                if(map.getMapDispositionBateauxElement(x,y)){
+                if(map.getMapDispositionBateauxElement(y,x)){
                     btn.setBackground(Color.RED);
                 }else{
                     btn.setBackground(Color.BLUE);
@@ -203,104 +200,19 @@ public class ViewMain extends JPanel implements Observer{
         return grille;
     }
 
-    /*
-    public JPanel newGrilleHuman(int sizeScreen){
-
-        JPanel grille = new JPanel(new GridLayout(size+1, size+1));
-
-        // On créer la grille de boutons pour le positionnement des bateaux
-        grille.add(new JLabel("", SwingConstants.CENTER));
-        grille.add(new JLabel("A", SwingConstants.CENTER));
-        grille.add(new JLabel("B", SwingConstants.CENTER));
-        grille.add(new JLabel("C", SwingConstants.CENTER));
-        grille.add(new JLabel("D", SwingConstants.CENTER));
-        grille.add(new JLabel("E", SwingConstants.CENTER));
-        grille.add(new JLabel("F", SwingConstants.CENTER));
-        grille.add(new JLabel("G", SwingConstants.CENTER));
-        grille.add(new JLabel("H", SwingConstants.CENTER));
-        grille.add(new JLabel("I", SwingConstants.CENTER));
-        grille.add(new JLabel("J", SwingConstants.CENTER));
-
-        for (int y = 0; y < size; y++) {
-            grille.add(new JLabel(Integer.toString(y), SwingConstants.CENTER));
-            for (int x = 0; x < size; x++) {
-                JLabel btn = new JLabel();
-                btn.setEnabled(false);
-                btn.setOpaque(true);
-                btn.setBackground(Color.BLUE);
-                //on vérifie un bateau s'y trouve
-
-                //checkColor(btn,x,y,shipHuman);
-                btn.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
-                grille.add(btn);
-            }
-
-        }
-
-        //pour la taille de la grille
-        grille.setPreferredSize(new Dimension(sizeScreen,sizeScreen));
-        return grille;
-    }
-
-
-    public JPanel newGrilleEnnemy(int sizeScreen){
-
-        JPanel grille = new JPanel(new GridLayout(size+1, size+1));
-
-        // On créer la grille de boutons pour le positionnement des bateaux
-        grille.add(new JLabel("", SwingConstants.CENTER));
-        grille.add(new JLabel("A", SwingConstants.CENTER));
-        grille.add(new JLabel("B", SwingConstants.CENTER));
-        grille.add(new JLabel("C", SwingConstants.CENTER));
-        grille.add(new JLabel("D", SwingConstants.CENTER));
-        grille.add(new JLabel("E", SwingConstants.CENTER));
-        grille.add(new JLabel("F", SwingConstants.CENTER));
-        grille.add(new JLabel("G", SwingConstants.CENTER));
-        grille.add(new JLabel("H", SwingConstants.CENTER));
-        grille.add(new JLabel("I", SwingConstants.CENTER));
-        grille.add(new JLabel("J", SwingConstants.CENTER));
-
-        for (int y = 0; y < size; y++) {
-            grille.add(new JLabel(Integer.toString(y), SwingConstants.CENTER));
-            for (int x = 0; x < size; x++) {
-                JLabel btn = new JLabel();
-                btn.setEnabled(false);
-                btn.setOpaque(true);
-                btn.setBackground(Color.BLUE);
-                //on vérifie si le bateau humain se trouve ici
-                checkColor(btn,x,y,shipEnnemy);
-                btn.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
-                grille.add(btn);
-            }
-
-        }
-
-        //pour la taille de la grille
-        grille.setPreferredSize(new Dimension(sizeScreen,sizeScreen));
-        return grille;
-    }
-    */
-
     public void updateGrille(JPanel currentGrille){
-        //réussir à obtenir le label à la position [fireX,fireY]
-    }
 
-    public void checkColor(JLabel btn,int x, int y,int[] ship){
-
-        for(int i=0;i<ship[3];i++){
-            if(ship[2]==0){
-                if(ship[0]+i==x && ship[1]==y) {
-                    btn.setBackground(Color.RED);
-                }
-            }else{
-                if(ship[0]==x && ship[1]+i==y) {
-                    btn.setBackground(Color.RED);
-                }
-            }
-        }
     }
 
     public boolean fire(int x, int y){
+        if(this.mapAdver.getMapDispositionBateauxElement(y,x)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    /*public boolean fire(int x, int y){
 
         for(int i=0;i<shipEnnemy[3];i++){
             if(shipEnnemy[2]==0){
@@ -316,6 +228,7 @@ public class ViewMain extends JPanel implements Observer{
 
         return false;
     }
+    */
 
     @Override
     public void update(Observable o, Object arg) {
