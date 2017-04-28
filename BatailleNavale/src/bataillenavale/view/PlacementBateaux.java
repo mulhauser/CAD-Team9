@@ -20,15 +20,12 @@ import java.util.Observer;
  */
 public class PlacementBateaux extends JPanel implements Observer {
 
+    //id permet de switcher de panel dans JPanelCards
     public static final String id = "placement";
     private JPanel grille;
     private static JPanelMenuDroite menuDroite;
     private static JPanelSouth buttons;
     private static Ship currentShip;
-
-
-
-
 
     private JLabelBateau[][] listButton;
     private static BatailleNavale model;
@@ -436,6 +433,8 @@ public class PlacementBateaux extends JPanel implements Observer {
                     // On sera notifier dans les update si le placement peut se faire, voir dans BatailleNavale
                     // la methode ajouterShip(Ship s) notifie les vues
                     model.ajouterShip(currentShip);
+                    System.out.println(currentShip.getCoordinate());
+                    System.out.println(currentShip.getSize());
 
                 }
             });
