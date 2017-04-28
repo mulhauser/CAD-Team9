@@ -7,7 +7,6 @@ import bataillenavale.model.ship.ShipPiece;
 import bataillenavale.model.ship.StatePiece;
 
 import javax.swing.*;
-import javax.swing.border.BevelBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,30 +24,15 @@ public class PlacementBateaux extends JPanel implements Observer {
 
     //id permet de switcher de panel dans JPanelCards
     public static final String id = "placement";
-    private JPanel grille;
     private static JPanelMenuDroite menuDroite;
     private static JPanelSouth buttons;
+    private static JPanelGrille grille;
     private static Ship currentShip;
 
-    private JLabelBateau[][] listButton;
+
     private static BatailleNavale model;
 
-    //private int bateauxPlaces = 0;
-
-
-    //temporaire pour stocker le nouveau bateau
-    private int newX = 0;
-    private int newY = 0;
     private int size = 0;
-    //0=vertical, 1=horizontal
-    private int direction;
-    //le but est qu'il devienne par exemple "A0 - A3"
-
-    private boolean boolX = false;
-    private boolean boolY = false;
-
-    //chaque 0 représente un bateau
-    private int[] shipsAdded = {0, 0, 0, 0};
 
     // TODO: Voir pour utiliser un GridBagLayout partout pour placer comme on veut mais c'est compliqué
     public PlacementBateaux(final BatailleNavale model, final JPanelCards card) {
@@ -62,38 +46,17 @@ public class PlacementBateaux extends JPanel implements Observer {
     }
 
 
-    // TODO: A revoir avec la map du Player
     public void constructGrillePlacement() {
 
         // Construction de la grille des bateaux
         if (grille != null) {
             remove(grille);
         }
-        grille = new JPanel(new GridLayout(size + 1, size + 1));
-        listButton = new JLabelBateau[size][size];
 
-        // On créer la grille de boutons pour le positionnement des bateaux
-        grille.add(new JLabel("", SwingConstants.CENTER));
-        grille.add(new JLabel("A", SwingConstants.CENTER));
-        grille.add(new JLabel("B", SwingConstants.CENTER));
-        grille.add(new JLabel("C", SwingConstants.CENTER));
-        grille.add(new JLabel("D", SwingConstants.CENTER));
-        grille.add(new JLabel("E", SwingConstants.CENTER));
-        grille.add(new JLabel("F", SwingConstants.CENTER));
-        grille.add(new JLabel("G", SwingConstants.CENTER));
-        grille.add(new JLabel("H", SwingConstants.CENTER));
-        grille.add(new JLabel("I", SwingConstants.CENTER));
-        grille.add(new JLabel("J", SwingConstants.CENTER));
-        for (int y = 0; y < listButton.length; y++) {
-            grille.add(new JLabel(Integer.toString(y), SwingConstants.CENTER));
-            for (int x = 0; x < listButton[y].length; x++) {
-                JLabelBateau btn = new JLabelBateau(model, x, y);
-                listButton[y][x] = btn;
-                grille.add(btn);
-            }
+        grille = new JPanelGrille();
 
-        }
         add(grille, BorderLayout.CENTER);
+
 
     }
 
@@ -109,7 +72,7 @@ public class PlacementBateaux extends JPanel implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        System.out.println("Coucou du placement");
+
     }
 
     /**
@@ -117,63 +80,56 @@ public class PlacementBateaux extends JPanel implements Observer {
      */
     private class JPanelGrille extends JPanel implements Observer {
 
+        private JLabelBateau[][] listButton;
+
         public JPanelGrille() {
             super(new GridLayout(size + 1, size + 1));
-
-        }
-
-        @Override
-        public void update(Observable o, Object arg) {
-
-        }
-    }
-
-    /**
-     * Classe privee qui pour chaque case de la grille de placement
-     */
-    private class JLabelBateau extends JLabel implements Observer {
-
-        // x = colonne du tableau, y = ligne du tableau
-        final int posX, posY;
-        final BatailleNavale model;
-
-        public JLabelBateau(BatailleNavale model, int x, int y) {
-            super();
             model.addObserver(this);
-            this.model = model;
-            this.posX = x;
-            this.posY = y;
-            this.setEnabled(false);
-            this.setOpaque(true);
-            if (model.getPartie().getHuman().getMapPerso().getShip(x, y) == null) {
-                this.setBackground(Color.BLUE);
-            } else {
-                this.setBackground(Color.ORANGE);
+            listButton = new JLabelBateau[size][size];
+            // On créer la grille de boutons pour le positionnement des bateaux
+            this.add(new JLabel("", SwingConstants.CENTER));
+            this.add(new JLabel("A", SwingConstants.CENTER));
+            this.add(new JLabel("B", SwingConstants.CENTER));
+            this.add(new JLabel("C", SwingConstants.CENTER));
+            this.add(new JLabel("D", SwingConstants.CENTER));
+            this.add(new JLabel("E", SwingConstants.CENTER));
+            this.add(new JLabel("F", SwingConstants.CENTER));
+            this.add(new JLabel("G", SwingConstants.CENTER));
+            this.add(new JLabel("H", SwingConstants.CENTER));
+            this.add(new JLabel("I", SwingConstants.CENTER));
+            this.add(new JLabel("J", SwingConstants.CENTER));
+            for (int y = 0; y < size; y++) {
+                this.add(new JLabel(Integer.toString(y), SwingConstants.CENTER));
+                for (int x = 0; x < size; x++) {
+                    JLabelBateau btn = new JLabelBateau(model, x, y);
+                    listButton[y][x] = btn;
+                    this.add(btn);
+                }
+
             }
-            this.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
-
-
         }
 
         @Override
         public void update(Observable o, Object arg) {
-            // modifier couleur bouton quand bateau placé
-            //System.out.println("coucou des jlabel "+ (GridLayout)(this.getParent()).getComponentAt()+", "+this.getY());
-            /*int x = ((Coordinate) arg).getX();
-            int y = ((Coordinate) arg).getY();
-            listButton[y][x].setBackground(Color.ORANGE);*/
             Map map = model.getPartie().getHuman().getMapPerso();
             ShipPiece[][] tabMap = map.getMapDispositionBateaux();
             for (int x = 0; x < tabMap.length; x++) {
                 for (int y = 0; y < tabMap[x].length; y++) {
-                    if(tabMap[y][x] != null)
-                        if (tabMap[y][x].getState() == StatePiece.MISS)
+                    if(tabMap[y][x] != null) {
+                        if (tabMap[y][x].getState() == StatePiece.MISS) {
                             listButton[y][x].setBackground(Color.ORANGE);
+                        }
+                        if (tabMap[y][x].getState() == StatePiece.HIT) {
+                            listButton[y][x].setBackground(Color.RED);
+                        }
+                    }
+
                 }
             }
-            //System.out.println(model.getPartie().getHuman().getMapPerso().toString());
         }
     }
+
+
 
 
     /**
@@ -401,9 +357,6 @@ public class PlacementBateaux extends JPanel implements Observer {
                     // On sera notifier dans les update si le placement peut se faire, voir dans BatailleNavale
                     // la methode ajouterShip(Ship s) notifie les vues
                     model.ajouterShip(currentShip);
-                    System.out.println(currentShip.getCoordinate());
-                    System.out.println(currentShip.getSize());
-
                 }
             });
             this.add(this.annulerPlacement);

@@ -29,7 +29,7 @@ public class BatailleNavale extends Observable {
 
         if(partie.ajouterShip(s)) {
             setChanged();
-            notifyObservers(s.getCoordinate());
+            notifyObservers();
         }
     }
 
