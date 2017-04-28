@@ -105,8 +105,8 @@ public class ViewMain extends JPanel implements Observer{
         System.out.println(this.mapPlayer.toString());
 
         this.size = model.getPartie().getHuman().getMapPerso().getSize();
-        this.grilleHuman = newGrille(400,this.mapPlayer);
-        this.grilleEnnemy = newGrille(400,this.mapAdver);
+        this.grilleHuman = newGrille(400,this.mapPlayer,false);
+        this.grilleEnnemy = newGrille(400,this.mapAdver,true);
 
 
         //après affichage des 2 maps, place au tir
@@ -160,7 +160,8 @@ public class ViewMain extends JPanel implements Observer{
         add(panelFire,BorderLayout.SOUTH);
     }
 
-    public JPanel newGrille(int sizeScreen,Map map){
+    public JPanel newGrille(int sizeScreen,Map map, boolean ennemy){
+        //boolean qui, si c'est la map de l'ennemy, ne montre pas les bateaux
 
         JPanel grille = new JPanel(new GridLayout(size+1, size+1));
 
@@ -184,8 +185,12 @@ public class ViewMain extends JPanel implements Observer{
                 btn.setEnabled(false);
                 btn.setOpaque(true);
                 //on vérifie un bateau s'y trouve
-                if(map.getMapDispositionBateauxElement(y,x)){
-                    btn.setBackground(Color.RED);
+                if(!ennemy){
+                    if(map.getMapDispositionBateauxElement(y,x)){
+                        btn.setBackground(Color.RED);
+                    }else{
+                        btn.setBackground(Color.BLUE);
+                    }
                 }else{
                     btn.setBackground(Color.BLUE);
                 }
