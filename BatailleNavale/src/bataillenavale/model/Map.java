@@ -227,4 +227,15 @@ public class Map extends Observable implements Serializable {
     /*public int[][] getMapEtatBateaux() {
         return mapEtatBateaux;
     }*/
+
+    //permet de rérifier un seul élément dans la map, retourne true si un bateau est présent aux coordonnées x,y
+    //false sinon
+    public boolean getMapDispositionBateauxElement(int x, int y){
+        if(mapDispositionBateaux[x][y]==null){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
 }
