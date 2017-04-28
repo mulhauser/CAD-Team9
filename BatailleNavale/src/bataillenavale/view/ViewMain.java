@@ -212,24 +212,6 @@ public class ViewMain extends JPanel implements Observer{
         }
     }
 
-    /*public boolean fire(int x, int y){
-
-        for(int i=0;i<shipEnnemy[3];i++){
-            if(shipEnnemy[2]==0){
-                if(shipEnnemy[0]+i==x && shipEnnemy[1]==y) {
-                    return true;
-                }
-            }else{
-                if(shipEnnemy[0]==x && shipEnnemy[1]+i==y) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
-    }
-    */
-
     @Override
     public void update(Observable o, Object arg) {
 
