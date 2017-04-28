@@ -238,4 +238,10 @@ public class Map extends Observable implements Serializable {
         }
     }
 
+    /*
+    public void setMapDispositionBateauxElement(int x, int y){
+        this.mapDispositionBateaux[x][y]=null;
+    }
+    */
+
 }

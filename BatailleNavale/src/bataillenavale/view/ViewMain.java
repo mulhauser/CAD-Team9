@@ -139,6 +139,7 @@ public class ViewMain extends JPanel implements Observer{
                 //retourne un booléan : true si touché, false sinon
                 if(fire(fireX,fireY)){
                     JOptionPane.showMessageDialog(null, "Touché");
+                    //il faut lancer le update ICI
                 }else{
                     JOptionPane.showMessageDialog(null, "Plouf");
                 }
