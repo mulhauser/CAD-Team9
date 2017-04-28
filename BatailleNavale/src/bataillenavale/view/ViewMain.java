@@ -182,6 +182,7 @@ public class ViewMain extends JPanel implements Observer{
         for (int y = 0; y < size; y++) {
             grille.add(new JLabel(Integer.toString(y), SwingConstants.CENTER));
             for (int x = 0; x < size; x++) {
+                //grille.add(new JLabelBateau(this.model,x,y));
                 JLabel btn = new JLabel();
                 btn.setEnabled(false);
                 btn.setOpaque(true);

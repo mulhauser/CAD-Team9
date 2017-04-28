@@ -53,7 +53,8 @@ public class PlacementBateaux extends JPanel implements Observer {
             remove(grille);
         }
 
-        grille = new JPanelGrille();
+        //grille = new JPanelGrille();
+        grille = new JPanelGrille(this.model,this.model.getPartie().getHuman().getMapPerso().getSize());
 
         add(grille, BorderLayout.CENTER);
 
@@ -78,6 +79,8 @@ public class PlacementBateaux extends JPanel implements Observer {
     /**
      * Classe privee contenant la grille de placement des bateaux
      */
+
+    /*
     private class JPanelGrille extends JPanel implements Observer {
 
         private JLabelBateau[][] listButton;
@@ -128,7 +131,7 @@ public class PlacementBateaux extends JPanel implements Observer {
             }
         }
     }
-
+    */
 
 
 
