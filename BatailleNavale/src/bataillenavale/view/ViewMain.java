@@ -109,8 +109,7 @@ public class ViewMain extends JPanel implements Observer{
         this.grilleHuman = new JPanelGrille(this.model,this.model.getPartie().getHuman().getMapPerso().getSize());
         this.grilleHuman.setPreferredSize(new Dimension(400,400));
         //this.grilleEnnemy = newGrille(400,this.mapAdver,true);
-        //placé à false pour voir les bateaux pour les tests de tire
-        this.grilleEnnemy = newGrille(400,this.mapAdver,false);
+        this.grilleEnnemy = newGrille(400,this.mapAdver,true);
 
         //après affichage des 2 maps, place au tir
 
@@ -162,6 +161,20 @@ public class ViewMain extends JPanel implements Observer{
         add(grilleHuman, BorderLayout.WEST);
         add(grilleEnnemy, BorderLayout.EAST);
         add(panelFire,BorderLayout.SOUTH);
+    }
+
+    public void constructGrilleHumain() {
+
+        // Construction de la grille des bateaux
+        if (grilleHuman != null) {
+            remove(grilleHuman);
+        }
+
+        //grille = new JPanelGrille();
+        grilleHuman = new JPanelGrille(this.model,this.model.getPartie().getHuman().getMapPerso().getSize());
+        this.grilleHuman.setPreferredSize(new Dimension(400,400));
+
+        add(grilleHuman, BorderLayout.WEST);
     }
 
     public JPanel newGrille(int sizeScreen,Map map, boolean ennemy){

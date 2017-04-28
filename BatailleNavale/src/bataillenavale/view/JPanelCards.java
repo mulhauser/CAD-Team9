@@ -4,6 +4,7 @@ import bataillenavale.model.BatailleNavale;
 import bataillenavale.model.Map;
 
 import javax.swing.*;
+import javax.swing.text.View;
 import java.awt.*;
 import java.util.Observable;
 import java.util.Observer;
@@ -38,19 +39,17 @@ public class JPanelCards extends JPanel implements Observer{
         accueil = new Accueil(model, this);
         partie = new CreationPartie(model, this);
         placement = new PlacementBateaux(model, this);
-
         partieEnCours = new ViewMain(model, this);
-        add(partieEnCours, ViewMain.id);
+
 
         add(accueil, Accueil.id);
         add(partie, CreationPartie.id);
         add(placement, PlacementBateaux.id);
+        add(partieEnCours, ViewMain.id);
 
-        //currentPanelId = Accueil.id;
-        //currentPanel = accueil;
 
-        currentPanelId = ViewMain.id;
-        currentPanel = partieEnCours;
+        currentPanelId = Accueil.id;
+        currentPanel = accueil;
     }
 
     public void show(String id) {
@@ -99,4 +98,6 @@ public class JPanelCards extends JPanel implements Observer{
     public PlacementBateaux getPlacementPanel(){
         return this.placement;
     }
+
+    public ViewMain getViewMain() {return this.partieEnCours;}
 }

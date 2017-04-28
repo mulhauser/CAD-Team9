@@ -156,8 +156,19 @@ public class PlacementBateaux extends JPanel implements Observer {
             this.add(backToCreer);
 
             JButton valider = new JButton("valider");
-            valider.setEnabled(false);
 
+            //valider.setEnabled(false);
+
+            valider.setEnabled(true);
+            valider.addActionListener(new ActionListener() {
+
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                    card.getViewMain().constructGrilleHumain();
+                    // On affiche le panel de placement
+                    card.show(ViewMain.id);
+                }
+            });
             this.add(valider);
         }
     }
