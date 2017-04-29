@@ -5,6 +5,7 @@ package bataillenavale.view;
  */
 
 import bataillenavale.model.BatailleNavale;
+import bataillenavale.model.player.Player;
 import bataillenavale.model.ship.ShipPiece;
 import bataillenavale.model.ship.StatePiece;
 
@@ -22,14 +23,14 @@ public class JLabelBateau extends JLabel {
     final BatailleNavale model;
 
 
-    public JLabelBateau(BatailleNavale model, int x, int y) {
+    public JLabelBateau(BatailleNavale model, int x, int y, Player p) {
         super();
         this.model = model;
         this.posX = x;
         this.posY = y;
         this.setEnabled(false);
         this.setOpaque(true);
-        ShipPiece piece = model.getPartie().getHuman().getMapPerso().getShip(x, y);
+        ShipPiece piece = p.getMapPerso().getShip(x, y);
         if (piece == null) {
             this.setBackground(Color.BLUE);
         } else if(piece.getState() == StatePiece.MISS){

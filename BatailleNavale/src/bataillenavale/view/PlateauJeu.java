@@ -1,7 +1,6 @@
 package bataillenavale.view;
 
 import bataillenavale.model.BatailleNavale;
-import bataillenavale.model.Coordinate;
 import bataillenavale.model.Map;
 import bataillenavale.model.ship.Ship;
 import bataillenavale.model.ship.xx.ContreTorpilleur;
@@ -60,42 +59,9 @@ public class PlateauJeu extends JPanel implements Observer{
         model.addObserver(this);
         //this.model = model;
         //pour l'instant on ne reprend pas le model on en crée un nouveau :
-        this.model = new BatailleNavale();
-        //maintenant on doit creer les persos ainsi :
-        //il faut creer 2 joueurs avec bateaux placés au meme endroit :
-        //1 de 4 cases en : [D0]-[GØ] --> le croiseur
-        //1 de 3 cases en : [B2]-[B4]
-        //1 de 3 cases en : [G3]-[I3]
-        //1 de 3 cases en : [B8]-[D8]
-        //1 de 2 cases en : [H8]-[I8]
-        this.croiseur.setCoordinate(new Coordinate(3,0));
-        this.croiseur.setOrientation(Ship.Orientation.HORIZONTAL);
+        this.model = model;
 
-        this.caravelle1.setCoordinate(new Coordinate(1,2));
-        this.caravelle1.setOrientation(Ship.Orientation.VERTICAL);
 
-        this.caravelle2.setCoordinate(new Coordinate(6,3));
-        this.caravelle2.setOrientation(Ship.Orientation.HORIZONTAL);
-
-        this.caravelle3.setCoordinate(new Coordinate(1,8));
-        this.caravelle3.setOrientation(Ship.Orientation.HORIZONTAL);
-
-        this.torpilleur.setCoordinate(new Coordinate(7,8));
-        this.torpilleur.setOrientation(Ship.Orientation.HORIZONTAL);
-
-        this.mapPlayer = new Map();
-        this.mapPlayer.ajouterBateau(this.croiseur);
-        this.mapPlayer.ajouterBateau(this.caravelle1);
-        this.mapPlayer.ajouterBateau(this.caravelle2);
-        this.mapPlayer.ajouterBateau(this.caravelle3);
-        this.mapPlayer.ajouterBateau(this.torpilleur);
-
-        this.mapAdver = new Map();
-        this.mapAdver.ajouterBateau(this.croiseur);
-        this.mapAdver.ajouterBateau(this.caravelle1);
-        this.mapAdver.ajouterBateau(this.caravelle2);
-        this.mapAdver.ajouterBateau(this.caravelle3);
-        this.mapAdver.ajouterBateau(this.torpilleur);
 
         //puis utiliser mapDispositionBateaux pour savoir si un bateau est présent ou non.
 
@@ -104,8 +70,6 @@ public class PlateauJeu extends JPanel implements Observer{
 
         this.size = model.getPartie().getHuman().getMapPerso().getSize();
         //this.grilleHuman = newGrille(400,this.mapPlayer,false);
-        this.grilleHuman = new JPanelGrille(this.model,this.model.getPartie().getHuman().getMapPerso().getSize());
-        this.grilleHuman.setPreferredSize(new Dimension(400,400));
         //this.grilleEnnemy = newGrille(400,this.mapAdver,true);
         this.grilleEnnemy = newGrille(400,this.mapAdver,true);
 
@@ -156,7 +120,6 @@ public class PlateauJeu extends JPanel implements Observer{
         panelDisplay.add(new JLabel("Ennemy",SwingConstants.CENTER));
 
         add(panelDisplay,BorderLayout.NORTH);
-        add(grilleHuman, BorderLayout.WEST);
         add(grilleEnnemy, BorderLayout.EAST);
         add(panelFire,BorderLayout.SOUTH);
     }
@@ -169,7 +132,7 @@ public class PlateauJeu extends JPanel implements Observer{
         }
 
         //grille = new JPanelGrille();
-        grilleHuman = new JPanelGrille(this.model,this.model.getPartie().getHuman().getMapPerso().getSize());
+        grilleHuman = new JPanelGrille(this.model,this.model.getPartie().getHuman().getMapPerso().getSize(), model.getPartie().getHuman());
         this.grilleHuman.setPreferredSize(new Dimension(400,400));
 
         add(grilleHuman, BorderLayout.WEST);

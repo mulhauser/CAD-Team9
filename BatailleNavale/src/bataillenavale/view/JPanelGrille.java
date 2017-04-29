@@ -6,6 +6,7 @@ package bataillenavale.view;
 
 import bataillenavale.model.BatailleNavale;
 import bataillenavale.model.Map;
+import bataillenavale.model.player.Player;
 import bataillenavale.model.ship.ShipPiece;
 import bataillenavale.model.ship.StatePiece;
 
@@ -23,7 +24,7 @@ public class JPanelGrille extends JPanel implements Observer {
     private static BatailleNavale model;
     private static int size;
 
-    public JPanelGrille(BatailleNavale model, int size) {
+    public JPanelGrille(BatailleNavale model, int size, Player p) {
         super(new GridLayout(size + 1, size + 1));
         this.model=model;
         this.size = size;
@@ -44,7 +45,7 @@ public class JPanelGrille extends JPanel implements Observer {
         for (int y = 0; y < size; y++) {
             this.add(new JLabel(Integer.toString(y), SwingConstants.CENTER));
             for (int x = 0; x < size; x++) {
-                JLabelBateau btn = new JLabelBateau(model, x, y);
+                JLabelBateau btn = new JLabelBateau(model, x, y, p);
                 listButton[y][x] = btn;
                 this.add(btn);
             }
