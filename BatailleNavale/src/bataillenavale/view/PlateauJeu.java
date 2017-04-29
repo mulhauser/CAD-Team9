@@ -71,15 +71,6 @@ public class PlateauJeu extends JPanel implements Observer{
         fire.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //test
-                //System.out.println("X: "+fireX+". Y: "+fireY);
-                //retourne un booléan : true si touché, false sinon
-                if(fire(fireX,fireY)){
-                    JOptionPane.showMessageDialog(null, "Touché");
-                    //il faut lancer le update ICI
-                }else{
-                    JOptionPane.showMessageDialog(null, "Plouf");
-                }
 
             }
         });
@@ -110,15 +101,6 @@ public class PlateauJeu extends JPanel implements Observer{
     }
 
 
-
-    public boolean fire(int x, int y){
-        if(this.mapAdver.getMapDispositionBateauxElement(y,x)){
-            return true;
-        }else{
-            return false;
-        }
-    }
-
     @Override
     public void update(Observable o, Object arg) {
 
@@ -132,7 +114,6 @@ public class PlateauJeu extends JPanel implements Observer{
 
         // On construit la map du bot avec une fonctionne qui place aléatoirement ses bateaux
         model.getPartie().getBot().randomPlacementShip();
-        System.out.println(model.getPartie().getBot().getMapPerso().toString());
 
         grilleBot = new JPanelGrille(this.model,this.model.getPartie().getHuman().getMapPerso().getSize(), model.getPartie().getBot());
         this.grilleBot.setPreferredSize(new Dimension(400,400));

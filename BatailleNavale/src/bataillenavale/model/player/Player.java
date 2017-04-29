@@ -63,7 +63,7 @@ public abstract class Player extends Observable implements Serializable {
         return res;
     }
 
-    public abstract void fire();
+    public abstract void fire(int fireX, int fireY);
 
     public void constructFlotte(Epoque e) {
         this.flotte = new Flotte(ShipFactory.getInstance().getShipsByEpoque(e));

@@ -1,8 +1,11 @@
 package bataillenavale.model.player;
 
 import bataillenavale.model.Coordinate;
+import bataillenavale.model.Map;
 import bataillenavale.model.player.strategies.AttackStrategies;
 import bataillenavale.model.ship.Ship;
+import bataillenavale.model.ship.ShipPiece;
+import bataillenavale.model.ship.StatePiece;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -19,8 +22,15 @@ public class Bot extends Player {
     }
 
     @Override
-    public void fire() {
-
+    public void fire(int fireX, int fireY) {
+        Map mapPerso = getMapPerso();
+        //si un bateau est placé à la position (fireX,fireY)
+        ShipPiece[][] tabMap = mapPerso.getMapDispositionBateaux();
+        if(mapPerso.getMapDispositionBateauxElement(fireX,fireY)){
+            tabMap[fireY][fireX].setState(StatePiece.HIT);
+        }else{
+            tabMap[fireY][fireX].setState(StatePiece.MISS);
+        }
     }
 
     @Override
