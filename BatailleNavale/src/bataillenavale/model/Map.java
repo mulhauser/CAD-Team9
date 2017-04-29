@@ -5,12 +5,11 @@ import bataillenavale.model.ship.ShipPiece;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Observable;
 
 /**
  * Created by mulhauser on 12/04/2017.
  */
-public class Map extends Observable implements Serializable {
+public class Map implements Serializable {
 
     /*
     pour la mapDispositionBateau :
@@ -44,6 +43,28 @@ public class Map extends Observable implements Serializable {
     }
 
 
+    public void supprimerBateau(Ship s){
+        int x = s.getCoordinate().getX();
+        int y = s.getCoordinate().getY();
+        int taille = s.getSize();
+        Ship.Orientation orientation = s.getOrientation();
+
+        switch (orientation){
+            case HORIZONTAL:
+                for(int xi = x; xi < x+taille; xi++){
+                    mapDispositionBateaux[y][xi] = null;
+                }
+                s.setPlaced(false);
+                break;
+            case VERTICAL:
+                for(int yi = y; yi < y+taille; yi++){
+                    mapDispositionBateaux[yi][x] = null;
+                }
+                s.setPlaced(false);
+                break;
+        }
+    }
+
     /**
      * va ajouter un bateau dans le tableau disposition
      * appelle une fonction qui vérifie puis une qui place
@@ -62,6 +83,7 @@ public class Map extends Observable implements Serializable {
             s.setCoordinate(new Coordinate(s.getCoordinate().getX(), s.getCoordinate().getY()));
             placementBateau(s);
             ajout = true;
+            s.setPlaced(true);
         }
         //}
         return ajout;

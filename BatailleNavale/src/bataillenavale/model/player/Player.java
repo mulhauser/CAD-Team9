@@ -53,15 +53,6 @@ public abstract class Player extends Observable implements Serializable {
         return mapPerso.ajouterBateau(s);
     }
 
-
-    /*
-    public void constructFlotte(Epoque e){
-        ShipFactory shipFactory = ShipFactory.getInstance();
-        List<Ship> shipList = shipFactory.getShipsByEpoque(e);
-        flotte = new Flotte(shipList);
-    }
-    */
-
     public abstract void fire();
 
     public void constructFlotte(Epoque e) {

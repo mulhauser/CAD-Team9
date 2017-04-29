@@ -11,13 +11,11 @@ import bataillenavale.model.ship.StatePiece;
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import java.awt.*;
-import java.util.Observable;
-import java.util.Observer;
 
 /**
  * Classe privee qui pour chaque case de la grille de placement
  */
-public class JLabelBateau extends JLabel implements Observer {
+public class JLabelBateau extends JLabel {
 
     // x = colonne du tableau, y = ligne du tableau
     final int posX, posY;
@@ -26,7 +24,6 @@ public class JLabelBateau extends JLabel implements Observer {
 
     public JLabelBateau(BatailleNavale model, int x, int y) {
         super();
-        model.addObserver(this);
         this.model = model;
         this.posX = x;
         this.posY = y;
@@ -43,12 +40,5 @@ public class JLabelBateau extends JLabel implements Observer {
         this.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
 
 
-    }
-
-    @Override
-    public void update(Observable o, Object arg) {
-        // modifier couleur bouton quand bateau placé
-
-        //System.out.println(model.getPartie().getHuman().getMapPerso().toString());
     }
 }

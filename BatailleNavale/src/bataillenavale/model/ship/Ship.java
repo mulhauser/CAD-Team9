@@ -9,11 +9,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
 /**
  * Created by mulhauser on 12/04/2017.
  */
-public abstract class Ship {
+public abstract class Ship extends Observable{
 
     /**
      * taille petit = 2
@@ -27,12 +28,11 @@ public abstract class Ship {
     private Coordinate coordinate;
     private Orientation orientation;
     private BufferedImage image;
+    private boolean isPlaced;
 
     public enum Orientation {
-        TOP,
         VERTICAL,
-        HORIZONTAL,
-        LEFT
+        HORIZONTAL
     }
 
     private List<ShipPiece> pieceShipList;
@@ -40,6 +40,7 @@ public abstract class Ship {
     public Ship(String n, int s) {
         //this.live = l;
         try {
+            this.isPlaced = false;
             this.nom = n;
             this.size = s;
             this.coordinate = new Coordinate();
@@ -99,6 +100,16 @@ public abstract class Ship {
 
     public void setNom(String n){
         this.nom = n;
+    }
+
+    public boolean getPlaced(){
+        return this.isPlaced;
+    }
+
+    public void setPlaced(boolean placed){
+        this.isPlaced = placed;
+        setChanged();
+        notifyObservers();
     }
 
     public boolean isDestroy() {

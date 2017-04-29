@@ -33,6 +33,12 @@ public class BatailleNavale extends Observable {
         }
     }
 
+    public void supprimerShip(Ship s){
+        partie.getHuman().getMapPerso().supprimerBateau(s);
+        setChanged();
+        notifyObservers("Suppression");
+    }
+
     public Profile getProfile(){
         return this.profile;
     }

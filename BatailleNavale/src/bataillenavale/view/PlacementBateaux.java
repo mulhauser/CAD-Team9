@@ -1,10 +1,7 @@
 package bataillenavale.view;
 
 import bataillenavale.model.BatailleNavale;
-import bataillenavale.model.Map;
 import bataillenavale.model.ship.Ship;
-import bataillenavale.model.ship.ShipPiece;
-import bataillenavale.model.ship.StatePiece;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,7 +17,7 @@ import java.util.Observer;
 /**
  * Created by mulhauser on 23/04/2017.
  */
-public class PlacementBateaux extends JPanel implements Observer {
+public class PlacementBateaux extends JPanel {
 
     //id permet de switcher de panel dans JPanelCards
     public static final String id = "placement";
@@ -28,6 +25,7 @@ public class PlacementBateaux extends JPanel implements Observer {
     private static JPanelSouth buttons;
     private static JPanelGrille grille;
     private static Ship currentShip;
+    private static Ship lastShip;
 
 
     private static BatailleNavale model;
@@ -37,7 +35,6 @@ public class PlacementBateaux extends JPanel implements Observer {
     // TODO: Voir pour utiliser un GridBagLayout partout pour placer comme on veut mais c'est compliqué
     public PlacementBateaux(final BatailleNavale model, final JPanelCards card) {
         super(new BorderLayout());
-        model.addObserver(this);
         this.model = model;
         this.size = model.getPartie().getHuman().getMapPerso().getSize();
 
@@ -54,7 +51,7 @@ public class PlacementBateaux extends JPanel implements Observer {
         }
 
         //grille = new JPanelGrille();
-        grille = new JPanelGrille(this.model,this.model.getPartie().getHuman().getMapPerso().getSize());
+        grille = new JPanelGrille(this.model, this.model.getPartie().getHuman().getMapPerso().getSize());
 
         add(grille, BorderLayout.CENTER);
 
@@ -70,70 +67,6 @@ public class PlacementBateaux extends JPanel implements Observer {
 
         add(menuDroite, BorderLayout.EAST);
     }
-
-    @Override
-    public void update(Observable o, Object arg) {
-
-    }
-
-    /**
-     * Classe privee contenant la grille de placement des bateaux
-     */
-
-    /*
-    private class JPanelGrille extends JPanel implements Observer {
-
-        private JLabelBateau[][] listButton;
-
-        public JPanelGrille() {
-            super(new GridLayout(size + 1, size + 1));
-            model.addObserver(this);
-            listButton = new JLabelBateau[size][size];
-            // On créer la grille de boutons pour le positionnement des bateaux
-            this.add(new JLabel("", SwingConstants.CENTER));
-            this.add(new JLabel("A", SwingConstants.CENTER));
-            this.add(new JLabel("B", SwingConstants.CENTER));
-            this.add(new JLabel("C", SwingConstants.CENTER));
-            this.add(new JLabel("D", SwingConstants.CENTER));
-            this.add(new JLabel("E", SwingConstants.CENTER));
-            this.add(new JLabel("F", SwingConstants.CENTER));
-            this.add(new JLabel("G", SwingConstants.CENTER));
-            this.add(new JLabel("H", SwingConstants.CENTER));
-            this.add(new JLabel("I", SwingConstants.CENTER));
-            this.add(new JLabel("J", SwingConstants.CENTER));
-            for (int y = 0; y < size; y++) {
-                this.add(new JLabel(Integer.toString(y), SwingConstants.CENTER));
-                for (int x = 0; x < size; x++) {
-                    JLabelBateau btn = new JLabelBateau(model, x, y);
-                    listButton[y][x] = btn;
-                    this.add(btn);
-                }
-
-            }
-        }
-
-        @Override
-        public void update(Observable o, Object arg) {
-            Map map = model.getPartie().getHuman().getMapPerso();
-            ShipPiece[][] tabMap = map.getMapDispositionBateaux();
-            for (int x = 0; x < tabMap.length; x++) {
-                for (int y = 0; y < tabMap[x].length; y++) {
-                    if(tabMap[y][x] != null) {
-                        if (tabMap[y][x].getState() == StatePiece.MISS) {
-                            listButton[y][x].setBackground(Color.ORANGE);
-                        }
-                        if (tabMap[y][x].getState() == StatePiece.HIT) {
-                            listButton[y][x].setBackground(Color.RED);
-                        }
-                    }
-
-                }
-            }
-        }
-    }
-    */
-
-
 
     /**
      * Classe privee qui permet de créer le panel de validation et de retour à l'accueil en bas de la fenetre
@@ -233,7 +166,7 @@ public class PlacementBateaux extends JPanel implements Observer {
     /**
      * Classe privee qui permet de construire pour chaque bateau, le label et ses deux boutons associés pour son placement
      */
-    private class JPanelBateau extends JPanel {
+    private class JPanelBateau extends JPanel implements Observer {
 
         Ship ship;
         JLabel nom;
@@ -250,6 +183,7 @@ public class PlacementBateaux extends JPanel implements Observer {
             this.nom.setHorizontalAlignment(SwingConstants.TRAILING);
             this.add(nom);
 
+            model.addObserver(this);
 
             BufferedImage imgH = s.getImage();
             BufferedImage imgV = new BufferedImage(imgH.getHeight(), imgH.getWidth(), imgH.getType());
@@ -269,7 +203,7 @@ public class PlacementBateaux extends JPanel implements Observer {
                     }
                 }
             });
-            this.add(horizontalButton);
+
 
             // Rotation de l'image de 90° pour l'affichage vertical
             AffineTransform tx = new AffineTransform();
@@ -296,7 +230,17 @@ public class PlacementBateaux extends JPanel implements Observer {
                     }
                 }
             });
+
+            horizontalButton.setEnabled(!ship.getPlaced());
+            verticalButton.setEnabled(!ship.getPlaced());
+            this.add(horizontalButton);
             this.add(verticalButton);
+        }
+
+        @Override
+        public void update(Observable o, Object arg) {
+            horizontalButton.setEnabled(!ship.getPlaced());
+            verticalButton.setEnabled(!ship.getPlaced());
         }
     }
 
@@ -342,6 +286,8 @@ public class PlacementBateaux extends JPanel implements Observer {
         public JComboBox getPositionY() {
             return this.positionY;
         }
+
+
     }
 
     /**
@@ -362,7 +308,15 @@ public class PlacementBateaux extends JPanel implements Observer {
             this.annulerPlacement.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-
+                    // On supprime le bateau de la map
+                    if(lastShip != null) {
+                        model.supprimerShip(lastShip);
+                        lastShip = null;
+                        for (Component c : menuDroite.getCoordonnees().getComponents()) {
+                            c.setEnabled(false);
+                        }
+                        annulerPlacement.setEnabled(false);
+                    }
                 }
             });
             this.validerPlacement.addActionListener(new ActionListener() {
@@ -370,11 +324,22 @@ public class PlacementBateaux extends JPanel implements Observer {
                 public void actionPerformed(ActionEvent e) {
                     // On sera notifier dans les update si le placement peut se faire, voir dans BatailleNavale
                     // la methode ajouterShip(Ship s) notifie les vues
-                    model.ajouterShip(currentShip);
+                    if(currentShip != null) {
+                        model.ajouterShip(currentShip);
+                        lastShip = currentShip;
+                        currentShip = null;
+                        for (Component c : menuDroite.getCoordonnees().getComponents()) {
+                            c.setEnabled(false);
+                        }
+                        validerPlacement.setEnabled(false);
+                    }
+
                 }
             });
             this.add(this.annulerPlacement);
             this.add(this.validerPlacement);
         }
+
+
     }
 }

@@ -1,6 +1,5 @@
 package bataillenavale.view;
 
-import bataillenavale.controler.MenuListener;
 import bataillenavale.model.BatailleNavale;
 import bataillenavale.model.Coordinate;
 import bataillenavale.model.Map;
@@ -11,7 +10,6 @@ import bataillenavale.model.ship.xx.Torpilleur;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
-import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -102,7 +100,7 @@ public class ViewMain extends JPanel implements Observer{
         //puis utiliser mapDispositionBateaux pour savoir si un bateau est présent ou non.
 
         //pour le test
-        System.out.println(this.mapPlayer.toString());
+        //System.out.println(this.mapPlayer.toString());
 
         this.size = model.getPartie().getHuman().getMapPerso().getSize();
         //this.grilleHuman = newGrille(400,this.mapPlayer,false);
@@ -137,7 +135,7 @@ public class ViewMain extends JPanel implements Observer{
             @Override
             public void actionPerformed(ActionEvent e) {
                 //test
-                System.out.println("X: "+fireX+". Y: "+fireY);
+                //System.out.println("X: "+fireX+". Y: "+fireY);
                 //retourne un booléan : true si touché, false sinon
                 if(fire(fireX,fireY)){
                     JOptionPane.showMessageDialog(null, "Touché");

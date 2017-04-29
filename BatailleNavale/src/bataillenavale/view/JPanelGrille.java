@@ -65,6 +65,8 @@ public class JPanelGrille extends JPanel implements Observer {
                     if (tabMap[y][x].getState() == StatePiece.HIT) {
                         listButton[y][x].setBackground(Color.RED);
                     }
+                }else{
+                    listButton[y][x].setBackground(Color.BLUE);
                 }
 
             }

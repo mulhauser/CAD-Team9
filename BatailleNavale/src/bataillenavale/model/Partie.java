@@ -6,12 +6,10 @@ import bataillenavale.model.player.Player;
 import bataillenavale.model.player.strategies.AttackStrategies;
 import bataillenavale.model.ship.Ship;
 
-import java.util.Observable;
-
 /**
  * Created by mulhauser on 25/04/2017.
  */
-public class Partie extends Observable{
+public class Partie {
 
     private Player human;
     Player bot;
@@ -27,8 +25,6 @@ public class Partie extends Observable{
     }
 
     public Player getHuman(){
-        setChanged();
-        notifyObservers();
         return this.human;
     }
 
@@ -38,5 +34,9 @@ public class Partie extends Observable{
 
     public boolean ajouterShip(Ship s) {
         return human.putShip(s);
+    }
+
+    public void supprimerShip(Ship s) {
+        human.getMapPerso().supprimerBateau(s);
     }
 }

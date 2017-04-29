@@ -1,10 +1,8 @@
 package bataillenavale.view;
 
 import bataillenavale.model.BatailleNavale;
-import bataillenavale.model.Map;
 
 import javax.swing.*;
-import javax.swing.text.View;
 import java.awt.*;
 import java.util.Observable;
 import java.util.Observer;
@@ -74,7 +72,7 @@ public class JPanelCards extends JPanel implements Observer{
                 currentPanel = placement;
                 Main.getInstance().setPreferredSize(new Dimension(700, 600));
                 //pour vérifier que le pseudo est modifié
-                System.out.print(model.getPartie().getHuman().getPseudo());
+                //System.out.print(model.getPartie().getHuman().getPseudo());
                 break;
                 //ajout de la grille de jeu lorsque la partie commence
             case ViewMain.id:
