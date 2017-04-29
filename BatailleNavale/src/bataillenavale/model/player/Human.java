@@ -1,6 +1,10 @@
 package bataillenavale.model.player;
 
+import bataillenavale.model.Coordinate;
 import bataillenavale.model.ship.Ship;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Created by mulhauser on 12/04/2017.
@@ -11,11 +15,12 @@ public class Human extends Player {
         super(p);
     }
 
-    public  void putShip(Ship s, int x, int y, String direction){
+    public void fire() {
 
     }
 
-    public void fire() {
+    @Override
+    public void randomPlacementShip() {
 
     }
 }

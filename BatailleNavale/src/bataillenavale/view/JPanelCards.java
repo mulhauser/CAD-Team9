@@ -97,5 +97,5 @@ public class JPanelCards extends JPanel implements Observer{
         return this.placement;
     }
 
-    public PlateauJeu getViewMain() {return this.partieEnCours;}
+    public PlateauJeu getPlateauJeu() {return this.partieEnCours;}
 }

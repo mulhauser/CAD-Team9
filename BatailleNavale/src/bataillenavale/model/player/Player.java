@@ -68,4 +68,6 @@ public abstract class Player extends Observable implements Serializable {
     public void constructFlotte(Epoque e) {
         this.flotte = new Flotte(ShipFactory.getInstance().getShipsByEpoque(e));
     }
+
+    public abstract void randomPlacementShip();
 }

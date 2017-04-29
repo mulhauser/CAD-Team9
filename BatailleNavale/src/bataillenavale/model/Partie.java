@@ -22,6 +22,7 @@ public class Partie {
         this.epoque = e;
         human.constructFlotte(e);
         bot = new Bot("Bot", strat);
+        bot.constructFlotte(e);
     }
 
     public Player getHuman(){
@@ -38,5 +39,9 @@ public class Partie {
 
     public void supprimerShip(Ship s) {
         human.getMapPerso().supprimerBateau(s);
+    }
+
+    public Player getBot() {
+        return this.bot;
     }
 }

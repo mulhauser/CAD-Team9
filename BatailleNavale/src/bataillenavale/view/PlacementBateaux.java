@@ -100,7 +100,8 @@ public class PlacementBateaux extends JPanel {
 
                 @Override
                 public void actionPerformed(ActionEvent ae) {
-                    card.getViewMain().constructGrilleHumain();
+                    card.getPlateauJeu().constructGrilleHumain();
+                    card.getPlateauJeu().constructGrilleBot();
                     // On affiche le panel de placement
                     card.show(PlateauJeu.id);
                 }
