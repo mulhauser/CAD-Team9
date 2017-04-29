@@ -1,6 +1,5 @@
 package bataillenavale.model;
 
-import bataillenavale.model.player.Profile;
 import bataillenavale.model.player.strategies.IAFactory;
 import bataillenavale.model.ship.Ship;
 
@@ -18,7 +17,7 @@ public class BatailleNavale extends Observable {
         //disons que par défaut l'époque est moderne et le pseudo ne vaut rien
 
         this.partie = new Partie("fsd", Epoque.XX, IAFactory.getInstance().getStrategy("random"));
-        this.profile = new Profile();
+        this.profile = new Profile("ddfds");
     }
 
     public Partie getPartie(){

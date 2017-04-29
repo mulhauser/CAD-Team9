@@ -6,18 +6,21 @@ import bataillenavale.model.player.Player;
 import bataillenavale.model.player.strategies.AttackStrategies;
 import bataillenavale.model.ship.Ship;
 
+import java.io.Serializable;
+
 /**
  * Created by mulhauser on 25/04/2017.
  */
-public class Partie {
+public class Partie implements Serializable{
 
+    private static int id;
     private Player human;
-    Player bot;
+    private Player bot;
     private Epoque epoque;
-    AttackStrategies strategy;
+    private AttackStrategies strategy;
 
     public Partie(String pseudo, Epoque e, AttackStrategies strat){
-
+        id++;
         human = new Human(pseudo);
         this.epoque = e;
         human.constructFlotte(e);
@@ -43,5 +46,9 @@ public class Partie {
 
     public Player getBot() {
         return this.bot;
+    }
+
+    public int getId(){
+        return this.id;
     }
 }

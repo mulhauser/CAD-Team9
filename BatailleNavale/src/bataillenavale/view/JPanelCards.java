@@ -34,6 +34,13 @@ public class JPanelCards extends JPanel implements Observer{
         this.setLayout(cl);
         model.addObserver(this);
 
+
+        /* ON DOIT ENLEVER LE MODEL DE CETTE CLASSE, IL SERT A RIEN
+        * ET UTILISER UN SETMODEL DANS LES AUTRES PANEL CREES CI-DESSOUS LORSQUE L'ON CHANGE DE PANEL (SI C'EST UTILE)
+        * MODIFIER LE LANCEMENT DE BATAILLENAVALE LORSQUE L'ON CREE UNE PARTIE PAS DIRECTEMENT DANS LE MAIN
+        * ENLEVER LE PSEUDO DANS PLAYER -> PROFILE, SEULEMENT UTILE POUR LA SAUVEGARDE
+        *
+        */
         accueil = new Accueil(model, this);
         partie = new CreationPartie(model, this);
         placement = new PlacementBateaux(model, this);
