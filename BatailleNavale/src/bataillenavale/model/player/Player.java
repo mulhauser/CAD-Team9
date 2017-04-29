@@ -8,6 +8,7 @@ import bataillenavale.model.ship.Ship;
 import bataillenavale.model.ship.ShipFactory;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Observable;
 
 /**
@@ -22,7 +23,7 @@ public abstract class Player extends Observable implements Serializable {
     private Flotte flotte;
 
 
-    public Player(String p){
+    public Player(String p) {
         this.pseudo = p;
         this.score = 0;
         this.mapPerso = new Map();
@@ -45,12 +46,21 @@ public abstract class Player extends Observable implements Serializable {
         this.flotte = flotte;
     }
 
-    public Map getMapPerso(){
+    public Map getMapPerso() {
         return this.mapPerso;
     }
 
-    public boolean putShip(Ship s){
+    public boolean putShip(Ship s) {
         return mapPerso.ajouterBateau(s);
+    }
+
+    public boolean flottePlace() {
+        boolean res = true;
+        ArrayList<Ship> ships = this.flotte.getShipList();
+        for (Ship s : ships) {
+            if (!s.getPlaced()) res = false;
+        }
+        return res;
     }
 
     public abstract void fire();

@@ -71,13 +71,16 @@ public class PlacementBateaux extends JPanel {
     /**
      * Classe privee qui permet de créer le panel de validation et de retour à l'accueil en bas de la fenetre
      */
-    private class JPanelSouth extends JPanel {
+    private class JPanelSouth extends JPanel implements Observer{
 
+        JButton valider;
+        JButton backToCreer;
         public JPanelSouth(JPanelCards card) {
             super(new GridLayout(1, 2));
 
+            model.addObserver(this);
             // Menu des boutons en bas
-            JButton backToCreer = new JButton("retour");
+            backToCreer = new JButton("retour");
             backToCreer.addActionListener(new ActionListener() {
 
                 @Override
@@ -88,11 +91,11 @@ public class PlacementBateaux extends JPanel {
             });
             this.add(backToCreer);
 
-            JButton valider = new JButton("valider");
+            valider = new JButton("valider");
 
             //valider.setEnabled(false);
 
-            valider.setEnabled(true);
+            valider.setEnabled(false);
             valider.addActionListener(new ActionListener() {
 
                 @Override
@@ -103,6 +106,15 @@ public class PlacementBateaux extends JPanel {
                 }
             });
             this.add(valider);
+        }
+
+        @Override
+        public void update(Observable o, Object arg) {
+            if(model.getPartie().getHuman().flottePlace()){
+                valider.setEnabled(true);
+            }else{
+                valider.setEnabled(false);
+            }
         }
     }
 
