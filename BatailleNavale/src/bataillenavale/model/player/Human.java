@@ -19,14 +19,13 @@ public class Human extends Player {
     }
 
     @Override
-    public void fire(int fireX, int fireY) {
+    public void fire(int fireY, int fireX) {
         Map mapPerso = getMapPerso();
         //si un bateau est placé à la position (fireX,fireY)
-        ShipPiece[][] tabMap = mapPerso.getMapDispositionBateaux();
         if(mapPerso.getMapDispositionBateauxElement(fireX,fireY)){
-            tabMap[fireY][fireX].setState(StatePiece.HIT);
+            mapPerso.setMapDispositionBateauxElement(fireX,fireY,true);
         }else{
-            tabMap[fireY][fireX].setState(StatePiece.MISS);
+            mapPerso.setMapDispositionBateauxElement(fireX,fireY,false);
         }
     }
 

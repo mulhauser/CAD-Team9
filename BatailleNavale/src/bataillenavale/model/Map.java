@@ -2,6 +2,7 @@ package bataillenavale.model;
 
 import bataillenavale.model.ship.Ship;
 import bataillenavale.model.ship.ShipPiece;
+import bataillenavale.model.ship.StatePiece;
 
 import java.io.Serializable;
 import java.util.List;
@@ -260,10 +261,15 @@ public class Map implements Serializable {
         }
     }
 
-    /*
-    public void setMapDispositionBateauxElement(int x, int y){
-        this.mapDispositionBateaux[x][y]=null;
+
+
+    public void setMapDispositionBateauxElement(int x, int y, boolean hit){
+        if(hit==true){
+            this.mapDispositionBateaux[x][y].setState(StatePiece.HIT);
+        }else{
+            this.mapDispositionBateaux[x][y].setState(StatePiece.MISS);
+        }
     }
-    */
+
 
 }
