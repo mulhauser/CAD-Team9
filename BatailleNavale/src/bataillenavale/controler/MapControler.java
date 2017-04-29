@@ -1,7 +1,7 @@
 package bataillenavale.controler;
 
 import bataillenavale.model.Map;
-import bataillenavale.view.ViewMain;
+import bataillenavale.view.PlateauJeu;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,9 +12,9 @@ import java.awt.event.ActionListener;
 public class MapControler implements ActionListener {
 
     Map m;
-    ViewMain g;
+    PlateauJeu g;
 
-    public MapControler(Map m, ViewMain g){
+    public MapControler(Map m, PlateauJeu g){
         m = m;
         g = g;
     }

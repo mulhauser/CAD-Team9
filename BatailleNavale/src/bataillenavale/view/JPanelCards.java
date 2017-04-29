@@ -25,7 +25,7 @@ public class JPanelCards extends JPanel implements Observer{
     private BatailleNavale model;
 
     //ajout de la grille de la partie en cours
-    private ViewMain partieEnCours;
+    private PlateauJeu partieEnCours;
 
     public JPanelCards(BatailleNavale model) {
         super();
@@ -37,13 +37,13 @@ public class JPanelCards extends JPanel implements Observer{
         accueil = new Accueil(model, this);
         partie = new CreationPartie(model, this);
         placement = new PlacementBateaux(model, this);
-        partieEnCours = new ViewMain(model, this);
+        partieEnCours = new PlateauJeu(model, this);
 
 
         add(accueil, Accueil.id);
         add(partie, CreationPartie.id);
         add(placement, PlacementBateaux.id);
-        add(partieEnCours, ViewMain.id);
+        add(partieEnCours, PlateauJeu.id);
 
 
         currentPanelId = Accueil.id;
@@ -75,7 +75,7 @@ public class JPanelCards extends JPanel implements Observer{
                 //System.out.print(model.getPartie().getHuman().getPseudo());
                 break;
                 //ajout de la grille de jeu lorsque la partie commence
-            case ViewMain.id:
+            case PlateauJeu.id:
                 currentPanel = partieEnCours;
                 Main.getInstance().setPreferredSize(new Dimension(900, 600));
                 break;
@@ -97,5 +97,5 @@ public class JPanelCards extends JPanel implements Observer{
         return this.placement;
     }
 
-    public ViewMain getViewMain() {return this.partieEnCours;}
+    public PlateauJeu getViewMain() {return this.partieEnCours;}
 }

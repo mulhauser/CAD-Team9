@@ -20,7 +20,7 @@ import java.util.Observer;
  * Created by mulhauser on 12/04/2017.
  */
 
-public class ViewMain extends JPanel implements Observer{
+public class PlateauJeu extends JPanel implements Observer{
     public static final String id = "main";
     private Map mapPlayer;
     private Map mapAdver;
@@ -54,7 +54,7 @@ public class ViewMain extends JPanel implements Observer{
     private int fireX;
     private int fireY;
 
-    public ViewMain(final BatailleNavale model, final JPanelCards card){
+    public PlateauJeu(final BatailleNavale model, final JPanelCards card){
         //ici le super pour le Fichier (accueil,quitter)
         super(new BorderLayout());
         model.addObserver(this);

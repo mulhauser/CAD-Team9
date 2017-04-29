@@ -25,18 +25,19 @@ public class BatailleNavale extends Observable {
         return this.partie;
     }
 
-    public void ajouterShip(Ship s){
-
-        if(partie.ajouterShip(s)) {
+    public boolean ajouterShip(Ship s){
+        boolean res = partie.ajouterShip(s);
+        if(res) {
             setChanged();
             notifyObservers();
         }
+        return res;
     }
 
     public void supprimerShip(Ship s){
         partie.getHuman().getMapPerso().supprimerBateau(s);
         setChanged();
-        notifyObservers("Suppression");
+        notifyObservers();
     }
 
     public Profile getProfile(){

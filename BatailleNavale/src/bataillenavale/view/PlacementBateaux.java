@@ -99,7 +99,7 @@ public class PlacementBateaux extends JPanel {
                 public void actionPerformed(ActionEvent ae) {
                     card.getViewMain().constructGrilleHumain();
                     // On affiche le panel de placement
-                    card.show(ViewMain.id);
+                    card.show(PlateauJeu.id);
                 }
             });
             this.add(valider);
@@ -325,13 +325,14 @@ public class PlacementBateaux extends JPanel {
                     // On sera notifier dans les update si le placement peut se faire, voir dans BatailleNavale
                     // la methode ajouterShip(Ship s) notifie les vues
                     if(currentShip != null) {
-                        model.ajouterShip(currentShip);
-                        lastShip = currentShip;
-                        currentShip = null;
-                        for (Component c : menuDroite.getCoordonnees().getComponents()) {
-                            c.setEnabled(false);
+                        if(model.ajouterShip(currentShip)) {
+                            lastShip = currentShip;
+                            currentShip = null;
+                            for (Component c : menuDroite.getCoordonnees().getComponents()) {
+                                c.setEnabled(false);
+                            }
+                            validerPlacement.setEnabled(false);
                         }
-                        validerPlacement.setEnabled(false);
                     }
 
                 }
