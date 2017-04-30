@@ -28,13 +28,7 @@ public class Bot extends Player {
         if(mapPerso.getMapDispositionBateauxElement(fireX,fireY)){
             mapPerso.setMapDispositionBateauxElement(fireX,fireY);
         }
-        /*
-        if(mapPerso.getMapDispositionBateauxElement(fireX,fireY)){
-            mapPerso.setMapDispositionBateauxElement(fireX,fireY,true);
-        }else{
-            mapPerso.setMapDispositionBateauxElement(fireX,fireY,false);
-        }
-        */
+
     }
 
     @Override
