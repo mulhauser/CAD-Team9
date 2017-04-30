@@ -1,5 +1,6 @@
 package bataillenavale.model;
 
+import bataillenavale.model.player.strategies.AttackStrategies;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,6 +20,7 @@ public class PartieTest {
     Partie partieXVI;
     Partie partieNull;
     Partie partieVide;
+    AttackStrategies strategie;
 
 
     @Before
@@ -31,10 +33,12 @@ public class PartieTest {
         partieXVI = null;
         partieNull = null;
         partieVide = null;
+        strategie = null;
         assertNull(partieXX);
         assertNull(partieXVI);
         assertNull(partieNull);
         assertNull(partieVide);
+        assertNull(strategie);
     }
 
 
@@ -43,7 +47,8 @@ public class PartieTest {
      */
     @Test
     public void partieEpoqueXX(){
-        partieXX = new Partie( "michel",  XX);
+        strategie = null;
+        partieXX = new Partie( "michel",  XX, strategie);
         assertEquals(XX, partieXX.getEpoque());
     }
 
@@ -53,7 +58,8 @@ public class PartieTest {
      */
     @Test
     public void partiePseudoXX(){
-        partieXX = new Partie( "michel",  XX);
+         strategie = null;
+         partieXX = new Partie( "michel",  XX, strategie);
         assertEquals("michel", partieXX.getHuman().getPseudo());
     }
 
@@ -63,7 +69,8 @@ public class PartieTest {
      */
     @Test
     public void partieEpoqueXVI(){
-        partieXVI = new Partie( "a",  XVI);
+        strategie = null;
+        partieXVI = new Partie( "a",  XVI, strategie);
         assertEquals(XVI, partieXVI.getEpoque());
     }
 
@@ -73,7 +80,8 @@ public class PartieTest {
      */
     @Test
     public void partiePseudoXVI(){
-        partieXVI = new Partie( "a",  XVI);
+        strategie = null;
+        partieXVI = new Partie( "a",  XVI, strategie);
         assertEquals("a", partieXVI.getHuman().getPseudo());
     }
 
@@ -85,7 +93,8 @@ public class PartieTest {
      */
     @Test
     public void partieNullTest() throws NullPointerException{
-        partieNull = new Partie( null ,  XX);
+        strategie = null;
+        partieNull = new Partie( null ,  XX, strategie);
        assertNull(partieNull.getHuman().getPseudo());
        // assertEquals("", partieNull.getHuman().getPseudo());
     }
@@ -97,7 +106,8 @@ public class PartieTest {
      */
     @Test
     public void partieSansPseudoTest(){
-        partieVide = new Partie( "",  XVI);
+        strategie = null;
+        partieVide = new Partie( "",  XVI, strategie);
         assertEquals("", partieVide.getHuman().getPseudo());
     }
 
