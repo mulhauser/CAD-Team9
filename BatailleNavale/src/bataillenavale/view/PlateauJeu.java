@@ -71,7 +71,7 @@ public class PlateauJeu extends JPanel implements Observer{
         fire.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                fire(fireX,fireY);
+                model.getPartie().getBot().fire(fireX,fireY);
             }
         });
 
@@ -121,7 +121,4 @@ public class PlateauJeu extends JPanel implements Observer{
         add(grilleBot, BorderLayout.EAST);
     }
 
-    public void fire(int x, int y){
-        model.getPartie().getBot().fire(x,y);
-    }
 }
