@@ -261,18 +261,17 @@ public class Map implements Serializable {
         }
     }
 
+    //public void setMapDispositionBateauxElement(int x, int y, boolean hit){
+    public void setMapDispositionBateauxElement(int x, int y){
+        System.out.println("Touché en X : "+x+", Y : "+y);
+        this.mapDispositionBateaux[x][y].setState(StatePiece.HIT);
+        /*
+        if (hit == true) {
+            this.mapDispositionBateaux[x][y].setState(true);
+        } else {
+            this.mapDispositionBateaux[x][y].setState(false);
+        }*/
 
-
-    public void setMapDispositionBateauxElement(int x, int y, boolean hit){
-        System.out.println("X:"+x);
-        System.out.println("Y:"+y);
-        System.out.println("Hit:"+hit);
-        if(hit==true){
-            this.mapDispositionBateaux[x][y].setState(StatePiece.HIT);
-        }else{
-            this.mapDispositionBateaux[x][y].setState(StatePiece.MISS);
-        }
     }
-
 
 }

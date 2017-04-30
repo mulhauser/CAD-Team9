@@ -39,6 +39,13 @@ public class BatailleNavale extends Observable {
         notifyObservers();
     }
 
+    /*
+    public void tir(){
+        setChanged();
+        notifyObservers();
+    }
+    */
+
     public Profile getProfile(){
         return this.profile;
     }
