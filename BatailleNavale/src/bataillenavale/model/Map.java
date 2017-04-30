@@ -280,7 +280,6 @@ public class Map implements Serializable {
             System.out.println("Plouf en X : "+x+", Y : "+y);
             this.mapDispositionBateaux[x][y] = new ShipPiece();
         }
-
     }
 
 }

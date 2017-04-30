@@ -66,11 +66,38 @@ public class JPanelGrille extends JPanel implements Observer {
                     if (tabMap[y][x].getState() == StatePiece.HIT) {
                         listButton[y][x].setBackground(Color.RED);
                     }
+                    if (tabMap[y][x].getState() == StatePiece.FAIL) {
+                        listButton[y][x].setBackground(Color.BLACK);
+                    }
                 }else{
                     listButton[y][x].setBackground(Color.BLUE);
                 }
 
             }
         }
+        /*
+        Map mapBot = model.getPartie().getBot().getMapPerso();
+        tabMap = mapBot.getMapDispositionBateaux();
+        for (int x = 0; x < tabMap.length; x++) {
+            for (int y = 0; y < tabMap[x].length; y++) {
+                if(tabMap[y][x] != null) {
+                    if (tabMap[y][x].getState() == StatePiece.MISS) {
+                        //pas de orange pour le bot car on ne doit pas voir ou son les bateaux
+                        listButton[y][x].setBackground(Color.BLUE);
+                    }
+                    if (tabMap[y][x].getState() == StatePiece.HIT) {
+                        listButton[y][x].setBackground(Color.RED);
+                    }
+                    if (tabMap[y][x].getState() == StatePiece.FAIL) {
+                        listButton[y][x].setBackground(Color.BLACK);
+                    }
+                }else{
+                    listButton[y][x].setBackground(Color.BLUE);
+                }
+            }
+        }
+        */
+
     }
+
 }

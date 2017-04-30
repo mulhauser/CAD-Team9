@@ -51,4 +51,5 @@ public class Partie implements Serializable{
     public int getId(){
         return this.id;
     }
+
 }
