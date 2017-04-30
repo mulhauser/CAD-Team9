@@ -23,7 +23,7 @@ public class Human extends Player {
         Map mapPerso = getMapPerso();
         //si un bateau est placé à la position (fireX,fireY)
         if(mapPerso.getMapDispositionBateauxElement(fireX,fireY)){
-            mapPerso.setMapDispositionBateauxElement(fireX,fireY);
+            mapPerso.setMapDispositionBateauxElement(fireX,fireY, true);
         }
     }
 

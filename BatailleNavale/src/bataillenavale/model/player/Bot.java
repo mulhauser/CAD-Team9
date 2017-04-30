@@ -26,7 +26,10 @@ public class Bot extends Player {
         Map mapPerso = getMapPerso();
         //pour un bateau placé à la position (fireX,fireY)
         if(mapPerso.getMapDispositionBateauxElement(fireX,fireY)){
-            mapPerso.setMapDispositionBateauxElement(fireX,fireY);
+            //true si un bateau est présent ici ou un tir raté
+            mapPerso.setMapDispositionBateauxElement(fireX,fireY,true);
+        }else{
+            mapPerso.setMapDispositionBateauxElement(fireX,fireY,false);
         }
 
     }

@@ -15,6 +15,11 @@ public class ShipPiece {
         this.state = StatePiece.MISS;
     }
 
+    public ShipPiece(){
+        this.ship = null;
+        this.state = StatePiece.FAIL;
+    }
+
     public StatePiece getState(){
         return this.state;
     }
