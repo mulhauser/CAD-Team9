@@ -51,12 +51,13 @@ public class BatailleNavale extends Observable {
         notifyObservers();
     }
 
-    /*
-    public void tir(){
+    public void ajouterTir(int fireX,int fireY){
+        partie.getBot().fire(fireX,fireY);
+        /*
         setChanged();
         notifyObservers();
+        */
     }
-    */
 
     public Profile getProfile(){
         return this.profile;

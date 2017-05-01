@@ -18,15 +18,8 @@ public class Human extends Player implements Serializable {
         Map mapPerso = getMapPerso();
         //si un bateau est placé à la position (fireX,fireY)
         if(mapPerso.getMapDispositionBateauxElement(fireX,fireY)){
-            mapPerso.setMapDispositionBateauxElement(fireX,fireY);
+            mapPerso.setMapDispositionBateauxElement(fireX,fireY, true);
         }
-        /*
-        if(mapPerso.getMapDispositionBateauxElement(fireX,fireY)){
-            mapPerso.setMapDispositionBateauxElement(fireX,fireY,true);
-        }else{
-            mapPerso.setMapDispositionBateauxElement(fireX,fireY,false);
-        }
-        */
     }
 
     @Override

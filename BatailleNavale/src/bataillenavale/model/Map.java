@@ -262,16 +262,24 @@ public class Map implements Serializable {
     }
 
     //public void setMapDispositionBateauxElement(int x, int y, boolean hit){
-    public void setMapDispositionBateauxElement(int x, int y){
-        System.out.println("Touché en X : "+x+", Y : "+y);
-        this.mapDispositionBateaux[x][y].setState(StatePiece.HIT);
-        /*
-        if (hit == true) {
-            this.mapDispositionBateaux[x][y].setState(true);
-        } else {
-            this.mapDispositionBateaux[x][y].setState(false);
-        }*/
-
+    public void setMapDispositionBateauxElement(int x, int y, boolean touche){
+        if(touche){
+            if(this.mapDispositionBateaux[x][y].getState()==StatePiece.HIT){
+                //si le bateau a déja été touché à la case la
+                System.out.println("Bateau déjà touché en X : "+x+", Y : "+y);
+            }else if(this.mapDispositionBateaux[x][y].getState()==StatePiece.FAIL){
+                //si tire dans l'eau pour la seconde fois ou plus
+                System.out.println("Déjà plouf en X : "+x+", Y : "+y);
+            }else{
+                //si nouveau tire ok
+                System.out.println("Touché en X : "+x+", Y : "+y);
+                this.mapDispositionBateaux[x][y].setState(StatePiece.HIT);
+            }
+        }else {
+            //si tire dans l'eau pour la premiere fois
+            System.out.println("Plouf en X : "+x+", Y : "+y);
+            this.mapDispositionBateaux[x][y] = new ShipPiece();
+        }
     }
 
 }

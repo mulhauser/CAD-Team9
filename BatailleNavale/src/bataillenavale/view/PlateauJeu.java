@@ -69,8 +69,9 @@ public class PlateauJeu extends JPanel implements Observer{
         fire.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                model.getPartie().getBot().fire(fireX,fireY);
-                //model.tir();
+                //model.getPartie().getBot().fire(fireX,fireY);
+                //puis après le tir peut-importe le résultat de celui-ci il faut mettre à jour la vue
+                model.ajouterTir(fireX,fireY);
             }
         });
 

@@ -3,11 +3,14 @@ package bataillenavale.model;
 
 import bataillenavale.model.ship.Ship;
 import bataillenavale.model.ship.ShipFactory;
+import bataillenavale.model.ship.ShipPiece;
+import bataillenavale.model.ship.xx.Croiseur;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static bataillenavale.model.Epoque.XX;
 import static org.junit.Assert.*;
@@ -46,23 +49,11 @@ public class MapTest {
      */
     @Test
     public void getSize(){
-        System.out.println("Test de la taille de la map");
+      //  System.out.println("Test de la taille de la map");
         assertEquals(size, map.getSize());
     }
 
 
-    /**
-     * verifie que les coordonnées d un bateau sont bien dans la map et n'en sortent pas
-     */
-    @Test
-    public void verificationCoordinate(){
-        System.out.println("Test de la vérification des coordonnées");
-        for(int i = 0; i < size; i++){
-            for (int j = 0; j < size; j++){
-                assertEquals(true, map.verificationCoordinate(i,j));
-            }
-        }
-    }
 
 
     /**
@@ -70,7 +61,7 @@ public class MapTest {
      */
     @Test
     public void getShipSansShip() {
-        System.out.println("Test de la non présence d'une partie de bateau la où il n'est pas censé en avoir");
+       // System.out.println("Test de la non présence d'une partie de bateau la où il n'est pas censé en avoir");
         for(int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 assertEquals(null, map.getShip(i, j));
@@ -84,25 +75,276 @@ public class MapTest {
      */
     @Test
     public void getShipAvecShip(){
-        System.out.println("Test de la non présence d'une partie de bateau la où il est censé en avoir");
+       // System.out.println("Test de la non présence d'une partie de bateau la où il est censé en avoir");
         //TEST A FAIRE APRES PLACEMENT BATEAU
 
     }
 
 
     /**
-     * on va vférifier si apres la fonction placementBateau() (que l'on va "forcer") le bateau est correctement place
+     * on test si c'est possible d'ajouter un ship hors de la map
+     *
      */
     @Test
-    public void placementBateau() {
-        map.placementBateau(ships.get(0));
-       // assertEquals();
+    public void verificationCoordinateFalse(){
+        boolean b = map.verificationCoordinate(map.getMapDispositionBateaux().length +1, map.getMapDispositionBateaux().length +1);
+        assertEquals(false,b);
+    }
 
+
+    /**
+     * on test si c'est possible d'ajouter un ship a la limite de la map
+     */
+    @Test
+    public void verificationCoordinateTrueLimit(){
+        boolean b = map.verificationCoordinate(map.getMapDispositionBateaux().length , map.getMapDispositionBateaux().length );
+        assertEquals(true,b);
+    }
+
+    /**
+     * on test si on peut ajouter un bateau a 0
+     */
+    @Test
+    public void verificationCoordinateTrueZero(){
+        boolean b = map.verificationCoordinate(0, 0 );
+        assertEquals(true,b);
+    }
+
+
+    /**
+     * on test si on peut ajouter un bateau a 0
+     */
+    @Test
+    public void verificationCoordinatePartout(){
+        for(int i= 0; i < map.getMapDispositionBateaux().length; i++){
+            for(int j = 0; j < map.getMapDispositionBateaux().length; j++) {
+                assertEquals(true, map.verificationCoordinate(i, j));
+            }
+        }
+
+    }
+
+
+    /**
+     * on test si on peut placer un bateau dans un endroit ou on est censé pouvoir la placer
+     * le bateau est un croiseur et dans une position verticale
+     */
+    @Test
+    public void verificationPlacementCorrectVertical(){
+        Ship s = new Croiseur();
+        s.setOrientation(Ship.Orientation.VERTICAL);
+        s.setCoordinate(new Coordinate(5,5));
+        boolean b = map.verificationsPlacement(s.getCoordinate().getX(), s.getCoordinate().getY(), s.getSize(), s.getOrientation());
+        assertEquals(true, b);
+    }
+
+
+    /**
+     * on test si on peut placer un bateau dans un endroit ou on est censé pouvoir la placer
+     * le bateau est un croiseur et dans une position horizontale
+     */
+    @Test
+    public void verificationPlacementCorrectHorizontale(){
+        Ship s = new Croiseur();
+        s.setOrientation(Ship.Orientation.HORIZONTAL);
+        s.setCoordinate(new Coordinate(5,5));
+        boolean b = map.verificationsPlacement(s.getCoordinate().getX(), s.getCoordinate().getY(), s.getSize(), s.getOrientation());
+        assertEquals(true, b);
+    }
+
+
+    /**
+     * on test si on peut placer un bateau en position de départ en bas de la map et qui va sortir de la map
+     * le debut du bateau est tout en bas , puis le reste en dehors
+     * pas possible normalement
+     */
+    @Test
+    public void verificationPlacementIMPOSSIBLEVertical(){
+        Ship s = new Croiseur();
+        s.setOrientation(Ship.Orientation.VERTICAL);
+        s.setCoordinate(new Coordinate(map.getSize()-1,map.getSize()-1));
+        boolean b = map.verificationsPlacement(s.getCoordinate().getX(), s.getCoordinate().getY(), s.getSize(), s.getOrientation());
+        assertEquals(false, b);
+    }
+
+
+
+    /**
+     * on test si on peut placer un bateau en position de départ en bas de la map et qui va sortir de la map
+     * le debut du bateau est tout en bas , puis le reste en dehors
+     * pas possible normalement
+     */
+    @Test
+    public void verificationPlacementIMPOSSIBLEHorizontale(){
+        Ship s = new Croiseur();
+        s.setOrientation(Ship.Orientation.HORIZONTAL);
+        s.setCoordinate(new Coordinate(map.getSize()-1,map.getSize()-1));
+        boolean b = map.verificationsPlacement(s.getCoordinate().getX(), s.getCoordinate().getY(), s.getSize(), s.getOrientation());
+        assertEquals(false, b);
+    }
+
+
+    /**
+     * on test si c'est possible de placer un bateau totalement hors de la map
+     * normalement non
+     */
+    @Test
+    public void verificationPlacementHorsMapCompletementHorizontale(){
+        Ship s = new Croiseur();
+        s.setOrientation(Ship.Orientation.HORIZONTAL);
+        s.setCoordinate(new Coordinate(map.getSize()+1,map.getSize()+1));
+        boolean b = map.verificationsPlacement(s.getCoordinate().getX(), s.getCoordinate().getY(), s.getSize(), s.getOrientation());
+        assertEquals(false, b);
+    }
+
+
+    /**
+     * on test si c'est possible de placer un bateau totalement hors de la map
+     * normalement non
+     */
+    @Test
+    public void verificationPlacementHorsMapCompletementVerticale(){
+        Ship s = new Croiseur();
+        s.setOrientation(Ship.Orientation.VERTICAL);
+        s.setCoordinate(new Coordinate(map.getSize()+1,map.getSize()+1));
+        boolean b = map.verificationsPlacement(s.getCoordinate().getX(), s.getCoordinate().getY(), s.getSize(), s.getOrientation());
+        assertEquals(false, b);
+    }
+
+
+    /**
+     * on test si c'est possible de placer un bateau exactement sur  un autre
+     * dans la position verticale
+     */
+    @Test
+    public void verificationPlacementBateauDejaPlaceIdentiqueVerticale(){
+        Ship s = new Croiseur();
+        s.setOrientation(Ship.Orientation.VERTICAL);
+        s.setCoordinate(new Coordinate(5, 5));
+
+        Ship s2 = new Croiseur();
+        s2.setOrientation(Ship.Orientation.VERTICAL);
+        s2.setCoordinate(new Coordinate(5, 5));
+
+        map.ajouterBateau(s);
+
+        boolean b = map.verificationsPlacement(s2.getCoordinate().getX(), s2.getCoordinate().getY(), s2.getSize(), s2.getOrientation());
+        assertEquals(false, b);
+    }
+
+
+
+    /**
+     * on test si c'est possible de placer un bateau exactement sur  un autre
+     * dans la position Horizontale
+     */
+    @Test
+    public void verificationPlacementBateauDejaPlaceIdentiqueHorizontale(){
+        Ship s = new Croiseur();
+        s.setOrientation(Ship.Orientation.HORIZONTAL);
+        s.setCoordinate(new Coordinate(5, 5));
+
+        Ship s2 = new Croiseur();
+        s2.setOrientation(Ship.Orientation.HORIZONTAL);
+        s2.setCoordinate(new Coordinate(5, 5));
+
+        map.ajouterBateau(s);
+
+        boolean b = map.verificationsPlacement(s2.getCoordinate().getX(), s2.getCoordinate().getY(), s2.getSize(), s2.getOrientation());
+        assertEquals(false, b);
+    }
+
+
+    /**
+     * on test si c'est possible de placer un bateau sur une case ou se trouve deja un bateau
+     * normalement le test retourne non
+     */
+    @Test
+    public void verificationPlacementBateauDejaPlaceDifferentHorizontale(){
+        Ship s = new Croiseur();
+        s.setOrientation(Ship.Orientation.HORIZONTAL);
+        s.setCoordinate(new Coordinate(0, 0));
+
+        Ship s2 = new Croiseur();
+        s2.setOrientation(Ship.Orientation.VERTICAL);
+        s2.setCoordinate(new Coordinate(0, 0));
+
+        map.ajouterBateau(s);
+
+        boolean b = map.verificationsPlacement(s2.getCoordinate().getX(), s2.getCoordinate().getY(), s2.getSize(), s2.getOrientation());
+        assertEquals(false, b);
+    }
+
+
+    /**
+     * test d ajout d un bateau horizontalement
+     * on verifie si la position sur la grille n'est plus null
+     */
+    @Test
+    public void ajouterBateauHorizontal(){
+        Ship s = new Croiseur();
+        s.setCoordinate(new Coordinate(2,2));
+        s.setOrientation(Ship.Orientation.VERTICAL);
+        map.ajouterBateau(s);
+        for(int i = s.getCoordinate().getX(); i < s.getCoordinate().getX() + s.getSize(); i++){
+            assertNotNull(map.getMapDispositionBateaux()[s.getCoordinate().getY()][i]);
+        }
+    }
+
+
+    /**
+     * test d ajout d un bateau verticalement
+     * on verifie si la position sur la grille n'est plus null
+     */
+    @Test
+    public void ajouterBateauVertical(){
+        Ship s = new Croiseur();
+        s.setCoordinate(new Coordinate(2,2));
+        s.setOrientation(Ship.Orientation.VERTICAL);
+        map.ajouterBateau(s);
+        for(int i = s.getCoordinate().getY(); i < s.getCoordinate().getY() + s.getSize(); i++){
+            assertNotNull(map.getMapDispositionBateaux()[i][s.getCoordinate().getX()]);
+        }
     }
 
 
 
 
+    /**
+     * on test que quand on supprime un bateau VERTICAL il soit bien supprimé
+     */
+    @Test
+    public void supprimerBateauVertical(){
+        Ship s = new Croiseur();
+        s.setCoordinate(new Coordinate(2,2));
+        s.setOrientation(Ship.Orientation.VERTICAL);
+        map.ajouterBateau(s);
+        map.supprimerBateau(s);
+        ShipPiece[][] sp = map.getMapDispositionBateaux();
+        for(int yi = 2; yi < 2+s.getSize(); yi++){
+            assertEquals(null,  sp[yi][2]);
+        }
+    }
+
+
+    /**
+     * on test que quand on supprime un bateau HORIZONTAL il soit bien supprimé
+     */
+    @Test
+    public void supprimerBateauHorizontal(){
+        Ship s = new Croiseur();
+        s.setCoordinate(new Coordinate(2,2));
+        s.setOrientation(Ship.Orientation.HORIZONTAL);
+        map.ajouterBateau(s);
+        map.supprimerBateau(s);
+        ShipPiece[][] sp = map.getMapDispositionBateaux();
+        for(int yi = 2; yi < 2+s.getSize(); yi++){
+            assertEquals(null,  sp[yi][2]);
+        }
+        for(int xi = 2; xi < 2+s.getSize(); xi++){
+            assertEquals(null,  sp[2][xi]);
+        }
+    }
 
 
 

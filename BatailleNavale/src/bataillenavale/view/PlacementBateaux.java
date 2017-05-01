@@ -363,4 +363,5 @@ public class PlacementBateaux extends JPanel {
 
 
     }
+
 }
