@@ -114,7 +114,6 @@ public class PlateauJeu extends JPanel implements Observer{
         }
 
         // On construit la map du bot avec une fonctionne qui place aléatoirement ses bateaux
-        model.getPartie().getBot().randomPlacementShip();
 
         grilleBot = new JPanelGrille(this.model,this.model.getPartie().getHuman().getMapPerso().getSize(), model.getPartie().getBot());
         this.grilleBot.setPreferredSize(new Dimension(400,400));

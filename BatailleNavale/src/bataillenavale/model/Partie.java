@@ -25,6 +25,7 @@ public class Partie implements Serializable{
         human.constructFlotte(e);
         bot = new Bot(strat);
         bot.constructFlotte(e);
+        bot.randomPlacementShip();
         this.strategy = strat;
     }
 

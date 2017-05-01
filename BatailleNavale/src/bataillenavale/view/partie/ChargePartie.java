@@ -4,6 +4,7 @@ import bataillenavale.controler.MenuListener;
 import bataillenavale.model.BatailleNavale;
 import bataillenavale.model.Partie;
 import bataillenavale.view.JPanelCards;
+import bataillenavale.view.PlateauJeu;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -45,10 +46,15 @@ public class ChargePartie extends JPanel {
             public void actionPerformed(ActionEvent ae) {
                 if(!list.isSelectionEmpty()){
                     model.setPartie(parties.get(list.getSelectedValue()));
+                    System.out.println(model.getPartie().getHuman().getMapPerso().toString());
+                    card.getPlateauJeu().setModel(model);
+                    card.getPlateauJeu().constructFenetre();
+                    card.getPlateauJeu().constructGrilleHumain();
+                    card.getPlateauJeu().constructGrilleBot();
                     card.getAccueilPartie().setModel(model);
                     card.getLoadPartie().setModel(model);
                     card.getNewPartie().setModel(model);
-                    card.show(AccueilPartie.id);
+                    card.show(PlateauJeu.id);
                 }else{
                     JOptionPane.showMessageDialog(card.fenetre, "Veuillez selectionner une partie", "Information", JOptionPane.INFORMATION_MESSAGE);
                 }

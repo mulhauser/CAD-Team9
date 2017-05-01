@@ -137,4 +137,17 @@ public abstract class Ship extends Observable implements Serializable{
         g2.dispose();
         return newImage;
     }
+
+
+    /*private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        this.image = ImageIO.read(new File("./img/1.png"));
+
+        for (int i = 0; i < this.size; i++) {
+            // On construit l'image selon sa taille
+            if(i < this.size - 1) {
+                BufferedImage img2 = ImageIO.read(new File("./img/1.png"));
+                this.image = joinBufferedImage(this.image, img2);
+            }
+        }
+    }*/
 }
