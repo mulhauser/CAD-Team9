@@ -73,8 +73,8 @@ public class ProfileTest {
      */
     @Test
     public void testNombrePartieApresAjout1(){
-        p1.ajouterPartie(new Partie("michel", XX, null));
-        p1.ajouterPartie(new Partie("michel", XX, null));
+        p1.ajouterPartie(new Partie(XX, null));
+        p1.ajouterPartie(new Partie(XX, null));
         assertEquals(2, p1.getParties().size());
 
     }
@@ -96,7 +96,7 @@ public class ProfileTest {
      */
     @Test
     public void supprimer() /*throws NullPointerException*/{
-        p1.ajouterPartie(new Partie("michel", XX, null));
+        p1.ajouterPartie(new Partie(XX, null));
         p1.supprimer((Partie) p1.getParties().get(p1.getId()));
         assertEquals(0, p1.getParties().size());
     }
