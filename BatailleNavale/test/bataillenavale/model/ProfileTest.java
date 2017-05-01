@@ -1,14 +1,11 @@
 package bataillenavale.model;
 
-import bataillenavale.model.player.strategies.AttackStrategies;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.HashMap;
-
-import static bataillenavale.model.Epoque.XX;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 /**
  * Created by wolkowicz on 30/04/2017.
@@ -73,8 +70,8 @@ public class ProfileTest {
      */
     @Test
     public void testNombrePartieApresAjout1(){
-        p1.ajouterPartie(new Partie("michel", XX, null));
-        p1.ajouterPartie(new Partie("michel", XX, null));
+        //p1.ajouterPartie(new Partie("michel", XX, null));
+        //p1.ajouterPartie(new Partie("michel", XX, null));
         assertEquals(2, p1.getParties().size());
 
     }
@@ -96,7 +93,7 @@ public class ProfileTest {
      */
     @Test
     public void supprimer() /*throws NullPointerException*/{
-        p1.ajouterPartie(new Partie("michel", XX, null));
+        //p1.ajouterPartie(new Partie("michel", XX, null));
         p1.supprimer((Partie) p1.getParties().get(p1.getId()));
         assertEquals(0, p1.getParties().size());
     }

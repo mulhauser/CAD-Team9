@@ -13,7 +13,7 @@ public class DAOSauvegarde {
 
     public DAOSauvegarde() {
         // On créer un dossier de profils
-        File f = new File("BatailleNavale" + File.separator + "profils");
+        File f = new File("./profils");
         if (!f.exists()) {
             f.mkdir();
         }
@@ -23,7 +23,7 @@ public class DAOSauvegarde {
     public HashMap getProfiles() {
         HashMap<String, Profile> listeProfiles = new HashMap<>();
 
-        File folder = new File("BatailleNavale" + File.separator + "profils");
+        File folder = new File("./profils");
         File[] files = folder.listFiles();
 
         for (int i = 0; i < files.length; i++) {

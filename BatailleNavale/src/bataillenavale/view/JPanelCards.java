@@ -194,4 +194,5 @@ public class JPanelCards extends JPanel {
         quitter.addActionListener(new MenuListener(this, "Quit"));
         menu.add(quitter);
     }
+
 }
