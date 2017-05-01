@@ -57,6 +57,7 @@ public class CreationProfile extends JPanel {
                 if (!DAOFactory.getInstance().getDAOSauvegarde().profileExist(pseudo.getText())) {
                     model = new BatailleNavale();
                     model.newProfile(pseudo.getText());
+                    card.chargerMenuPartie(model);
                     card.getAccueilPartie().setModel(model);
                     card.getLoadPartie().setModel(model);
                     card.getNewPartie().setModel(model);

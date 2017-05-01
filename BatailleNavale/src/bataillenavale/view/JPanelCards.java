@@ -184,7 +184,7 @@ public class JPanelCards extends JPanel {
     }
 
     // Menu pour la partie creation et chargement de Partie
-    public void chargerMenuPartie() {
+    public void chargerMenuPartie(BatailleNavale model) {
         menu.removeAll();
         JMenuItem newPartie = new JMenuItem("Créer Partie");
         newPartie.addActionListener(new MenuListener(this, CreationPartie.id));
@@ -192,6 +192,9 @@ public class JPanelCards extends JPanel {
         JMenuItem loadPartie = new JMenuItem("Charger Partie");
         loadPartie.addActionListener(new MenuListener(this, ChargePartie.id));
         menu.add(loadPartie);
+        JMenuItem saveProfil = new JMenuItem("Sauvegarder Profil");
+        saveProfil.addActionListener(new SaveListener(model));
+        menu.add(saveProfil);
         JMenuItem quitter = new JMenuItem("Quitter");
         quitter.addActionListener(new MenuListener(this, "Quit"));
         menu.add(quitter);

@@ -20,7 +20,6 @@ public class AccueilPartie extends JPanel {
     public AccueilPartie(final JPanelCards card) {
         //buttons affiche tout les boutons possibles
         // chargement menuBar pour accueil
-        card.chargerMenuPartie();
 
         JPanel buttons = new JPanel(new GridLayout(3, 1));
         JButton creerPartie = new JButton("Créer Partie");

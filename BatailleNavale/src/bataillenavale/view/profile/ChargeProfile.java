@@ -47,6 +47,7 @@ public class ChargeProfile extends JPanel {
                 if(!list.isSelectionEmpty()){
                     model = new BatailleNavale();
                     model.setProfile(profiles.get(list.getSelectedValue()));
+                    card.chargerMenuPartie(model);
                     card.getAccueilPartie().setModel(model);
                     card.getLoadPartie().setModel(model);
                     card.getNewPartie().setModel(model);
