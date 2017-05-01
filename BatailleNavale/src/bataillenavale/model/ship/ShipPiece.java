@@ -7,8 +7,8 @@ import java.io.Serializable;
  */
 public class ShipPiece implements Serializable{
 
-    private StatePiece state;
-    private Ship ship;
+    protected StatePiece state;
+    protected Ship ship;
 
     public ShipPiece(Ship s){
         this.ship = s;

@@ -10,8 +10,8 @@ import java.util.Observable;
  */
 public class BatailleNavale extends Observable {
 
-    private Partie partie;
-    private Profile profile;
+    protected Partie partie;
+    protected Profile profile;
 
     public BatailleNavale(){
         //disons que par défaut l'époque est moderne et le pseudo ne vaut rien

@@ -13,11 +13,11 @@ import java.io.Serializable;
  */
 public class Partie implements Serializable{
 
-    private static int id;
-    private Player human;
-    private Player bot;
-    private Epoque epoque;
-    private AttackStrategies strategy;
+    protected static int id;
+    protected Player human;
+    protected Player bot;
+    protected Epoque epoque;
+    protected AttackStrategies strategy;
 
     public Partie(Epoque e, AttackStrategies strat){
         human = new Human();

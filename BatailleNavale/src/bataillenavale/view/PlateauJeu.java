@@ -41,6 +41,7 @@ public class PlateauJeu extends JPanel implements Observer{
         model.addObserver(this);
         this.model = model;
 
+        card.chargerMenuJouer(model);
 
 
         this.size = model.getPartie().getHuman().getMapPerso().getSize();

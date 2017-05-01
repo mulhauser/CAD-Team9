@@ -12,24 +12,10 @@ import java.util.List;
  */
 public class Map implements Serializable {
 
-    /*
-    pour la mapDispositionBateau :
-    le code est :
-    0 = rien
-    2 = petit bateau
-    3 = moyen bateau
-    4 = grand bateau
-     */
-    private ShipPiece[][] mapDispositionBateaux;
 
-    /*
-     * pour la mapEtatBateau :
-     * le code est :
-     * 0 = raté
-     * 1 = touché
-     */
-    //private int[][] mapEtatBateaux;
-    private static final int size = 10;
+    protected ShipPiece[][] mapDispositionBateaux;
+
+    protected static final int size = 10;
 
 
     public Map() {

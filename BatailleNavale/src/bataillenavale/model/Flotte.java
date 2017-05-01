@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class Flotte implements Serializable{
 
-    private List<Ship> shipList;
+    protected List<Ship> shipList;
 
     public Flotte(List<Ship> shipList) {
         this.shipList = new ArrayList<Ship>();

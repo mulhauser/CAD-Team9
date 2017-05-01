@@ -51,7 +51,7 @@ public class DAOSauvegarde {
     }
 
     public void saveProfile(Profile p) {
-        String file = "BatailleNavale" + File.separator + "profils" + File.separator + p.getPseudo() + ".save";
+        String file = "./profils" + File.separator + p.getPseudo() + ".save";
 
         try {
             FileOutputStream fos = new FileOutputStream(file);

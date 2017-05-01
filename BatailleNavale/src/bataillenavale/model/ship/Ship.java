@@ -17,19 +17,12 @@ import java.util.Observable;
  */
 public abstract class Ship extends Observable implements Serializable{
 
-    /**
-     * taille petit = 2
-     * taille moyen 3
-     * taille grand 4
-     */
-    //private int live;
-    //private boolean alive = true;
-    private int size;
-    private String nom;
-    private Coordinate coordinate;
-    private Orientation orientation;
-    private BufferedImage image;
-    private boolean isPlaced;
+    protected int size;
+    protected String nom;
+    protected Coordinate coordinate;
+    protected Orientation orientation;
+    protected transient BufferedImage image;
+    protected boolean isPlaced;
 
     public enum Orientation {
         VERTICAL,

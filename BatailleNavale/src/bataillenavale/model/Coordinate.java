@@ -7,8 +7,8 @@ import java.io.Serializable;
  */
 public class Coordinate implements Serializable{
 
-    public int x;
-    public int y;
+    protected int x;
+    protected int y;
 
     public Coordinate(){
 

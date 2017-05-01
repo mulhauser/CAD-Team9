@@ -16,9 +16,9 @@ import java.util.Observable;
  */
 public abstract class Player extends Observable implements Serializable {
 
-    private Map mapPerso;
-    private Map mapAdver;
-    private Flotte flotte;
+    protected Map mapPerso;
+    protected Map mapAdver;
+    protected Flotte flotte;
 
 
     public Player() {

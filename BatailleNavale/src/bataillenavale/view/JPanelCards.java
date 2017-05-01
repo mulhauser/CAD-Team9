@@ -1,6 +1,8 @@
 package bataillenavale.view;
 
 import bataillenavale.controler.MenuListener;
+import bataillenavale.controler.SaveListener;
+import bataillenavale.model.BatailleNavale;
 import bataillenavale.view.partie.AccueilPartie;
 import bataillenavale.view.partie.ChargePartie;
 import bataillenavale.view.partie.CreationPartie;
@@ -190,6 +192,18 @@ public class JPanelCards extends JPanel {
         JMenuItem loadPartie = new JMenuItem("Charger Partie");
         loadPartie.addActionListener(new MenuListener(this, ChargePartie.id));
         menu.add(loadPartie);
+        JMenuItem quitter = new JMenuItem("Quitter");
+        quitter.addActionListener(new MenuListener(this, "Quit"));
+        menu.add(quitter);
+    }
+
+    public void chargerMenuJouer(BatailleNavale model){
+        menu.removeAll();
+        JMenuItem savePartie = new JMenuItem("Sauvegarder Partie");
+        savePartie.addActionListener(new SaveListener(model));
+        menu.add(savePartie);
+
+
         JMenuItem quitter = new JMenuItem("Quitter");
         quitter.addActionListener(new MenuListener(this, "Quit"));
         menu.add(quitter);
