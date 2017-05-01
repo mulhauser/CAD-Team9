@@ -1,7 +1,6 @@
 package bataillenavale.model.player;
 
 import bataillenavale.model.Coordinate;
-import bataillenavale.model.Map;
 import bataillenavale.model.player.strategies.AttackStrategies;
 import bataillenavale.model.ship.Ship;
 
@@ -17,6 +16,14 @@ public class Bot extends Player implements Serializable{
 
     public Bot(AttackStrategies strategy) {
         super();
+        this.strategy = strategy;
+    }
+
+    public AttackStrategies getStrategy(){
+        return strategy;
+    }
+
+    public void setStrategy(AttackStrategies strategy){
         this.strategy = strategy;
     }
 

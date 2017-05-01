@@ -1,27 +1,24 @@
 package bataillenavale.view;
 
 import bataillenavale.model.BatailleNavale;
-import bataillenavale.model.Map;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Observable;
-import java.util.Observer;
 
 /**
  * Created by mulhauser on 12/04/2017.
  */
 
-public class PlateauJeu extends JPanel implements Observer{
+public class PlateauJeu extends JPanel {
     public static final String id = "main";
-    private Map mapPlayer;
-    private Map mapAdver;
     private JPanel grilleHuman;
     private JPanel grilleBot;
     private BatailleNavale model;
     protected JPanelCards card;
+    private JPanel panelFire;
+    private JPanel panelDisplay;
     private int size;
 
 
@@ -38,16 +35,14 @@ public class PlateauJeu extends JPanel implements Observer{
     }
 
     public void constructFenetre(){
-        model.addObserver(this);
-        this.model = model;
-
+        removeAll();
         card.chargerMenuJouer(model);
 
 
-        this.size = model.getPartie().getHuman().getMapPerso().getSize();
+        this.size = this.model.getPartie().getHuman().getMapPerso().getSize();
 
 
-        JPanel panelFire = new JPanel(new GridLayout(1,3));
+        panelFire = new JPanel(new GridLayout(1,3));
         String[] alphabet = {"A", "B","C","D","E","F","G","H","I","J"};
         JComboBox chooseX = new JComboBox(alphabet);
         String[] numbers = {"0", "1","2","3","4","5","6","7","8","9"};
@@ -72,7 +67,7 @@ public class PlateauJeu extends JPanel implements Observer{
             public void actionPerformed(ActionEvent e) {
                 //model.getPartie().getBot().fire(fireX,fireY);
                 //puis après le tir peut-importe le résultat de celui-ci il faut mettre à jour la vue
-                model.ajouterTirHumain(fireY,fireX);
+                model.tirHumain(fireX,fireY);
             }
         });
 
@@ -80,7 +75,7 @@ public class PlateauJeu extends JPanel implements Observer{
         panelFire.add(chooseY);
         panelFire.add(fire);
 
-        JPanel panelDisplay = new JPanel(new GridLayout(1,2));
+        panelDisplay = new JPanel(new GridLayout(1,2));
         panelDisplay.add(new JLabel("You",SwingConstants.CENTER));
         panelDisplay.add(new JLabel("Ennemy",SwingConstants.CENTER));
 
@@ -95,16 +90,10 @@ public class PlateauJeu extends JPanel implements Observer{
             remove(grilleHuman);
         }
 
-        grilleHuman = new JPanelGrille(this.model,this.model.getPartie().getHuman().getMapPerso().getSize(), model.getPartie().getHuman());
+        grilleHuman = new JPanelGrille(this.model,this.model.getPartie().getHuman().getMapPerso().getSize(), model.getPartie().getHuman().getMapPerso());
         this.grilleHuman.setPreferredSize(new Dimension(400,400));
 
         add(grilleHuman, BorderLayout.WEST);
-    }
-
-
-    @Override
-    public void update(Observable o, Object arg) {
-
     }
 
     public void constructGrilleBot() {
@@ -113,9 +102,8 @@ public class PlateauJeu extends JPanel implements Observer{
             remove(grilleBot);
         }
 
-        // On construit la map du bot avec une fonctionne qui place aléatoirement ses bateaux
-
-        grilleBot = new JPanelGrille(this.model,this.model.getPartie().getHuman().getMapPerso().getSize(), model.getPartie().getBot());
+        System.out.println(model.getPartie().getBot().getMapPerso());
+        grilleBot = new JPanelGrille(this.model,this.model.getPartie().getHuman().getMapPerso().getSize(), model.getPartie().getHuman().getMapAdver());
         this.grilleBot.setPreferredSize(new Dimension(400,400));
 
         add(grilleBot, BorderLayout.EAST);

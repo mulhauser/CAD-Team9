@@ -202,8 +202,9 @@ public class JPanelCards extends JPanel {
         JMenuItem savePartie = new JMenuItem("Sauvegarder Partie");
         savePartie.addActionListener(new SaveListener(model));
         menu.add(savePartie);
-
-
+        JMenuItem accueilPartie = new JMenuItem("Accueil de votre Profil");
+        accueilPartie.addActionListener(new MenuListener(this, AccueilPartie.id));
+        menu.add(accueilPartie);
         JMenuItem quitter = new JMenuItem("Quitter");
         quitter.addActionListener(new MenuListener(this, "Quit"));
         menu.add(quitter);

@@ -6,9 +6,7 @@ package bataillenavale.view;
 
 import bataillenavale.model.BatailleNavale;
 import bataillenavale.model.Map;
-import bataillenavale.model.player.Player;
 import bataillenavale.model.ship.ShipPiece;
-import bataillenavale.model.ship.StatePiece;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,11 +21,13 @@ public class JPanelGrille extends JPanel implements Observer {
     private JLabelBateau[][] listButton;
     private static BatailleNavale model;
     private static int size;
+    private Map map;
 
-    public JPanelGrille(BatailleNavale model, int size, Player p) {
+    public JPanelGrille(BatailleNavale model, int size, Map map) {
         super(new GridLayout(size + 1, size + 1));
         this.model=model;
         this.size = size;
+        this.map = map;
         model.addObserver(this);
         listButton = new JLabelBateau[size][size];
         // On créer la grille de boutons pour le positionnement des bateaux
@@ -45,7 +45,7 @@ public class JPanelGrille extends JPanel implements Observer {
         for (int y = 0; y < size; y++) {
             this.add(new JLabel(Integer.toString(y), SwingConstants.CENTER));
             for (int x = 0; x < size; x++) {
-                JLabelBateau btn = new JLabelBateau(model, x, y, p);
+                JLabelBateau btn = new JLabelBateau(model, x, y, this.map);
                 listButton[y][x] = btn;
                 this.add(btn);
             }
@@ -55,49 +55,26 @@ public class JPanelGrille extends JPanel implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        Map map = model.getPartie().getHuman().getMapPerso();
-        ShipPiece[][] tabMap = map.getMapDispositionBateaux();
-        for (int x = 0; x < tabMap.length; x++) {
-            for (int y = 0; y < tabMap[x].length; y++) {
-                if(tabMap[y][x] != null) {
-                    if (tabMap[y][x].getState() == StatePiece.MISS) {
-                        listButton[y][x].setBackground(Color.ORANGE);
-                    }
-                    if (tabMap[y][x].getState() == StatePiece.HIT) {
-                        listButton[y][x].setBackground(Color.RED);
-                    }
-                    if (tabMap[y][x].getState() == StatePiece.FAIL) {
-                        listButton[y][x].setBackground(Color.BLACK);
-                    }
-                }else{
-                    listButton[y][x].setBackground(Color.BLUE);
-                }
 
-            }
-        }
-        /*
-        Map mapBot = model.getPartie().getBot().getMapPerso();
-        tabMap = mapBot.getMapDispositionBateaux();
+        ShipPiece[][] tabMap = this.map.getMapDispositionBateaux();
         for (int x = 0; x < tabMap.length; x++) {
             for (int y = 0; y < tabMap[x].length; y++) {
-                if(tabMap[y][x] != null) {
-                    if (tabMap[y][x].getState() == StatePiece.MISS) {
-                        //pas de orange pour le bot car on ne doit pas voir ou son les bateaux
+                switch (tabMap[y][x].getState()){
+                    case EMPTY:
                         listButton[y][x].setBackground(Color.BLUE);
-                    }
-                    if (tabMap[y][x].getState() == StatePiece.HIT) {
+                        break;
+                    case MISS:
+                        listButton[y][x].setBackground(Color.ORANGE);
+                        break;
+                    case HIT:
                         listButton[y][x].setBackground(Color.RED);
-                    }
-                    if (tabMap[y][x].getState() == StatePiece.FAIL) {
+                        break;
+                    case FAIL:
                         listButton[y][x].setBackground(Color.BLACK);
-                    }
-                }else{
-                    listButton[y][x].setBackground(Color.BLUE);
+                        break;
                 }
             }
         }
-        */
-
     }
 
 }

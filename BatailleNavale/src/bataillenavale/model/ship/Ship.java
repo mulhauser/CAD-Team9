@@ -21,6 +21,7 @@ public abstract class Ship extends Observable implements Serializable{
     protected String nom;
     protected Coordinate coordinate;
     protected Orientation orientation;
+    // Pas besoin de l'image pour sauvegarder la partie, l'image est utile pour construire la fenetre de placement des bateaux
     protected transient BufferedImage image;
     protected boolean isPlaced;
 
@@ -32,7 +33,6 @@ public abstract class Ship extends Observable implements Serializable{
     private List<ShipPiece> pieceShipList;
 
     public Ship(String n, int s) {
-        //this.live = l;
         try {
             this.isPlaced = false;
             this.nom = n;
@@ -137,17 +137,4 @@ public abstract class Ship extends Observable implements Serializable{
         g2.dispose();
         return newImage;
     }
-
-
-    /*private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
-        this.image = ImageIO.read(new File("./img/1.png"));
-
-        for (int i = 0; i < this.size; i++) {
-            // On construit l'image selon sa taille
-            if(i < this.size - 1) {
-                BufferedImage img2 = ImageIO.read(new File("./img/1.png"));
-                this.image = joinBufferedImage(this.image, img2);
-            }
-        }
-    }*/
 }

@@ -56,7 +56,7 @@ public class PlacementBateaux extends JPanel {
         }
 
         //grille = new JPanelGrille();
-        grille = new JPanelGrille(this.model, this.model.getPartie().getHuman().getMapPerso().getSize(), this.model.getPartie().getHuman());
+        grille = new JPanelGrille(this.model, this.model.getPartie().getHuman().getMapPerso().getSize(), this.model.getPartie().getHuman().getMapPerso());
 
         add(grille, BorderLayout.CENTER);
 

@@ -5,9 +5,8 @@ package bataillenavale.view;
  */
 
 import bataillenavale.model.BatailleNavale;
-import bataillenavale.model.player.Player;
+import bataillenavale.model.Map;
 import bataillenavale.model.ship.ShipPiece;
-import bataillenavale.model.ship.StatePiece;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
@@ -23,20 +22,27 @@ public class JLabelBateau extends JLabel {
     final BatailleNavale model;
 
 
-    public JLabelBateau(BatailleNavale model, int x, int y, Player p) {
+    public JLabelBateau(BatailleNavale model, int x, int y, Map map) {
         super();
         this.model = model;
         this.posX = x;
         this.posY = y;
         this.setEnabled(false);
         this.setOpaque(true);
-        ShipPiece piece = p.getMapPerso().getShip(x, y);
-        if (piece == null) {
-            this.setBackground(Color.BLUE);
-        } else if(piece.getState() == StatePiece.MISS){
-            this.setBackground(Color.ORANGE);
-        }else{
-            this.setBackground(Color.RED);
+        ShipPiece piece = map.getShip(x, y);
+        switch (piece.getState()){
+            case EMPTY:
+                this.setBackground(Color.BLUE);
+                break;
+            case MISS:
+                this.setBackground(Color.ORANGE);
+                break;
+            case HIT:
+                this.setBackground(Color.RED);
+                break;
+            case FAIL:
+                this.setBackground(Color.BLACK);
+                break;
         }
         this.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
 

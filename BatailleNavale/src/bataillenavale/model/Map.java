@@ -23,7 +23,7 @@ public class Map implements Serializable {
         //this.mapEtatBateaux = new int[this.size][this.size];
         for (int i = 0; i < mapDispositionBateaux.length; i++) {
             for (int j = 0; j < mapDispositionBateaux[i].length; j++) {
-                mapDispositionBateaux[i][j] = null;
+                mapDispositionBateaux[i][j] = new ShipPiece(StatePiece.EMPTY);
                 //mapEtatBateaux[i][j] = 0;
             }
         }
@@ -39,13 +39,13 @@ public class Map implements Serializable {
         switch (orientation){
             case HORIZONTAL:
                 for(int xi = x; xi < x+taille; xi++){
-                    mapDispositionBateaux[y][xi] = null;
+                    mapDispositionBateaux[y][xi] = new ShipPiece(StatePiece.EMPTY);
                 }
                 s.setPlaced(false);
                 break;
             case VERTICAL:
                 for(int yi = y; yi < y+taille; yi++){
-                    mapDispositionBateaux[yi][x] = null;
+                    mapDispositionBateaux[yi][x] = new ShipPiece(StatePiece.EMPTY);
                 }
                 s.setPlaced(false);
                 break;
@@ -92,28 +92,13 @@ public class Map implements Serializable {
         if (verificationCoordinate(x, y)) {
             switch (orientation) {
                 // On parcours le tableau de gauche à droite et de haut en bas
-                /*case TOP:
-                    // On vérifie si on dépasse pas la map
-                    if (y - size + 1 >= 0) {
-                        // On vérifie ensuite si il n'y a pas déjà un bateau sur les cases
-                        for (int i = y; i > y - size; i--) {
-                            // Si il y a déjà un bateau on met à false et on arrête la boucle
-                            if (this.getShip(x, i) != null) {
-                                result = false;
-                                break;
-                            } else {
-                                result = true;
-                            }
-                        }
-                    }
-                    break;*/
                 case VERTICAL:
                     // On vérifie si on dépasse pas la map
                     if (y + size <= mapDispositionBateaux.length) {
                         // On vérifie ensuite si il n'y a pas déjà un bateau sur les cases
                         for (int i = y; i < y + size; i++) {
                             // Si il y a déjà un bateau on met à false et on arrête la boucle
-                            if (this.getShip(x, i) != null) {
+                            if (this.getShip(x, i).getState() != StatePiece.EMPTY) {
                                 result = false;
                                 break;
                             } else {
@@ -122,26 +107,12 @@ public class Map implements Serializable {
                         }
                     }
                     break;
-                /*case LEFT:
-                    if (x - size + 1 >= 0) {
-                        // On vérifie ensuite si il n'y a pas déjà un bateau sur les cases
-                        for (int i = x; i > x - size; i--) {
-                            // Si il y a déjà un bateau on met à false et on arrête la boucle
-                            if (this.getShip(i, y) != null) {
-                                result = false;
-                                break;
-                            } else {
-                                result = true;
-                            }
-                        }
-                    }
-                    break;*/
                 case HORIZONTAL:
                     if (x + size <= mapDispositionBateaux[y].length) {
                         // On vérifie ensuite si il n'y a pas déjà un bateau sur les cases
                         for (int i = x; i < x + size; i++) {
                             // Si il y a déjà un bateau on met à false et on arrête la boucle
-                            if (this.getShip(i, y) != null) {
+                            if (this.getShip(i, y).getState() != StatePiece.EMPTY) {
                                 result = false;
                                 break;
                             } else {
@@ -180,13 +151,6 @@ public class Map implements Serializable {
         List<ShipPiece> shipList = s.getPieceShipList();
         int j;
         switch (o) {
-            /*case TOP:
-                j = 0;
-                for (int i = c.getY(); i > c.getY() - taille; i--) {
-                    mapDispositionBateaux[i][c.getX()] = shipList.get(j);
-                    j++;
-                }
-                break;*/
             case VERTICAL:
                 j = 0;
                 for (int i = c.getY(); i < c.getY() + taille; i++) {
@@ -194,13 +158,6 @@ public class Map implements Serializable {
                     j++;
                 }
                 break;
-            /*case LEFT:
-                j = 0;
-                for (int i = c.getX(); i > c.getX() - taille; i--) {
-                    mapDispositionBateaux[c.getY()][i] = shipList.get(j);
-                    j++;
-                }
-                break;*/
             case HORIZONTAL:
                 j = 0;
                 for (int i = c.getX(); i < c.getX() + taille; i++) {
@@ -220,22 +177,21 @@ public class Map implements Serializable {
         return this.size;
     }
 
+
+
     public String toString() {
         StringBuffer sb = new StringBuffer();
         for (int y = 0; y < mapDispositionBateaux.length; y++) {
             for (int x = 0; x < mapDispositionBateaux[y].length; x++) {
                 sb.append("|");
-                if (mapDispositionBateaux[y][x] == null) sb.append(" X ");
+                if (mapDispositionBateaux[y][x].getState() == StatePiece.EMPTY) sb.append(" X ");
                 else sb.append(" O ");
                 sb.append("|");
             }
-            sb.append("\n--------------------------\n");
+            sb.append("\n----------------------------------------------------\n");
         }
         return sb.toString();
     }
-    /*public int[][] getMapEtatBateaux() {
-        return mapEtatBateaux;
-    }*/
 
     //permet de rérifier un seul élément dans la map, retourne true si un bateau est présent aux coordonnées x,y
     //false sinon
@@ -264,7 +220,7 @@ public class Map implements Serializable {
         }else {
             //si tire dans l'eau pour la premiere fois
             System.out.println("Plouf en X : "+x+", Y : "+y);
-            this.mapDispositionBateaux[x][y] = new ShipPiece();
+            this.mapDispositionBateaux[x][y] = new ShipPiece(StatePiece.FAIL);
         }
     }
 

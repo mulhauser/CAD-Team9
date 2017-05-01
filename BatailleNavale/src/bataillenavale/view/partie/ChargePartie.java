@@ -46,7 +46,6 @@ public class ChargePartie extends JPanel {
             public void actionPerformed(ActionEvent ae) {
                 if(!list.isSelectionEmpty()){
                     model.setPartie(parties.get(list.getSelectedValue()));
-                    System.out.println(model.getPartie().getHuman().getMapPerso().toString());
                     card.getPlateauJeu().setModel(model);
                     card.getPlateauJeu().constructFenetre();
                     card.getPlateauJeu().constructGrilleHumain();

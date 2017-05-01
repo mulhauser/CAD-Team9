@@ -27,6 +27,7 @@ public class AccueilPartie extends JPanel {
         creerPartie.addActionListener(new MenuListener(card, "newPartie"));
         buttons.add(creerPartie);
 
+
         JButton chargerPartie = new JButton("Charger Partie");
         chargerPartie.addActionListener(new MenuListener(card, "loadPartie"));
         buttons.add(chargerPartie);
