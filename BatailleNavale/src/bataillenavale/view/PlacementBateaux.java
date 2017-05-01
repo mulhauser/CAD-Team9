@@ -332,10 +332,12 @@ public class PlacementBateaux extends JPanel {
                     if(lastShip != null) {
                         model.supprimerShip(lastShip);
                         lastShip = null;
+                        currentShip = null;
                         for (Component c : menuDroite.getCoordonnees().getComponents()) {
                             c.setEnabled(false);
                         }
                         annulerPlacement.setEnabled(false);
+                        validerPlacement.setEnabled(false);
                     }
                 }
             });
@@ -352,6 +354,9 @@ public class PlacementBateaux extends JPanel {
                                 c.setEnabled(false);
                             }
                             validerPlacement.setEnabled(false);
+                        }else{
+                            JOptionPane.showMessageDialog(card.fenetre, "Vous ne pouvez pas placer de bateau à cette position !", "Information", JOptionPane.INFORMATION_MESSAGE);
+
                         }
                     }
 

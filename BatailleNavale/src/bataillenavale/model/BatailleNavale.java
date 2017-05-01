@@ -1,5 +1,6 @@
 package bataillenavale.model;
 
+import bataillenavale.model.player.Bot;
 import bataillenavale.model.player.strategies.IAFactory;
 import bataillenavale.model.ship.Ship;
 
@@ -29,6 +30,7 @@ public class BatailleNavale extends Observable {
 
     // On passera en parametre les param necessaire plus tard
     public void newPartie(Epoque e, String strat) {
+        //System.out.println(IAFactory.getInstance().getStrategy(strat));
         this.partie = new Partie(e, IAFactory.getInstance().getStrategy(strat));
     }
 
@@ -58,10 +60,16 @@ public class BatailleNavale extends Observable {
         notifyObservers();
     }
 
-    public void tirBot(int fireX, int fireY) {
-        partie.getBot().fire(fireX, fireY, partie.getHuman().getMapPerso());
-        /*setChanged();
-        notifyObservers();*/
+    public void tirBot() {
+        int[] xy = ((Bot)partie.getBot()).getStrategy().getStrategyShoot(partie.getHuman().getMapAdver().getSize());
+        partie.getBot().fire(xy[0], xy[1], partie.getHuman().getMapPerso());
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e1) {
+            e1.printStackTrace();
+        }
+        setChanged();
+        notifyObservers();
     }
 
     public Profile getProfile() {

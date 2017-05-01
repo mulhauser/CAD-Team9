@@ -13,6 +13,7 @@ import java.util.Random;
  */
 public class Bot extends Player implements Serializable{
     AttackStrategies strategy;
+    private static final long serialVersionUID = 4026994099299480429L;
 
     public Bot(AttackStrategies strategy) {
         super();

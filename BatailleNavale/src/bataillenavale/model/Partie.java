@@ -20,6 +20,7 @@ public class Partie implements Serializable{
     protected AttackStrategies strategy;
 
     public Partie(Epoque e, AttackStrategies strat){
+
         human = new Human();
         this.epoque = e;
         human.constructFlotte(e);

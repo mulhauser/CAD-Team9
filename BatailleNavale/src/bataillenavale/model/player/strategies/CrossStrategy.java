@@ -10,11 +10,13 @@ public class CrossStrategy extends AttackStrategies implements Serializable{
     public CrossStrategy(){
         super();
     }
+
     @Override
-    public int[] getStrategyShoot() {
-        int[] res = new int[2];
+    public int[] getStrategyShoot(int size) {
+        return new int[0];
+    }
 
-
-        return res;
+    public String toString(){
+        return "Cross";
     }
 }

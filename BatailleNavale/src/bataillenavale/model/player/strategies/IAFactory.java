@@ -23,10 +23,10 @@ public class IAFactory implements Serializable{
         AttackStrategies strategy = null;
         switch (strat){
             case "random":
-                strategy = new CrossStrategy();
+                strategy = new RandomStrategy();
                 break;
             case "cross":
-                strategy = new RandomStrategy();
+                strategy = new CrossStrategy();
                 break;
         }
         return strategy;

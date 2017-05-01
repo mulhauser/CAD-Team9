@@ -10,11 +10,21 @@ import java.util.ArrayList;
  */
 public abstract class AttackStrategies implements Serializable {
 
-    public ArrayList<Coordinate> listShoot;
+    protected ArrayList<Coordinate> listShoot;
+    protected int taille;
 
     public AttackStrategies(){
-        listShoot = new ArrayList<>();
+        this.listShoot = new ArrayList<>();
     }
 
-    public abstract int[] getStrategyShoot();
+    public boolean ajouteShoot(int x, int y){
+        boolean res = false;
+        if(!listShoot.contains(new Coordinate(x, y))){
+            listShoot.add(new Coordinate(x, y));
+            res = true;
+        }
+        return res;
+    }
+
+    public abstract int[] getStrategyShoot(int size);
 }
