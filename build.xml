@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="cad-team9" default="all">
+<project name="cad-team9" default="jar">
   
   
-  <property file="build.properties"/>
+
   <!-- Uncomment the following property if no tests compilation is needed -->
   <!-- 
   <property name="skip.tests" value="true"/>
@@ -65,7 +65,8 @@
   
   <property name="bataillenavale.output.dir" value="${module.bataillenavale.basedir}/out/production/BatailleNavale"/>
   <property name="bataillenavale.testoutput.dir" value="${module.bataillenavale.basedir}/out/test/BatailleNavale"/>
-  
+
+
   <path id="bataillenavale.module.bootclasspath">
     <!-- Paths to be included in compilation bootclasspath -->
   </path>
@@ -150,9 +151,9 @@
   </target>
   
   <target name="clean.module.bataillenavale" description="cleanup module">
-    <delete dir="${bataillenavale.output.dir}"/>
-    <delete dir="${bataillenavale.testoutput.dir}"/>
-  </target>
+  <delete dir="${bataillenavale.output.dir}"/>
+  <delete dir="${bataillenavale.testoutput.dir}"/>
+</target>
   
   <target name="init" description="Build initialization">
     <!-- Perform any build initialization in this target -->
@@ -161,6 +162,25 @@
   <target name="clean" depends="clean.module.bataillenavale" description="cleanup all"/>
   
   <target name="build.modules" depends="init, clean, compile.module.bataillenavale" description="build all modules"/>
-  
+
   <target name="all" depends="build.modules" description="build all"/>
+
+
+
+
+  <!-- creation d un .jar pour l application -->
+  <target name="jar" depends="build.modules" description="jar generation">
+    <jar destfile="${module.bataillenavale.basedir}/CAD_TEAM9.jar" basedir="${module.bataillenavale.basedir}/out/production/BatailleNavale/bataillenavale">
+      <manifest>
+        <attribute name="Main-Class" value="bataillenavale.view.Main"/>
+      </manifest>
+    </jar>
+  </target>
+
+
+
+
+
+
+
 </project>
