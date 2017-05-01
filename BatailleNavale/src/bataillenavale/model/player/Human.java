@@ -16,10 +16,14 @@ public class Human extends Player implements Serializable {
     @Override
     public void fire(int fireY, int fireX) {
         Map mapPerso = getMapPerso();
-        //si un bateau est placé à la position (fireX,fireY)
+        //pour un bateau placé à la position (fireX,fireY)
         if(mapPerso.getMapDispositionBateauxElement(fireX,fireY)){
-            mapPerso.setMapDispositionBateauxElement(fireX,fireY, true);
+            //true si un bateau est présent ici ou un tir raté
+            mapPerso.setMapDispositionBateauxElement(fireX,fireY,true);
+        }else{
+            mapPerso.setMapDispositionBateauxElement(fireX,fireY,false);
         }
+
     }
 
     @Override
