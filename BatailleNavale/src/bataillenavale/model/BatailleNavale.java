@@ -53,10 +53,14 @@ public class BatailleNavale extends Observable {
 
     public void ajouterTirHumain(int fireX,int fireY){
         partie.getHuman().fire(fireX,fireY,partie.getBot().getMapPerso());
+        /*setChanged();
+        notifyObservers();*/
     }
 
     public void ajouterTirBot(int fireX,int fireY){
         partie.getBot().fire(fireX,fireY,partie.getHuman().getMapPerso());
+        /*setChanged();
+        notifyObservers();*/
     }
 
     public Profile getProfile(){
