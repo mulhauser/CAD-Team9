@@ -48,20 +48,11 @@ public class PartieTest {
     @Test
     public void partieEpoqueXX(){
         strategie = null;
-       // partieXX = new Partie( "michel",  XX, strategie);
+        partieXX = new Partie(XX, strategie);
         assertEquals(XX, partieXX.getEpoque());
     }
 
 
-    /**
-     * on test que le joueur soit le bon
-     */
-    @Test
-    public void partiePseudoXX(){
-         strategie = null;
-         //partieXX = new Partie( "michel",  XX, strategie);
-        //assertEquals("michel", partieXX.getHuman().getPseudo());
-    }
 
 
     /**
@@ -70,45 +61,37 @@ public class PartieTest {
     @Test
     public void partieEpoqueXVI(){
         strategie = null;
-        //partieXVI = new Partie( "a",  XVI, strategie);
+        partieXVI = new Partie(XVI, strategie);
         assertEquals(XVI, partieXVI.getEpoque());
     }
 
 
-    /**
-     * on test que le joueur soit le bon
-     */
-    @Test
-    public void partiePseudoXVI(){
-        strategie = null;
-        //partieXVI = new Partie( "a",  XVI, strategie);
-        //assertEquals("a", partieXVI.getHuman().getPseudo());
-    }
 
 
+/*
     /**
      * test si on peut savoir si on peut creer une partie sans joueur, et c'esdt le cas
      * du coup le joueur sera null mais pas vraiment, c'est le pseudo de celui-ci qui le sera
      * @throws NullPointerException
-     */
+     *
     @Test
     public void partieNullTest() throws NullPointerException{
         strategie = null;
-        //partieNull = new Partie( null ,  XX, strategie);
-       //assertNull(partieNull.getHuman().getPseudo());
+        partieNull = new Partie(XX, strategie);
+       assertNull(partieNull.getHuman().getPseudo());
        // assertEquals("", partieNull.getHuman().getPseudo());
-    }
+    }*/
 
 
-
+/*
     /**
      * on test si c'est possible de faire des parties avec un pseudo vide
-     */
+     *
     @Test
     public void partieSansPseudoTest(){
         strategie = null;
-        //partieVide = new Partie( "",  XVI, strategie);
-        //assertEquals("", partieVide.getHuman().getPseudo());
-    }
+        partieVide = new Partie( "",  XVI, strategie);
+        assertEquals("", partieVide.getHuman().getPseudo());
+    }*/
 
 }
