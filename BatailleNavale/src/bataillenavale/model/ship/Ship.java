@@ -43,7 +43,6 @@ public abstract class Ship extends Observable implements Serializable{
             this.image = ImageIO.read(new File("./img/1.png"));
 
             pieceShipList = new ArrayList<ShipPiece>(size);
-                System.out.println(vie);
             for (int i = 0; i < this.size; i++) {
                 pieceShipList.add(new ShipPiece(this, vie));
                 // On construit l'image selon sa taille

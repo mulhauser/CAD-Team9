@@ -87,9 +87,6 @@ public abstract class Player extends Observable implements Serializable {
                 break;
         }
 
-
-        System.out.println(mapAdver.getShip(x,y).getState());
-        System.out.println(targetMap.getShip(x,y).getState());
         //System.out.println("Après shoot");
         //System.out.println("perso:\n"+mapPerso+"\nadvers:\n"+mapAdver);
 
