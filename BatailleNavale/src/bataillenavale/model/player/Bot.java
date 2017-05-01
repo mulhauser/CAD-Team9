@@ -21,19 +21,6 @@ public class Bot extends Player implements Serializable{
     }
 
     @Override
-    public void fire(int fireY, int fireX) {
-        Map mapPerso = getMapPerso();
-        //pour un bateau placé à la position (fireX,fireY)
-        if(mapPerso.getMapDispositionBateauxElement(fireX,fireY)){
-            //true si un bateau est présent ici ou un tir raté
-            mapPerso.setMapDispositionBateauxElement(fireX,fireY,true);
-        }else{
-            mapPerso.setMapDispositionBateauxElement(fireX,fireY,false);
-        }
-
-    }
-
-    @Override
     public void randomPlacementShip() {
         ArrayList<Ship> ships = this.getFlotte().getShipList();
         int tailleMap = getMapPerso().getSize();

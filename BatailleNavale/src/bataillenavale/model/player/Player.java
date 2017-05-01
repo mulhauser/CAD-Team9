@@ -17,13 +17,13 @@ import java.util.Observable;
 public abstract class Player extends Observable implements Serializable {
 
     private Map mapPerso;
-    //private Map mapAdver;
+    private Map mapAdver;
     private Flotte flotte;
 
 
     public Player() {
         this.mapPerso = new Map();
-        //this.mapAdver = new Map();
+        this.mapAdver = new Map();
     }
 
     public Flotte getFlotte() {
@@ -51,7 +51,14 @@ public abstract class Player extends Observable implements Serializable {
         return res;
     }
 
-    public abstract void fire(int fireX, int fireY);
+    public void fire(int fireX, int fireY, Map targetMap) {
+        if(targetMap.getMapDispositionBateauxElement(fireX,fireY)){
+            //true si un bateau est présent ici ou un tir raté
+            targetMap.setMapDispositionBateauxElement(fireX,fireY,true);
+        }else{
+            targetMap.setMapDispositionBateauxElement(fireX,fireY,false);
+        }
+    };
 
     public void constructFlotte(Epoque e) {
         this.flotte = new Flotte(ShipFactory.getInstance().getShipsByEpoque(e));
