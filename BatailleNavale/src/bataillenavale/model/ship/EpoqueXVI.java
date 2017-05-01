@@ -7,6 +7,6 @@ import java.io.Serializable;
  */
 public class EpoqueXVI extends Ship implements Serializable{
     public EpoqueXVI(String n, int s) {
-        super(n, s);
+        super(n, s, 1);
     }
 }

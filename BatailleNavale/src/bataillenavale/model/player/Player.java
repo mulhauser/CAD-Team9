@@ -61,22 +61,35 @@ public abstract class Player extends Observable implements Serializable {
     public void fire(int x, int y, Map targetMap) {
         //System.out.println("perso:\n"+mapPerso+"\nadvers:\n"+mapAdver);
         ShipPiece sp = targetMap.getShip(x, y);
+
+
         switch (sp.getState()){
             case EMPTY:
                 mapAdver.getShip(x,y).setState(StatePiece.FAIL);
                 targetMap.getShip(x, y).setState(StatePiece.FAIL);
                 break;
             case MISS:
-                mapAdver.getShip(x,y).setState(StatePiece.HIT);
-                targetMap.getShip(x, y).setState(StatePiece.HIT);
+                ShipPiece s = targetMap.getShip(x, y);
+                mapAdver.setPiece(x, y, new ShipPiece(s.getShip(), s.getVie()));
+                mapAdver.getShip(x,y).touchePiece();
+                targetMap.getShip(x, y).touchePiece();
                 break;
             case HIT:
-                // On ne fait rien
+                mapAdver.getShip(x, y).touchePiece();
+                targetMap.getShip(x, y).touchePiece();
+                break;
+            case DEAD:
+                mapAdver.getShip(x, y).touchePiece();
+                targetMap.getShip(x, y).touchePiece();
                 break;
             case FAIL:
                 // On ne fait rien
                 break;
         }
+
+
+        System.out.println(mapAdver.getShip(x,y).getState());
+        System.out.println(targetMap.getShip(x,y).getState());
         //System.out.println("Après shoot");
         //System.out.println("perso:\n"+mapPerso+"\nadvers:\n"+mapAdver);
 

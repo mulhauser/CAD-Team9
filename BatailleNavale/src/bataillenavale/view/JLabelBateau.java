@@ -35,9 +35,12 @@ public class JLabelBateau extends JLabel {
                 this.setBackground(Color.BLUE);
                 break;
             case MISS:
-                this.setBackground(Color.ORANGE);
+                this.setBackground(Color.YELLOW);
                 break;
             case HIT:
+                this.setBackground(Color.ORANGE);
+                break;
+            case DEAD:
                 this.setBackground(Color.RED);
                 break;
             case FAIL:

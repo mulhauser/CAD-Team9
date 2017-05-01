@@ -24,6 +24,7 @@ public abstract class Ship extends Observable implements Serializable{
     // Pas besoin de l'image pour sauvegarder la partie, l'image est utile pour construire la fenetre de placement des bateaux
     protected transient BufferedImage image;
     protected boolean isPlaced;
+    private static final long serialVersionUID = 7711509765822578650L;
 
     public enum Orientation {
         VERTICAL,
@@ -32,7 +33,7 @@ public abstract class Ship extends Observable implements Serializable{
 
     private List<ShipPiece> pieceShipList;
 
-    public Ship(String n, int s) {
+    public Ship(String n, int s, int vie) {
         try {
             this.isPlaced = false;
             this.nom = n;
@@ -42,8 +43,9 @@ public abstract class Ship extends Observable implements Serializable{
             this.image = ImageIO.read(new File("./img/1.png"));
 
             pieceShipList = new ArrayList<ShipPiece>(size);
+                System.out.println(vie);
             for (int i = 0; i < this.size; i++) {
-                pieceShipList.add(new ShipPiece(this));
+                pieceShipList.add(new ShipPiece(this, vie));
                 // On construit l'image selon sa taille
                 if(i < this.size - 1) {
                     BufferedImage img2 = ImageIO.read(new File("./img/1.png"));
@@ -109,7 +111,7 @@ public abstract class Ship extends Observable implements Serializable{
     public boolean isDestroy() {
         boolean res = true;
         for (ShipPiece sp : pieceShipList) {
-            if (sp.getState() == StatePiece.MISS) {
+            if (sp.getState() == StatePiece.MISS || sp.getState() == StatePiece.HIT) {
                 res = false;
                 break;
             }

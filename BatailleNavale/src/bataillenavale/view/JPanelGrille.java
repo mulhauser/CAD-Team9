@@ -59,14 +59,18 @@ public class JPanelGrille extends JPanel implements Observer {
         ShipPiece[][] tabMap = this.map.getMapDispositionBateaux();
         for (int x = 0; x < tabMap.length; x++) {
             for (int y = 0; y < tabMap[x].length; y++) {
+                //System.out.println(tabMap[y][x].getState());
                 switch (tabMap[y][x].getState()){
                     case EMPTY:
                         listButton[y][x].setBackground(Color.BLUE);
                         break;
                     case MISS:
-                        listButton[y][x].setBackground(Color.ORANGE);
+                        listButton[y][x].setBackground(Color.YELLOW);
                         break;
                     case HIT:
+                        listButton[y][x].setBackground(Color.ORANGE);
+                        break;
+                    case DEAD:
                         listButton[y][x].setBackground(Color.RED);
                         break;
                     case FAIL:

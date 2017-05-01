@@ -14,7 +14,7 @@ public class Map implements Serializable {
 
 
     protected ShipPiece[][] mapDispositionBateaux;
-
+    private static final long serialVersionUID = -2031907042248103634L;
     protected static final int size = 10;
 
 
@@ -177,6 +177,9 @@ public class Map implements Serializable {
         return this.size;
     }
 
+    public void setPiece(int x, int y, ShipPiece sp){
+        this.mapDispositionBateaux[y][x] = sp;
+    }
 
 
     public String toString() {

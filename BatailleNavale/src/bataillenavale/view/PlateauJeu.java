@@ -103,7 +103,7 @@ public class PlateauJeu extends JPanel {
             remove(grilleBot);
         }
 
-        //System.out.println(model.getPartie().getBot().getMapPerso());
+        System.out.println(model.getPartie().getBot().getMapPerso());
         grilleBot = new JPanelGrille(this.model,this.model.getPartie().getHuman().getMapPerso().getSize(), model.getPartie().getHuman().getMapAdver());
         this.grilleBot.setPreferredSize(new Dimension(400,400));
 

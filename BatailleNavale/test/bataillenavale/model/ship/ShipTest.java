@@ -1,22 +1,16 @@
 package bataillenavale.model.ship;
 
 import bataillenavale.model.Coordinate;
-import bataillenavale.model.ship.xvi.Corsaire;
 import bataillenavale.model.ship.xx.Croiseur;
-import bataillenavale.model.ship.xx.PorteAvion;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static bataillenavale.model.Epoque.XX;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 /**
  * Created by wolkowicz on 29/04/2017.
@@ -65,7 +59,7 @@ public class ShipTest {
         List<ShipPiece> pieceShipList = new ArrayList<>();
         //Ship pa = ships.get(0);
         for (int i = 0; i < ship.getSize(); i++) {
-            pieceShipList.add(new ShipPiece(ship));
+            //pieceShipList.add(new ShipPiece(ship));
         }
         assertEquals(pieceShipList, ship.getPieceShipList());
     }
