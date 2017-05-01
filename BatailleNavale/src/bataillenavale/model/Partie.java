@@ -6,10 +6,12 @@ import bataillenavale.model.player.Player;
 import bataillenavale.model.player.strategies.AttackStrategies;
 import bataillenavale.model.ship.Ship;
 
+import java.io.Serializable;
+
 /**
  * Created by mulhauser on 25/04/2017.
  */
-public class Partie {
+public class Partie implements Serializable{
 
     private static int id;
     private Player human;
