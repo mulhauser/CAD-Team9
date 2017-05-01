@@ -4,20 +4,19 @@ import bataillenavale.model.Coordinate;
 import bataillenavale.model.Map;
 import bataillenavale.model.player.strategies.AttackStrategies;
 import bataillenavale.model.ship.Ship;
-import bataillenavale.model.ship.ShipPiece;
-import bataillenavale.model.ship.StatePiece;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
 /**
  * Created by mulhauser on 12/04/2017.
  */
-public class Bot extends Player {
+public class Bot extends Player implements Serializable{
     AttackStrategies strategy;
 
-    public Bot(String p, AttackStrategies strategy) {
-        super(p);
+    public Bot(AttackStrategies strategy) {
+        super();
         this.strategy = strategy;
     }
 

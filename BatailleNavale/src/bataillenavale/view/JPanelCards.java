@@ -1,39 +1,45 @@
 package bataillenavale.view;
 
-import bataillenavale.model.BatailleNavale;
+import bataillenavale.controler.MenuListener;
+import bataillenavale.view.partie.AccueilPartie;
+import bataillenavale.view.partie.ChargePartie;
+import bataillenavale.view.partie.CreationPartie;
+import bataillenavale.view.profile.AccueilProfile;
+import bataillenavale.view.profile.ChargeProfile;
+import bataillenavale.view.profile.CreationProfile;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Observable;
-import java.util.Observer;
 
 /**
  * Created by mulhauser on 21/04/2017.
  */
-public class JPanelCards extends JPanel implements Observer{
+public class JPanelCards extends JPanel {
 
     private final CardLayout cl;
-    private Accueil accueil;
-    private CreationPartie partie;
+    private JMenu menu;
+    public static JFrame fenetre;
+    private AccueilProfile accueilProfile;
+    private CreationProfile newProfil;
+    private ChargeProfile loadProfil;
+    private AccueilPartie accueilPartie;
+    private CreationPartie newPartie;
+    private ChargePartie loadPartie;
 
-    //une fois que la partie est créé (une fois qu'un a saisi un pseudo)
     private PlacementBateaux placement;
 
     private String currentPanelId = null;
     private JPanel currentPanel;
 
-    private BatailleNavale model;
 
-    //ajout de la grille de la partie en cours
     private PlateauJeu partieEnCours;
 
-    public JPanelCards(BatailleNavale model) {
+    public JPanelCards(JMenu menu, JFrame fenetre) {
         super();
-        this.model = model;
         this.cl = new CardLayout();
         this.setLayout(cl);
-        model.addObserver(this);
-
+        this.menu = menu;
+        this.fenetre = fenetre;
 
         /* ON DOIT ENLEVER LE MODEL DE CETTE CLASSE, IL SERT A RIEN
         * ET UTILISER UN SETMODEL DANS LES AUTRES PANEL CREES CI-DESSOUS LORSQUE L'ON CHANGE DE PANEL (SI C'EST UTILE)
@@ -41,20 +47,33 @@ public class JPanelCards extends JPanel implements Observer{
         * ENLEVER LE PSEUDO DANS PLAYER -> PROFILE, SEULEMENT UTILE POUR LA SAUVEGARDE
         *
         */
-        accueil = new Accueil(model, this);
-        partie = new CreationPartie(model, this);
-        placement = new PlacementBateaux(model, this);
-        partieEnCours = new PlateauJeu(model, this);
+        // PROFILE
+        accueilProfile = new AccueilProfile(this);
+        newProfil = new CreationProfile(this);
+        loadProfil = new ChargeProfile(this);
+
+        // PARTIE
+        accueilPartie = new AccueilPartie(this);
+        newPartie = new CreationPartie(this);
+        loadPartie = new ChargePartie(this);
+
+        placement = new PlacementBateaux(this);
+        partieEnCours = new PlateauJeu(this);
 
 
-        add(accueil, Accueil.id);
-        add(partie, CreationPartie.id);
+        add(accueilProfile, AccueilProfile.id);
+        add(newProfil, CreationProfile.id);
+        add(loadProfil, ChargeProfile.id);
+        add(accueilPartie, AccueilPartie.id);
+        add(newPartie, CreationPartie.id);
+        add(loadPartie, ChargePartie.id);
+
         add(placement, PlacementBateaux.id);
         add(partieEnCours, PlateauJeu.id);
 
 
-        currentPanelId = Accueil.id;
-        currentPanel = accueil;
+        currentPanelId = AccueilProfile.id;
+        currentPanel = accueilProfile;
     }
 
     public void show(String id) {
@@ -67,21 +86,34 @@ public class JPanelCards extends JPanel implements Observer{
     private void switchJPanel(String id) {
         currentPanelId = id;
         switch (id) {
-            case Accueil.id:
-                currentPanel = accueil;
+            case AccueilProfile.id:
+                currentPanel = accueilProfile;
+                Main.getInstance().setPreferredSize(new Dimension(250, 200));
+                break;
+            case CreationProfile.id:
+                currentPanel = newProfil;
+                Main.getInstance().setPreferredSize(new Dimension(250, 200));
+                break;
+            case ChargeProfile.id:
+                currentPanel = loadProfil;
+                Main.getInstance().setPreferredSize(new Dimension(250, 200));
+                break;
+            case AccueilPartie.id:
+                currentPanel = accueilPartie;
                 Main.getInstance().setPreferredSize(new Dimension(250, 200));
                 break;
             case CreationPartie.id:
-                currentPanel = partie;
+                currentPanel = newPartie;
+                Main.getInstance().setPreferredSize(new Dimension(250, 200));
+                break;
+            case ChargePartie.id:
+                currentPanel = loadPartie;
                 Main.getInstance().setPreferredSize(new Dimension(250, 200));
                 break;
             case PlacementBateaux.id:
                 currentPanel = placement;
                 Main.getInstance().setPreferredSize(new Dimension(700, 600));
-                //pour vérifier que le pseudo est modifié
-                //System.out.print(model.getPartie().getHuman().getPseudo());
                 break;
-                //ajout de la grille de jeu lorsque la partie commence
             case PlateauJeu.id:
                 currentPanel = partieEnCours;
                 Main.getInstance().setPreferredSize(new Dimension(900, 600));
@@ -91,18 +123,75 @@ public class JPanelCards extends JPanel implements Observer{
         }
     }
 
-    @Override
-    public void update(Observable o, Object arg) {
-
-    }
-
     public String getCurrentPanelId() {
         return currentPanelId;
     }
 
-    public PlacementBateaux getPlacementPanel(){
+    public PlacementBateaux getPlacementPanel() {
         return this.placement;
     }
 
-    public PlateauJeu getPlateauJeu() {return this.partieEnCours;}
+    public PlateauJeu getPlateauJeu() {
+        return this.partieEnCours;
+    }
+
+
+    public AccueilPartie getAccueilPartie() {
+        return this.accueilPartie;
+    }
+
+    public CreationPartie getNewPartie() {
+        return this.newPartie;
+    }
+
+    public ChargePartie getLoadPartie() {
+        return this.loadPartie;
+    }
+
+    public AccueilProfile getAccueilProfile() {
+        return this.accueilProfile;
+    }
+
+    public CreationProfile getNewProfil() {
+        return this.newProfil;
+    }
+
+    public ChargeProfile getLoadProfil() {
+        return this.loadProfil;
+    }
+
+
+    // Demarrage de l'application
+    public void chargerMenuDepart() {
+
+    }
+
+    // Menu pour la partie creation, chargement de Profile
+    public void chargerMenuProfil() {
+        //System.out.println("test");
+        menu.removeAll();
+        JMenuItem newProfile = new JMenuItem("Créer Profil");
+        newProfile.addActionListener(new MenuListener(this, CreationProfile.id));
+        menu.add(newProfile);
+        JMenuItem loadProfile = new JMenuItem("Charger Profil");
+        loadProfile.addActionListener(new MenuListener(this, ChargeProfile.id));
+        menu.add(loadProfile);
+        JMenuItem quitter = new JMenuItem("Quitter");
+        quitter.addActionListener(new MenuListener(this, "Quit"));
+        menu.add(quitter);
+    }
+
+    // Menu pour la partie creation et chargement de Partie
+    public void chargerMenuPartie() {
+        menu.removeAll();
+        JMenuItem newPartie = new JMenuItem("Créer Partie");
+        newPartie.addActionListener(new MenuListener(this, CreationPartie.id));
+        menu.add(newPartie);
+        JMenuItem loadPartie = new JMenuItem("Charger Partie");
+        loadPartie.addActionListener(new MenuListener(this, ChargePartie.id));
+        menu.add(loadPartie);
+        JMenuItem quitter = new JMenuItem("Quitter");
+        quitter.addActionListener(new MenuListener(this, "Quit"));
+        menu.add(quitter);
+    }
 }

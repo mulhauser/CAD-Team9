@@ -2,23 +2,27 @@ package bataillenavale.model;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Created by mulhauser on 12/04/2017.
  */
 public class Profile implements Serializable{
 
-    private static int id;
-    private static String pseudo;
-    private HashMap<Integer, Partie> parties;
+    protected final int id;
+    protected static final AtomicInteger count = new AtomicInteger(0);
+    protected String pseudo;
+    protected HashMap<Integer, Partie> parties;
+    private static final long serialVersionUID = 395780803259360757L;
 
     public Profile(String p){
-        id++;
+        this.id = count.incrementAndGet();
         this.pseudo = p;
-        parties = new HashMap<>();
+        this.parties = new HashMap<>();
     }
 
     public void ajouterPartie(Partie p){
+        p.setId(parties.size());
         this.parties.put(p.getId(),p);
     }
 
@@ -37,7 +41,6 @@ public class Profile implements Serializable{
     public String getPseudo(){
         return this.pseudo;
     }
-
 
 
 }

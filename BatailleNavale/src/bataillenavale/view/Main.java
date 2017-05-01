@@ -1,8 +1,5 @@
 package bataillenavale.view;
 
-import bataillenavale.controler.MenuListener;
-import bataillenavale.model.BatailleNavale;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -18,36 +15,41 @@ public class Main extends JFrame{
     }
 
     private final JPanelCards cards;
-    private final BatailleNavale model;
+    private final JMenuBar menuBar;
+    private final JMenu menu;
 
     private Main(){
         super("Bataille navale");
 
-        model = new BatailleNavale();
-
         //Create the panel that contains the "cards".
-        cards = new JPanelCards(model);
-
-        add(cards, BorderLayout.CENTER);
-
         // les menus
         //Create the menu bar.
-        JMenuBar menuBar = new JMenuBar();
+
+        //Profile p = new Profile("remy");
+        //DAOFactory.getInstance().getDAOSauvegarde().saveProfile(p);
+        //System.out.println(liste.keySet());
+        menuBar = new JMenuBar();
 
         //Build the first menu.
-        JMenu menu = new JMenu("Fichier");
+        menu = new JMenu("Fichier");
         menu.getAccessibleContext().setAccessibleDescription(
                 "The only menu in this program that has menu items");
         menuBar.add(menu);
 
-        JMenuItem accueil = new JMenuItem("Accueil");
+        // Voir pour modifier selon la page où l'on est
+        /*JMenuItem accueil = new JMenuItem("Accueil");
         accueil.addActionListener(new MenuListener(model, cards, Accueil.id));
         menu.add(accueil);
         JMenuItem quitter = new JMenuItem("Quitter");
         quitter.addActionListener(new MenuListener(model, cards, "Quit"));
-        menu.add(quitter);
+        menu.add(quitter);*/
 
         setJMenuBar(menuBar);
+
+        cards = new JPanelCards(menu, this);
+
+        add(cards, BorderLayout.CENTER);
+
         //setPreferredSize(new Dimension(250, 200));
 
         this.setPreferredSize(new Dimension(250, 200));
@@ -74,4 +76,6 @@ public class Main extends JFrame{
         //Utilisation d'un Singleton
         Main.getInstance();
     }
+
+
 }

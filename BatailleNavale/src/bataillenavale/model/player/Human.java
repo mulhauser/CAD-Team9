@@ -1,21 +1,16 @@
 package bataillenavale.model.player;
 
-import bataillenavale.model.Coordinate;
 import bataillenavale.model.Map;
-import bataillenavale.model.ship.Ship;
-import bataillenavale.model.ship.ShipPiece;
-import bataillenavale.model.ship.StatePiece;
 
-import java.util.ArrayList;
-import java.util.Random;
+import java.io.Serializable;
 
 /**
  * Created by mulhauser on 12/04/2017.
  */
-public class Human extends Player {
+public class Human extends Player implements Serializable {
 
-    public Human(String p) {
-        super(p);
+    public Human() {
+        super();
     }
 
     @Override

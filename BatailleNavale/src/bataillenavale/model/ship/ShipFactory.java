@@ -4,12 +4,13 @@ import bataillenavale.model.Epoque;
 import bataillenavale.model.ship.xvi.*;
 import bataillenavale.model.ship.xx.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by mulhauser on 25/04/2017.
  */
-public class ShipFactory {
+public class ShipFactory implements Serializable {
 
     private static ShipFactory instance = new ShipFactory();
 

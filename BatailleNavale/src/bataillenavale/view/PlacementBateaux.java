@@ -2,6 +2,7 @@ package bataillenavale.view;
 
 import bataillenavale.model.BatailleNavale;
 import bataillenavale.model.ship.Ship;
+import bataillenavale.view.partie.CreationPartie;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,25 +27,29 @@ public class PlacementBateaux extends JPanel {
     private static JPanelGrille grille;
     private static Ship currentShip;
     private static Ship lastShip;
+    protected JPanelCards card;
 
 
     private static BatailleNavale model;
 
-    private int size = 0;
+    private int size;
 
     // TODO: Voir pour utiliser un GridBagLayout partout pour placer comme on veut mais c'est compliqué
-    public PlacementBateaux(final BatailleNavale model, final JPanelCards card) {
+    public PlacementBateaux(final JPanelCards card) {
         super(new BorderLayout());
-        this.model = model;
-        this.size = model.getPartie().getHuman().getMapPerso().getSize();
+        this.card = card;
 
-        this.buttons = new JPanelSouth(card);
-        add(buttons, BorderLayout.SOUTH);
+    }
+
+    public void setModel(BatailleNavale model) {
+        this.model = model;
     }
 
 
     public void constructGrillePlacement() {
-
+        this.size = model.getPartie().getHuman().getMapPerso().getSize();
+        this.buttons = new JPanelSouth(card);
+        add(buttons, BorderLayout.SOUTH);
         // Construction de la grille des bateaux
         if (grille != null) {
             remove(grille);
@@ -100,6 +105,8 @@ public class PlacementBateaux extends JPanel {
 
                 @Override
                 public void actionPerformed(ActionEvent ae) {
+                    card.getPlateauJeu().setModel(model);
+                    card.getPlateauJeu().constructFenetre();
                     card.getPlateauJeu().constructGrilleHumain();
                     card.getPlateauJeu().constructGrilleBot();
                     // On affiche le panel de placement

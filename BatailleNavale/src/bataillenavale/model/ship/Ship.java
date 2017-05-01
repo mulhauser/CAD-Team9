@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -14,7 +15,7 @@ import java.util.Observable;
 /**
  * Created by mulhauser on 12/04/2017.
  */
-public abstract class Ship extends Observable{
+public abstract class Ship extends Observable implements Serializable{
 
     /**
      * taille petit = 2

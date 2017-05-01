@@ -2,13 +2,14 @@ package bataillenavale.model;
 
 import bataillenavale.model.ship.Ship;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by mulhauser on 21/04/2017.
  */
-public class Flotte {
+public class Flotte implements Serializable{
 
     private List<Ship> shipList;
 

@@ -21,6 +21,7 @@ public class PlateauJeu extends JPanel implements Observer{
     private JPanel grilleHuman;
     private JPanel grilleBot;
     private BatailleNavale model;
+    protected JPanelCards card;
     private int size;
 
 
@@ -29,24 +30,21 @@ public class PlateauJeu extends JPanel implements Observer{
     private int fireX;
     private int fireY;
 
-    public PlateauJeu(final BatailleNavale model, final JPanelCards card){
+    public PlateauJeu(final JPanelCards card){
         //ici le super pour le Fichier (accueil,quitter)
         super(new BorderLayout());
+        this.card = card;
+
+    }
+
+    public void constructFenetre(){
         model.addObserver(this);
-        //this.model = model;
-        //pour l'instant on ne reprend pas le model on en crée un nouveau :
         this.model = model;
 
 
 
-        //puis utiliser mapDispositionBateaux pour savoir si un bateau est présent ou non.
-
-        //pour le test
-        //System.out.println(this.mapPlayer.toString());
-
         this.size = model.getPartie().getHuman().getMapPerso().getSize();
 
-        //après affichage des 2 maps, place au tir
 
         JPanel panelFire = new JPanel(new GridLayout(1,3));
         String[] alphabet = {"A", "B","C","D","E","F","G","H","I","J"};
@@ -122,4 +120,7 @@ public class PlateauJeu extends JPanel implements Observer{
         add(grilleBot, BorderLayout.EAST);
     }
 
+    public void setModel(BatailleNavale model) {
+        this.model = model;
+    }
 }

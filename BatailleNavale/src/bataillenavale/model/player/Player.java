@@ -16,26 +16,14 @@ import java.util.Observable;
  */
 public abstract class Player extends Observable implements Serializable {
 
-    private String pseudo;
-    private int score;
     private Map mapPerso;
     //private Map mapAdver;
     private Flotte flotte;
 
 
-    public Player(String p) {
-        this.pseudo = p;
-        this.score = 0;
+    public Player() {
         this.mapPerso = new Map();
         //this.mapAdver = new Map();
-    }
-
-    public String getPseudo() {
-        return pseudo;
-    }
-
-    public void setPseudo(String pseudo) {
-        this.pseudo = pseudo;
     }
 
     public Flotte getFlotte() {

@@ -1,11 +1,11 @@
 package bataillenavale.model.ship;
 
-import javax.swing.plaf.nimbus.State;
+import java.io.Serializable;
 
 /**
  * Created by mulhauser on 21/04/2017.
  */
-public class ShipPiece {
+public class ShipPiece implements Serializable{
 
     private StatePiece state;
     private Ship ship;

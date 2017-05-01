@@ -16,8 +16,20 @@ public class BatailleNavale extends Observable {
     public BatailleNavale(){
         //disons que par défaut l'époque est moderne et le pseudo ne vaut rien
 
-        this.partie = new Partie("fsd", Epoque.XX, IAFactory.getInstance().getStrategy("random"));
-        this.profile = new Profile("ddfds");
+        ///this.partie = new Partie(Epoque.XX, IAFactory.getInstance().getStrategy("random"));
+    }
+
+    public void newProfile(String p){
+        this.profile = new Profile(p);
+    }
+
+    public void setProfile(Profile p){
+        this.profile = p;
+    }
+
+    // On passera en parametre les param necessaire plus tard
+    public void newPartie(Epoque e, String strat){
+        this.partie = new Partie(e, IAFactory.getInstance().getStrategy(strat));
     }
 
     public Partie getPartie(){
@@ -50,4 +62,7 @@ public class BatailleNavale extends Observable {
         return this.profile;
     }
 
+    public void setPartie(Partie partie) {
+        this.partie = partie;
+    }
 }
