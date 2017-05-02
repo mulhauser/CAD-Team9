@@ -1,6 +1,7 @@
 package bataillenavale.model.player;
 
 
+import bataillenavale.model.Coordinate;
 import bataillenavale.model.Epoque;
 import bataillenavale.model.Flotte;
 import bataillenavale.model.Map;
@@ -86,10 +87,7 @@ public abstract class Player extends Observable implements Serializable {
                 // On ne fait rien
                 break;
         }
-
-        //System.out.println("Après shoot");
-        //System.out.println("perso:\n"+mapPerso+"\nadvers:\n"+mapAdver);
-
+        
     }
 
     public void constructFlotte(Epoque e) {
@@ -97,4 +95,27 @@ public abstract class Player extends Observable implements Serializable {
     }
 
     public abstract void randomPlacementShip();
+
+    public boolean checkVictory(Map mapAdver){
+        ShipPiece[][] ships = mapAdver.getMapDispositionBateaux();
+
+        int compt=0;
+
+        for(int x = 0; x<mapAdver.getSize(); x++){
+            for(int y = 0; y<mapAdver.getSize(); y++){
+                //si une case est tuée
+                if(ships[x][y].getState()==StatePiece.DEAD){
+                    compt++;
+                }
+            }
+        }
+
+        //il doit y avoir 5+4+3+3+2 = 17 cases tuées
+        if(compt==17){
+            return true;
+        }else{
+            return false;
+        }
+
+    }
 }

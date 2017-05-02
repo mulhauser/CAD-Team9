@@ -68,7 +68,21 @@ public class PlateauJeu extends JPanel {
                 //model.getPartie().getBot().fire(fireX,fireY);
                 //puis après le tir peut-importe le résultat de celui-ci il faut mettre à jour la vue
                 model.tirHumain(fireX,fireY);
-                model.tirBot();
+                if(model.getPartie().getHuman().checkVictory(model.getPartie().getHuman().getMapAdver())){
+                    //si humain gagne
+                    JOptionPane.showMessageDialog (null, "Congratulations, you win", "Victory", JOptionPane.INFORMATION_MESSAGE);
+                    chooseX.setEnabled(false);
+                    chooseY.setEnabled(false);
+                }else{
+                    //sinon le bot joue
+                    model.tirBot();
+                    if(model.getPartie().getBot().checkVictory(model.getPartie().getBot().getMapAdver())){
+                        //puis si le bot gagne
+                        JOptionPane.showMessageDialog (null, "Sorry, you lose...", "IA win", JOptionPane.INFORMATION_MESSAGE);
+                        chooseX.setEnabled(false);
+                        chooseY.setEnabled(false);
+                    }
+                }
             }
         });
 
