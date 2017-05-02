@@ -12,6 +12,7 @@ import bataillenavale.model.ship.StatePiece;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 
 /**
@@ -110,8 +111,14 @@ public abstract class Player extends Observable implements Serializable {
             }
         }
 
-        //il doit y avoir 5+4+3+3+2 = 17 cases tuées
-        if(compt==17){
+        int nombreDeCasesAViser = 0;
+        List<Ship> shipList = flotte.getShipList();
+
+        for(Ship s : shipList){
+            nombreDeCasesAViser+=s.getSize();
+        }
+
+        if(compt==nombreDeCasesAViser){
             return true;
         }else{
             return false;
