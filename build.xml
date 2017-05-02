@@ -1,185 +1,113 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project name="cad-team9" default="jar">
-  
-  
-
-  <!-- Uncomment the following property if no tests compilation is needed -->
-  <!-- 
-  <property name="skip.tests" value="true"/>
-   -->
-  
-  <!-- Compiler options -->
-  
-  <property name="compiler.debug" value="on"/>
-  <property name="compiler.generate.no.warnings" value="off"/>
-  <property name="compiler.args" value=""/>
-  <property name="compiler.max.memory" value="700m"/>
-  <patternset id="ignored.files">
-    <exclude name="**/*.hprof/**"/>
-    <exclude name="**/*.pyc/**"/>
-    <exclude name="**/*.pyo/**"/>
-    <exclude name="**/*.rbc/**"/>
-    <exclude name="**/*.yarb/**"/>
-    <exclude name="**/*~/**"/>
-    <exclude name="**/.DS_Store/**"/>
-    <exclude name="**/.git/**"/>
-    <exclude name="**/.hg/**"/>
-    <exclude name="**/.svn/**"/>
-    <exclude name="**/CVS/**"/>
-    <exclude name="**/__pycache__/**"/>
-    <exclude name="**/_svn/**"/>
-    <exclude name="**/vssver.scc/**"/>
-    <exclude name="**/vssver2.scc/**"/>
-  </patternset>
-  <patternset id="library.patterns">
-    <include name="*.egg"/>
-    <include name="*.jar"/>
-    <include name="*.ear"/>
-    <include name="*.swc"/>
-    <include name="*.war"/>
-    <include name="*.ane"/>
-    <include name="*.zip"/>
-  </patternset>
-  <patternset id="compiler.resources">
-    <exclude name="**/?*.java"/>
-    <exclude name="**/?*.form"/>
-    <exclude name="**/?*.class"/>
-    <exclude name="**/?*.groovy"/>
-    <exclude name="**/?*.scala"/>
-    <exclude name="**/?*.flex"/>
-    <exclude name="**/?*.kt"/>
-    <exclude name="**/?*.clj"/>
-    <exclude name="**/?*.aj"/>
-  </patternset>
-  
-  <!-- Modules -->
-  
-  
-  <!-- Module BatailleNavale -->
-  
-  <dirname property="module.bataillenavale.basedir" file="${ant.file}"/>
-  
-  
-  
-  <property name="compiler.args.bataillenavale" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
-  
-  <property name="bataillenavale.output.dir" value="${module.bataillenavale.basedir}/out/production/BatailleNavale"/>
-  <property name="bataillenavale.testoutput.dir" value="${module.bataillenavale.basedir}/out/test/BatailleNavale"/>
-
-
-  <path id="bataillenavale.module.bootclasspath">
-    <!-- Paths to be included in compilation bootclasspath -->
-  </path>
-  
-  <path id="bataillenavale.module.production.classpath"/>
-  
-  <path id="bataillenavale.runtime.production.module.classpath">
-    <pathelement location="${bataillenavale.output.dir}"/>
-  </path>
-  
-  <path id="bataillenavale.module.classpath">
-    <pathelement location="${bataillenavale.output.dir}"/>
-    <pathelement location="${basedir}/BatailleNavale/lib/hamcrest-core-1.3.jar"/>
-    <pathelement location="${basedir}/BatailleNavale/lib/junit-4.12.jar"/>
-  </path>
-  
-  <path id="bataillenavale.runtime.module.classpath">
-    <pathelement location="${bataillenavale.testoutput.dir}"/>
-    <pathelement location="${bataillenavale.output.dir}"/>
-    <pathelement location="${basedir}/BatailleNavale/lib/hamcrest-core-1.3.jar"/>
-    <pathelement location="${basedir}/BatailleNavale/lib/junit-4.12.jar"/>
-  </path>
-  
-  
-  <patternset id="excluded.from.module.bataillenavale">
-    <patternset refid="ignored.files"/>
-  </patternset>
-  
-  <patternset id="excluded.from.compilation.bataillenavale">
-    <patternset refid="excluded.from.module.bataillenavale"/>
-  </patternset>
-  
-  <path id="bataillenavale.module.sourcepath">
-    <dirset dir="${module.bataillenavale.basedir}/BatailleNavale">
-      <include name="src"/>
-    </dirset>
-  </path>
-  
-  <path id="bataillenavale.module.test.sourcepath">
-    <dirset dir="${module.bataillenavale.basedir}/BatailleNavale">
-      <include name="test"/>
-    </dirset>
-  </path>
-  
-  
-  <target name="compile.module.bataillenavale" depends="compile.module.bataillenavale.production,compile.module.bataillenavale.tests" description="Compile module BatailleNavale"/>
-  
-  <target name="compile.module.bataillenavale.production" description="Compile module BatailleNavale; production classes">
-    <mkdir dir="${bataillenavale.output.dir}"/>
-    <javac destdir="${bataillenavale.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
-      <compilerarg line="${compiler.args.bataillenavale}"/>
-      <bootclasspath refid="bataillenavale.module.bootclasspath"/>
-      <classpath refid="bataillenavale.module.production.classpath"/>
-      <src refid="bataillenavale.module.sourcepath"/>
-      <patternset refid="excluded.from.compilation.bataillenavale"/>
-    </javac>
-    
-    <copy todir="${bataillenavale.output.dir}">
-      <fileset dir="${module.bataillenavale.basedir}/BatailleNavale/src">
-        <patternset refid="compiler.resources"/>
-        <type type="file"/>
-      </fileset>
-    </copy>
-  </target>
-  
-  <target name="compile.module.bataillenavale.tests" depends="compile.module.bataillenavale.production" description="compile module BatailleNavale; test classes" unless="skip.tests">
-    <mkdir dir="${bataillenavale.testoutput.dir}"/>
-    <javac destdir="${bataillenavale.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
-      <compilerarg line="${compiler.args.bataillenavale}"/>
-      <bootclasspath refid="bataillenavale.module.bootclasspath"/>
-      <classpath refid="bataillenavale.module.classpath"/>
-      <src refid="bataillenavale.module.test.sourcepath"/>
-      <patternset refid="excluded.from.compilation.bataillenavale"/>
-    </javac>
-    
-    <copy todir="${bataillenavale.testoutput.dir}">
-      <fileset dir="${module.bataillenavale.basedir}/BatailleNavale/test">
-        <patternset refid="compiler.resources"/>
-        <type type="file"/>
-      </fileset>
-    </copy>
-  </target>
-  
-  <target name="clean.module.bataillenavale" description="cleanup module">
-  <delete dir="${bataillenavale.output.dir}"/>
-  <delete dir="${bataillenavale.testoutput.dir}"/>
-</target>
-  
-  <target name="init" description="Build initialization">
-    <!-- Perform any build initialization in this target -->
-  </target>
-  
-  <target name="clean" depends="clean.module.bataillenavale" description="cleanup all"/>
-  
-  <target name="build.modules" depends="init, clean, compile.module.bataillenavale" description="build all modules"/>
-
-  <target name="all" depends="build.modules" description="build all"/>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="final_clean" name="Script ant pour le projet Bataille Navalle TEAM_CAD9">
 
 
 
 
-  <!-- creation d un .jar pour l application -->
-  <target name="jar" depends="build.modules" description="jar generation">
-    <jar destfile="${module.bataillenavale.basedir}/CAD_TEAM9.jar" basedir="${module.bataillenavale.basedir}/out/production/BatailleNavale/bataillenavale">
-      <manifest>
-        <attribute name="Main-Class" value="bataillenavale.view.Main"/>
-      </manifest>
-    </jar>
-  </target>
+    <!-- définition des propriétés -->
+    <dirname property="module.bataillenavale.basedir" file="${ant.file}"/>
+    <property name="compiler.args" value=""/>
+    <property name="compiler.args.bataillenavale" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+    <property name="bataillenavale.output.dir" value="${module.bataillenavale.basedir}/out/production/BatailleNavale"/>
+    <property name="bataillenavale.testoutput.dir" value="${module.bataillenavale.basedir}/out/test/BatailleNavale"/>
+    <property name="bataillenavale.test.report"   value="tests_report"/>
+
+
+
+    <!-- classpath du projet (sources et tests) -->
+    <path id="bataillenavale.module.sourcepath">
+        <dirset dir="${module.bataillenavale.basedir}/BatailleNavale">
+            <include name="src"/>
+        </dirset>
+    </path>
+
+    <path id="bataillenavale.module.test.sourcepath">
+        <dirset dir="${module.bataillenavale.basedir}/BatailleNavale">
+            <include name="test"/>
+        </dirset>
+    </path>
 
 
 
 
+    <!-- Nettoyage du projet -->
+    <target name="clean.module.bataillenavale" description="cleanup module">
+        <delete dir="${bataillenavale.output.dir}"/>
+        <delete dir="${bataillenavale.testoutput.dir}"/>
+    </target>
+
+
+
+
+    <!-- compilation des sources du projet -->
+    <target name="compile.sources" description="Compile module BatailleNavale; production classes">
+        <mkdir dir="${bataillenavale.output.dir}"/>
+        <javac destdir="${bataillenavale.output.dir}"  fork="true">
+            <compilerarg line="${compiler.args.bataillenavale}"/>
+            <src refid="bataillenavale.module.sourcepath"/>
+        </javac>
+        <copy todir="${bataillenavale.output.dir}">
+            <fileset dir="${module.bataillenavale.basedir}/BatailleNavale/src">
+                <type type="file"/>
+            </fileset>
+        </copy>
+    </target>
+
+
+
+
+    <!-- compilation des tests du projet -->
+    <target name="compile.tests">
+        <mkdir dir="${bataillenavale.testoutput.dir}"/>
+        <javac destdir="${bataillenavale.testoutput.dir}" fork="true">
+            <compilerarg line="${compiler.args.bataillenavale}"/>
+            <src refid="bataillenavale.module.test.sourcepath"/>
+        </javac>
+        <copy todir="${bataillenavale.testoutput.dir}">
+            <fileset dir="${module.bataillenavale.basedir}/BatailleNavale/test">
+                <type type="file"/>
+            </fileset>
+        </copy>
+    </target>
+
+
+
+
+    <!-- création d'un fichier jar exécutable -->
+    <target name="create_run_jar" depends="compile.sources">
+        <jar destfile="${module.bataillenavale.basedir}/CAD.jar" filesetmanifest="mergewithoutmain">
+            <manifest>
+                <attribute name="Main-Class" value="bataillenavale.view.Main"/>
+                <attribute name="Class-Path" value="."/>
+            </manifest>
+            <fileset dir="${bataillenavale.output.dir}"/>
+        </jar>
+    </target>
+
+
+
+    <!-- Exécution des tests-->
+    <target name="test" depends="compile.tests">
+        <mkdir dir="${bataillenavale.test.report}"/>
+        <junit printsummary="yes" haltonfailure="yes">
+            <classpath refid="bataillenavale.module.test.sourcepath" />
+            <formatter type="xml" />
+            <formatter type="plain"  usefile="true"/>
+            <batchtest haltonfailure="no" todir="${bataillenavale.test.report}">
+                <fileset dir="${bataillenavale.testoutput.dir}">
+
+                </fileset>
+            </batchtest>
+        </junit>
+    </target>
+
+
+
+    <!-- Nettoyage final -->
+    <target name="final_clean" depends="create_run_jar">
+        <delete dir="${bataillenavale.output.dir}"/>
+        <delete dir="${bataillenavale.testoutput.dir}"/>
+    </target>
 
 
 
