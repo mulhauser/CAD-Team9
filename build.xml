@@ -99,10 +99,10 @@
 
 
     <!-- Exécution des tests-->
-    <target name="execute.test" depends="compile.tests">
+    <!--
+    <target name="chose.test" depends="compile.tests">
         <mkdir dir="${bataillenavale.test.report}"/>
         <junit printsummary="no" haltonfailure="yes">
-          <!--  <classpath refid="bataillenavale.module.test.sourcepath" />-->
 
             <classpath>
                 <pathelement location="BatailleNavale/lib/junit-4.12.jar"/>
@@ -112,16 +112,7 @@
             <formatter type="xml" />
             <formatter usefile="yes" type="brief"/>
             <batchtest haltonfailure="no" todir="${bataillenavale.test.report}">
-              <!--  <fileset dir="${bataillenavale.testoutput.dir}">
-                    <include name="**/*Test*.java"/>
-                </fileset>
-                <fileset dir="BatailleNavale/src/bataillenavale/">
-                    <include name="*.java"/>
-                </fileset>
-                <fileset dir="BatailleNavale/test/">
-                    <include name="*.java"/>
-                </fileset>
-                -->
+
 
 
                 <fileset dir="out/test/BatailleNavale/">
@@ -146,8 +137,27 @@
             </batchtest>
         </junit>
     </target>
+    -->
 
 
+    <target name="execute.test" depends="compile.tests">
+        <mkdir dir="${bataillenavale.test.report}"/>
+        <junit printsummary="yes" fork="yes" haltonfailure="off">
+            <classpath>
+              <pathelement location="out"/>
+                <pathelement location="BatailleNavale/lib/junit-4.12.jar"/>
+                <pathelement location="BatailleNavale/lib/hamcrest-core-1.3.jar"/>
+            </classpath>
+            <formatter type="plain"/>  <!--Testbytest-->
+            <test name="TestSuiteClass" todir="${bataillenavale.test.report}"/>
+            <!-- Same with batch testing -->
+            <batchtest fork="yes" todir="${bataillenavale.test.report}">
+                <fileset dir="out">
+                    <include name="test/BatailleNavale/*Test*.class" />
+                </fileset>
+            </batchtest>
+        </junit>
+    </target>
 
 
     <!-- Nettoyage final -->

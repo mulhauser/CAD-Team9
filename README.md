@@ -8,8 +8,10 @@ En faisant :      ant -buildfile build.xml
 	- Les fichiers .class seront supprimés
 	- Le projet sera compilé
 	- Une archive du nom de cad-team9.jar sera crée
-	- (les test ça vient)
+	- Les tests sont compilés puis éxécutés
 	- Les fichiers .class seton à nouveau supprimés
+
+Pour exécuter le fichier cad-team9.jar utiliser la commande : java -jar cad-team9.jar
 
 
 Jeu:

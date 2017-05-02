@@ -4,6 +4,7 @@
 
 
 import bataillenavale.model.*;
+import bataillenavale.*;
 import bataillenavale.model.player.PlayerTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
