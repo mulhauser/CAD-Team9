@@ -1,0 +1,11 @@
+Testsuite: bataillenavale.model.ship.ShipPiece
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0 sec
+
+Null Test: 	Caused an ERROR
+bataillenavale.model.ship.ShipPiece
+java.lang.ClassNotFoundException: bataillenavale.model.ship.ShipPiece
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+	at java.lang.Class.forName0(Native Method)
+	at java.lang.Class.forName(Class.java:348)
+
+
