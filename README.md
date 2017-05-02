@@ -12,6 +12,22 @@ En faisant :      ant -buildfile build.xml
 	- (les test ça vient)
 	- Les fichiers .class seton à nouveau supprimés
 
+
+Jeu:
+
+Lorsqu'il faut placer nos bateaux, le placement s'effectuera en choisissant l'orientation du bateau (horizontale ou verticale)
+puis la position de la tête du bateau (partie haute si verticale, partie gauche si horizontale).
+Vous avez la possibilité d'annuler le placement du dernier bateau que vous avez placé mais si vous avez placé plusieurs
+bateaux et que vous souhaitez annuler le placement de tous ces bateaux, vous pourrez annuler seulement le dernier
+
+Lorsque l'on joue si on joue l'epoque XX, il faudra toucher 2 fois chaque case du bateau car elles ont 2 vies chacune
+Une case jaune: case non touchée
+Une case orange: case touchée
+Une case rouge: case morte
+Une case bleue: case vide
+Une case noire: tir loupé
+
+
 Pour ajouter une Epoque:
 - créer un package "nomdevotrepackage" dans le package bataillenavale.model.ship
 - créer une classe EpoqueNOMDEVOTREEPOQUE dans le package bataillenavale.model
@@ -25,6 +41,8 @@ Pour ajouter une Epoque:
     le modele de construction de la liste de bateaux
 
 
-Pour ajouter un moyen de sauvegarde, il suffit d'ajouter une classe qui hérite de la classe DAOSauvegarde et 
+
+Pour ajouter un moyen de sauvegarde:
+- il suffit d'ajouter une classe qui hérite de la classe DAOSauvegarde et
 d'implémenter les 3 méthodes getProfiles(), saveProfile(Profile p), profileExist(String nom)
 
