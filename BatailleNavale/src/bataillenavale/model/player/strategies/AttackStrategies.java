@@ -26,5 +26,13 @@ public abstract class AttackStrategies implements Serializable {
         return res;
     }
 
+    public boolean isShootPossible(int x, int y){
+        if(!listShoot.contains(new Coordinate(x, y))){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public abstract int[] getStrategyShoot(int size);
 }
