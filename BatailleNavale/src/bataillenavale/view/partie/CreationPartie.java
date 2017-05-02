@@ -68,6 +68,7 @@ public class CreationPartie extends JPanel {
                 card.getPlacementPanel().setModel(model);
                 card.getPlacementPanel().constructGrillePlacement();
                 card.getPlacementPanel().constructMenuBateaux();
+                card.chargerMenuJouer(model);
                 // On affiche le panel de placement
                 card.show(PlacementBateaux.id);
 

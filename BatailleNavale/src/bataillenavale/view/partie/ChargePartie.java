@@ -31,7 +31,6 @@ public class ChargePartie extends JPanel {
         super(new BorderLayout());
 
         this.card = card;
-        this.card.chargerMenuProfil();
 
 
 
@@ -53,6 +52,7 @@ public class ChargePartie extends JPanel {
                     card.getAccueilPartie().setModel(model);
                     card.getLoadPartie().setModel(model);
                     card.getNewPartie().setModel(model);
+                    card.chargerMenuJouer(model);
                     card.show(PlateauJeu.id);
                 }else{
                     JOptionPane.showMessageDialog(card.fenetre, "Veuillez selectionner une partie", "Information", JOptionPane.INFORMATION_MESSAGE);

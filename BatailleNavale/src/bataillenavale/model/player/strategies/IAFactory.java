@@ -7,6 +7,8 @@ import java.io.Serializable;
  */
 public class IAFactory implements Serializable{
 
+
+    private static final long serialVersionUID = 6512305568559274582L;
     private static IAFactory instance = new IAFactory();
 
     private IAFactory(){

@@ -18,7 +18,6 @@ public class AccueilProfile extends JPanel implements Observer{
     public AccueilProfile(final JPanelCards card){
         //buttons affiche tout les boutons possibles
         // chargement menuBar pour accueil
-        card.chargerMenuProfil();
 
         JPanel buttons = new JPanel(new GridLayout(2,1));
         JButton creerProfil = new JButton("Créer Profil");

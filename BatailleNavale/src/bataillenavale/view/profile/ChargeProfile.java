@@ -31,7 +31,6 @@ public class ChargeProfile extends JPanel {
     public ChargeProfile(JPanelCards card){
         super(new BorderLayout());
         this.card = card;
-        this.card.chargerMenuProfil();
 
 
 
@@ -47,10 +46,10 @@ public class ChargeProfile extends JPanel {
                 if(!list.isSelectionEmpty()){
                     model = new BatailleNavale();
                     model.setProfile(profiles.get(list.getSelectedValue()));
-                    card.chargerMenuPartie(model);
                     card.getAccueilPartie().setModel(model);
                     card.getLoadPartie().setModel(model);
                     card.getNewPartie().setModel(model);
+                    card.chargerMenuPartie();
                     card.show(AccueilPartie.id);
                 }else{
                     JOptionPane.showMessageDialog(card.fenetre, "Veuillez selectionner un profil", "Erreur", JOptionPane.ERROR_MESSAGE);

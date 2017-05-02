@@ -14,7 +14,7 @@ public class Map implements Serializable {
 
 
     protected ShipPiece[][] mapDispositionBateaux;
-    private static final long serialVersionUID = -2031907042248103634L;
+    private static final long serialVersionUID = 8268151079120855484L;
     protected static final int size = 10;
 
 

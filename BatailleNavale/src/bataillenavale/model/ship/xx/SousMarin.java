@@ -9,6 +9,8 @@ import java.io.Serializable;
  */
 public class SousMarin extends EpoqueXX  implements Serializable {
 
+    private static final long serialVersionUID = 165708230963072644L;
+
     // 3 CASES
     public SousMarin() {
         super("SousMarin",3);

@@ -8,6 +8,8 @@ import java.util.Random;
  */
 public class CrossStrategy extends AttackStrategies implements Serializable{
 
+    private static final long serialVersionUID = 6834726075740598097L;
+
     public CrossStrategy(){
         super();
     }
@@ -15,6 +17,7 @@ public class CrossStrategy extends AttackStrategies implements Serializable{
     private int[] storedPosition = {-1,-1};
     //1 signifie de gauche à droite et -1 pour de droite à gauche, défaut = 1
     private int diagonalWay = 1;
+
 
     @Override
     public int[] getStrategyShoot(int size) {
@@ -81,7 +84,6 @@ public class CrossStrategy extends AttackStrategies implements Serializable{
         //on ajoute le tire avec listShoot.add(new Coordinate(x, y)); dans ajouteShoot
         //on est certain que la fonction retourne true
         ajouteShoot(res[0], res[1]);
-        System.out.println("X: "+res[0]+", Y: "+res[1]);
 
         return res;
     }

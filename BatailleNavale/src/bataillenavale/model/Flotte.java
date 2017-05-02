@@ -11,6 +11,7 @@ import java.util.List;
  */
 public class Flotte implements Serializable{
 
+    private static final long serialVersionUID = 3043014960662931231L;
     protected List<Ship> shipList;
 
     public Flotte(List<Ship> shipList) {

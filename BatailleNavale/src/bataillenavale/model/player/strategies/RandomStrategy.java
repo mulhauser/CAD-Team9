@@ -8,6 +8,9 @@ import java.util.Random;
  */
 public class RandomStrategy extends AttackStrategies implements Serializable{
 
+
+    private static final long serialVersionUID = 152687835924581664L;
+
     public RandomStrategy(){
         super();
     }

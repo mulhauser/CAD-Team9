@@ -27,7 +27,6 @@ public class CreationProfile extends JPanel {
         super(new BorderLayout());
         JPanel saisie = new JPanel(new GridLayout(5, 2));
 
-        card.chargerMenuProfil();
         pseudoLabel = new JLabel("Pseudo");
         pseudo = new JTextField();
         pseudo.setToolTipText("Pseudo");
@@ -57,10 +56,10 @@ public class CreationProfile extends JPanel {
                 if (!DAOFactory.getInstance().getDAOSauvegarde().profileExist(pseudo.getText())) {
                     model = new BatailleNavale();
                     model.newProfile(pseudo.getText());
-                    card.chargerMenuPartie(model);
                     card.getAccueilPartie().setModel(model);
                     card.getLoadPartie().setModel(model);
                     card.getNewPartie().setModel(model);
+                    card.chargerMenuPartie();
                     card.show(AccueilPartie.id);
                 } else {
                     JOptionPane.showMessageDialog(card.fenetre, "Le profil avec le nom : " + pseudo.getText() + " existe déjà !", "Erreur", JOptionPane.ERROR_MESSAGE);

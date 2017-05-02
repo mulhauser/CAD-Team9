@@ -7,6 +7,7 @@ import java.io.Serializable;
  */
 public class Coordinate implements Serializable{
 
+    private static final long serialVersionUID = 6313187226481388093L;
     protected int x;
     protected int y;
 

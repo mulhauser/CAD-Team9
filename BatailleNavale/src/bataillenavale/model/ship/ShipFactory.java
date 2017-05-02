@@ -12,6 +12,7 @@ import java.util.ArrayList;
  */
 public class ShipFactory implements Serializable {
 
+    private static final long serialVersionUID = 153472384011715340L;
     private static ShipFactory instance = new ShipFactory();
 
     private ShipFactory(){

@@ -3,7 +3,7 @@ package bataillenavale.view.partie;
 import bataillenavale.controler.MenuListener;
 import bataillenavale.model.BatailleNavale;
 import bataillenavale.view.JPanelCards;
-import bataillenavale.view.profile.CreationProfile;
+import bataillenavale.view.profile.AccueilProfile;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -32,7 +32,7 @@ public class AccueilPartie extends JPanel {
         buttons.add(chargerPartie);
 
         JButton retour = new JButton("Retour");
-        retour.addActionListener(new MenuListener(card, CreationProfile.id));
+        retour.addActionListener(new MenuListener(card, AccueilProfile.id));
         buttons.add(retour);
 
         buttons.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.GRAY), "Bienvenue", TitledBorder.LEFT, TitledBorder.TOP, new Font(Font.SERIF, Font.ITALIC, 16), Color.GRAY));
@@ -44,4 +44,7 @@ public class AccueilPartie extends JPanel {
         this.model = m;
     }
 
+    public BatailleNavale getModel() {
+        return model;
+    }
 }

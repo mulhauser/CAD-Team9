@@ -12,6 +12,7 @@ public abstract class AttackStrategies implements Serializable {
 
     protected ArrayList<Coordinate> listShoot;
     protected int taille;
+    private static final long serialVersionUID = 6379415461300379859L;
 
     public AttackStrategies(){
         this.listShoot = new ArrayList<>();

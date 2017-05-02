@@ -7,6 +7,8 @@ import java.io.Serializable;
  */
 public class EpoqueXX extends Ship implements Serializable{
 
+    private static final long serialVersionUID = -3897657025890832052L;
+
     public EpoqueXX(String n, int s) {
         super(n, s, 2);
     }

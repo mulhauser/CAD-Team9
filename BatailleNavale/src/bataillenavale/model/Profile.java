@@ -13,7 +13,7 @@ public class Profile implements Serializable{
     protected static final AtomicInteger count = new AtomicInteger(0);
     protected String pseudo;
     protected HashMap<Integer, Partie> parties;
-    private static final long serialVersionUID = 395780803259360757L;
+    private static final long serialVersionUID = -1537951485391807260L;
 
     public Profile(String p){
         this.id = count.incrementAndGet();

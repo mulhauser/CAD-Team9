@@ -13,6 +13,7 @@ import java.io.Serializable;
  */
 public class Partie implements Serializable{
 
+    private static final long serialVersionUID = -8074355707605676522L;
     protected static int id;
     protected Player human;
     protected Player bot;
