@@ -13,6 +13,13 @@ En faisant :      ant -buildfile build.xml
 
 Pour exécuter le fichier cad-team9.jar utiliser la commande : java -jar cad-team9.jar
 
+Remarque concernant les tests :
+L'exécution des test ne fonctionne pas avec ant, nous n'arrivons pas à régler ce problème.
+Cependant les test fonctionne si on les éxécutent "manuellement" : 
+La classe TestSuiteClass est une suite qui regroupe tous nos fichier de test.
+En la compilant puis en l'éxécutant on constate que nos test fonctionnent bien mais via le script ant ils ne fonctionnent pas.
+Dans notre fichier build.xml, nous utilisons pourtant pour la partie de l'exécution des tests le "template" que vous nous avez montré dans le cours sur les outils des méthodes agiles.
+
 
 Jeu:
 

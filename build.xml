@@ -154,6 +154,7 @@
             <batchtest fork="yes" todir="${bataillenavale.test.report}">
                 <fileset dir="out">
                     <include name="test/BatailleNavale/*Test*.class" />
+                    <include name="test/BatailleNavale/bataillenavalle*Test*.class" />
                 </fileset>
             </batchtest>
         </junit>
