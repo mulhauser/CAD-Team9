@@ -4,6 +4,8 @@ package bataillenavale.model;
 import bataillenavale.model.ship.Ship;
 import bataillenavale.model.ship.ShipFactory;
 import bataillenavale.model.ship.ShipPiece;
+import bataillenavale.model.ship.StatePiece;
+import bataillenavale.model.ship.xvi.Caravelle;
 import bataillenavale.model.ship.xx.Croiseur;
 import org.junit.After;
 import org.junit.Before;
@@ -64,7 +66,7 @@ public class MapTest {
        // System.out.println("Test de la non présence d'une partie de bateau la où il n'est pas censé en avoir");
         for(int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-                assertEquals(null, map.getShip(i, j));
+                assertEquals(StatePiece.EMPTY, map.getShip(i, j).getState());
             }
         }
     }
@@ -94,11 +96,12 @@ public class MapTest {
 
     /**
      * on test si c'est possible d'ajouter un ship a la limite de la map
+     * ce qui ne doit pas être possible
      */
     @Test
     public void verificationCoordinateTrueLimit(){
         boolean b = map.verificationCoordinate(map.getMapDispositionBateaux().length , map.getMapDispositionBateaux().length );
-        assertEquals(true,b);
+        assertEquals(false,b);
     }
 
     /**
@@ -217,12 +220,12 @@ public class MapTest {
      * dans la position verticale
      */
     @Test
-    public void verificationPlacementBateauDejaPlaceIdentiqueVerticale(){
+    public void verificationPlacementBateauDejaPlaceIdentiqueVerticale() {
         Ship s = new Croiseur();
         s.setOrientation(Ship.Orientation.VERTICAL);
         s.setCoordinate(new Coordinate(5, 5));
 
-        Ship s2 = new Croiseur();
+        Ship s2 = new Caravelle();
         s2.setOrientation(Ship.Orientation.VERTICAL);
         s2.setCoordinate(new Coordinate(5, 5));
 
@@ -322,7 +325,7 @@ public class MapTest {
         map.supprimerBateau(s);
         ShipPiece[][] sp = map.getMapDispositionBateaux();
         for(int yi = 2; yi < 2+s.getSize(); yi++){
-            assertEquals(null,  sp[yi][2]);
+            assertEquals(StatePiece.EMPTY,  sp[yi][2].getState());
         }
     }
 
@@ -339,10 +342,10 @@ public class MapTest {
         map.supprimerBateau(s);
         ShipPiece[][] sp = map.getMapDispositionBateaux();
         for(int yi = 2; yi < 2+s.getSize(); yi++){
-            assertEquals(null,  sp[yi][2]);
+            assertEquals(StatePiece.EMPTY,  sp[yi][2].getState());
         }
         for(int xi = 2; xi < 2+s.getSize(); xi++){
-            assertEquals(null,  sp[2][xi]);
+            assertEquals(StatePiece.EMPTY,  sp[2][xi].getState());
         }
     }
 

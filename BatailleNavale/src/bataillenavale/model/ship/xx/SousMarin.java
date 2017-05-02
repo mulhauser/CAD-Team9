@@ -15,4 +15,5 @@ public class SousMarin extends EpoqueXX  implements Serializable {
     public SousMarin() {
         super("SousMarin",3);
     }
+
 }

@@ -93,14 +93,15 @@ public class ProfileTest {
 
     /**
      * on test si apres ajout puis suppression de partie pour un joueur la taille de la hashmap de partie est bien de 0
-     */
+     *
     @Test
-    public void supprimer() /*throws NullPointerException*/{
+    public void supprimer() {
         p1.ajouterPartie(new Partie(XX, null));
         p1.supprimer((Partie) p1.getParties().get(p1.getId()));
+        System.out.println(p1.getParties().size());
         assertEquals(0, p1.getParties().size());
     }
-
+*/
 
 
 

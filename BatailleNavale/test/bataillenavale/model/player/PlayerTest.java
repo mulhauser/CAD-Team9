@@ -15,7 +15,9 @@ public class PlayerTest {
 
     @Before
     public void setUp() throws Exception {
-
+        player = new Human();
+        playerVide = new Human();
+        playerNull = new Human();
     }
 
     @After
@@ -30,6 +32,10 @@ public class PlayerTest {
 
 
 
+    @Test
+    public void testOui(){
+        assertNull(null);
+    }
     /**
      * on test qu'un joueur ait bien le bon pseudo
      * @throws Exception

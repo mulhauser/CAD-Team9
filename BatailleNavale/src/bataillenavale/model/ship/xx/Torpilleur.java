@@ -15,4 +15,6 @@ public class Torpilleur extends EpoqueXX  implements Serializable {
     public Torpilleur() {
         super("Torpilleur",2);
     }
+
+
 }

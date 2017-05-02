@@ -14,4 +14,5 @@ public class Galion extends EpoqueXVI implements Serializable {
     public Galion(  ) {
         super("Galion",3);
     }
+
 }

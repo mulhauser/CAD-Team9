@@ -15,4 +15,5 @@ public class ContreTorpilleur extends EpoqueXX implements Serializable{
     public ContreTorpilleur() {
         super("ContreTorpilleur",3);
     }
+
 }

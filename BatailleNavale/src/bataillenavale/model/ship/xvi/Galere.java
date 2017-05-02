@@ -13,5 +13,8 @@ public class Galere extends EpoqueXVI  implements Serializable {
     // 2 CASES
     public Galere() {
         super("Galere",2);
+
     }
+
+
 }

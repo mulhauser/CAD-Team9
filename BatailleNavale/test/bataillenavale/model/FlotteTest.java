@@ -6,6 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.imageio.IIOException;
 import java.util.List;
 
 import static bataillenavale.model.Epoque.XVI;
@@ -22,13 +23,13 @@ public class FlotteTest {
 
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() throws IIOException {
         shipListXX = ShipFactory.getInstance().getShipsByEpoque(XX);
         shipListXVI = ShipFactory.getInstance().getShipsByEpoque(XVI);
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() throws IIOException{
         shipListXVI = null;
         shipListXX = null;
         assertNull(shipListXVI);
@@ -41,7 +42,7 @@ public class FlotteTest {
      * XXeme
      */
     @Test
-    public void flotteXX(){
+    public void flotteXX() throws IIOException{
         Flotte f = new Flotte(shipListXX);
         for(int i = 0; i < f.getShipList().size(); i++){
             assertEquals(shipListXX.get(i), f.getShipList().get(i));
@@ -54,7 +55,7 @@ public class FlotteTest {
      * XVIeme
      */
     @Test
-    public void flotteXVI(){
+    public void flotteXVI() throws IIOException{
         Flotte f = new Flotte(shipListXVI);
         for(int i = 0; i < f.getShipList().size(); i++){
             assertEquals(shipListXVI.get(i), f.getShipList().get(i));

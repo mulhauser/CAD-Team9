@@ -15,4 +15,6 @@ public class Croiseur extends EpoqueXX  implements Serializable {
     public Croiseur() {
         super("Croiseur",4);
     }
+
+
 }

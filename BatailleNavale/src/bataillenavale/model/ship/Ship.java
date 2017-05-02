@@ -39,23 +39,29 @@ public abstract class Ship extends Observable implements Serializable{
             this.nom = n;
             this.size = s;
             this.coordinate = new Coordinate();
-            // Construction de l'image du bateau de base
-            this.image = ImageIO.read(new File("./BatailleNavale/img/1.png"));
 
+            // Construction de l'image du bateau de base
             pieceShipList = new ArrayList<ShipPiece>(size);
             for (int i = 0; i < this.size; i++) {
                 pieceShipList.add(new ShipPiece(this, vie));
-                // On construit l'image selon sa taille
+            }
+
+            this.image = ImageIO.read(new File("./BatailleNavale/img/1.png"));
+            for (int i = 0; i < this.size; i++) {
                 if(i < this.size - 1) {
                     BufferedImage img2 = ImageIO.read(new File("./BatailleNavale/img/1.png"));
                     this.image = joinBufferedImage(this.image, img2);
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+           // e.printStackTrace();
         }
 
     }
+
+
+
+
 
     public int getSize() {
         return this.size;
