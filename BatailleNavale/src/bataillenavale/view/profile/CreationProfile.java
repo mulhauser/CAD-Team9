@@ -53,7 +53,7 @@ public class CreationProfile extends JPanel {
 
             @Override
             public void actionPerformed(ActionEvent ae) {
-                if (!DAOFactory.getInstance().getDAOSauvegarde().profileExist(pseudo.getText())) {
+                if (!DAOFactory.getInstance().getDAOSauvegardeSerialisation().profileExist(pseudo.getText())) {
                     model = new BatailleNavale();
                     model.newProfile(pseudo.getText());
                     card.getAccueilPartie().setModel(model);

@@ -70,7 +70,7 @@ public class ChargeProfile extends JPanel {
     }
 
     public void constructListProfil(){
-        profiles = DAOFactory.getInstance().getDAOSauvegarde().getProfiles();
+        profiles = DAOFactory.getInstance().getDAOSauvegardeSerialisation().getProfiles();
         if(profiles.size() > 0) {
             DefaultListModel listModel = new DefaultListModel<String>();
             for (String v : profiles.keySet()) {

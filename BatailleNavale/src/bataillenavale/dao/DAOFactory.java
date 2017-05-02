@@ -18,7 +18,7 @@ public class DAOFactory {
         return instance;
     }
 
-    public DAOSauvegarde getDAOSauvegarde(){
-        return new DAOSauvegarde();
+    public DAOSauvegarde getDAOSauvegardeSerialisation(){
+        return new DAOSauvegardeSerialisation();
     }
 }
