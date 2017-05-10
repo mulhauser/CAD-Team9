@@ -1,16 +1,15 @@
 # CAD-Team9
 Diagramme UML, etc : https://www.lucidchart.com/invitations/accept/4ac5469f-1d5e-4b8b-aebd-0011505baddc
 
+Ce projet nécessite gradle 3.5 et java 1.8
+# Nettoyage, Compilation, Execution
+Il faut être dans le dossier CAD-Team9 pour exécuter toutes ces commandes gradle xxx
+- nettoyer : gradle clean (supprime le dossier build)
+- compilation : gradle fatJar (créer un dossier build et un fichier jar exécutable dans build/libs)
+- exécution du jeu : java -jar build/libs/CAD-Team9-all-1.0.jar (ou en se plaçant dans le dossier build/libs/ java -jar CAD-Team9-all-1.0.jar)
+- exécution des tests : gradle test, un dossier build est créé.
+Pour voir le résultat des tests, il faut aller dans build/reports/tests/test/ et ouvrir dans votre navigateur internet le fichier index.html
 
-UTILISATION DU FICHIER BUILD.XML
-
-
-En faisant :      ant -buildfile build.xml
-	- Les fichiers .class seront supprimés
-	- Le projet sera compilé
-	- Une archive du nom de CAD_TEAM9.jar sera crée
-	- (les test ça vient)
-	- Les fichiers .class seton à nouveau supprimés
 
 
 Jeu:
