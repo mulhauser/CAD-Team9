@@ -30,6 +30,9 @@ public class IAFactory implements Serializable{
             case "cross":
                 strategy = new CrossStrategy();
                 break;
+            case "advanced":
+            	strategy = new AdvancedStrategy();
+            	break;
         }
         return strategy;
     }

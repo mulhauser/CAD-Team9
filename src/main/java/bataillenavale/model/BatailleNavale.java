@@ -61,7 +61,7 @@ public class BatailleNavale extends Observable {
     }
 
     public void tirBot() {
-        int[] xy = ((Bot)partie.getBot()).getStrategy().getStrategyShoot(partie.getHuman().getMapAdver().getSize());
+        int[] xy = ((Bot)partie.getBot()).getStrategy().getStrategyShoot(partie.getHuman().getMapPerso());
         partie.getBot().fire(xy[0], xy[1], partie.getHuman().getMapPerso());
         /*try {
             Thread.sleep(2000);

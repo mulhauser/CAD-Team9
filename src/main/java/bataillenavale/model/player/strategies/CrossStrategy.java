@@ -3,6 +3,8 @@ package bataillenavale.model.player.strategies;
 import java.io.Serializable;
 import java.util.Random;
 
+import bataillenavale.model.Map;
+
 /**
  * Created by mulhauser on 12/04/2017.
  */
@@ -20,7 +22,8 @@ public class CrossStrategy extends AttackStrategies implements Serializable{
 
 
     @Override
-    public int[] getStrategyShoot(int size) {
+    public int[] getStrategyShoot(Map adversMap) {
+    	int size = adversMap.getSize();
         //car resultat = coordonnees x et y
         int[] res = new int[2];
         Random r = new Random();
@@ -80,11 +83,9 @@ public class CrossStrategy extends AttackStrategies implements Serializable{
                 this.diagonalWay *= -1;
             }
         }
-
         //on ajoute le tire avec listShoot.add(new Coordinate(x, y)); dans ajouteShoot
         //on est certain que la fonction retourne true
         ajouteShoot(res[0], res[1]);
-
         return res;
     }
 

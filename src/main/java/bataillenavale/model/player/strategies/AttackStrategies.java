@@ -1,6 +1,7 @@
 package bataillenavale.model.player.strategies;
 
 import bataillenavale.model.Coordinate;
+import bataillenavale.model.Map;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -35,5 +36,5 @@ public abstract class AttackStrategies implements Serializable {
         }
     }
 
-    public abstract int[] getStrategyShoot(int size);
+    public abstract int[] getStrategyShoot(Map adversMap);
 }

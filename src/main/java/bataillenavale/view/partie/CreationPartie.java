@@ -36,7 +36,7 @@ public class CreationPartie extends JPanel {
         saisie.add(epoque);
         // ligne 3 du GL
         saisie.add(new JLabel("Difficulté : "));
-        String[] strats = {"random", "cross"};
+        String[] strats = {"random", "cross","advanced"};
         strat = new JComboBox(strats);
         strat.setSelectedIndex(0);
         saisie.add(strat);

@@ -3,6 +3,8 @@ package bataillenavale.model.player.strategies;
 import java.io.Serializable;
 import java.util.Random;
 
+import bataillenavale.model.Map;
+
 /**
  * Created by mulhauser on 12/04/2017.
  */
@@ -15,7 +17,8 @@ public class RandomStrategy extends AttackStrategies implements Serializable{
         super();
     }
     @Override
-    public int[] getStrategyShoot(int size) {
+    public int[] getStrategyShoot(Map adversMap) {
+    	int size = adversMap.getSize();
         int[] res = new int[2];
         Random r = new Random();
 

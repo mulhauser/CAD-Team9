@@ -45,3 +45,16 @@ Pour ajouter un moyen de sauvegarde:
 - il suffit d'ajouter une classe qui hérite de la classe DAOSauvegarde et
 d'implémenter les 3 méthodes getProfiles(), saveProfile(Profile p), profileExist(String nom)
 
+#CAD-Team8 Modifications effectuées:
+
+Ajout d'une stratégie : AdvancedStrategie
+	=>Quadrillage du terrain pour trouver les bateaux puis exploration autour des cases de bateaux touchées.
+	
+Pour implémenter cette stratégie, une modification du modèle de stratégie à du être nécessaire.
+La classe abstraite AttackStrategie a une méthode getStrategyShoot(int size) pour récupérer la position de tir choisie par l'IA.
+Cependant, cela ne permettait pas de prendre en compte les informations sur les cases déjà touchées, et empêchait de finir de détruire les bateaux qui ont plus d'un de vie.
+Nous l'avons donc modifié en getStrategyShoot(Map adverseMap) pour pouvoir avoir accès aux informations des cases déjà touchées.
+Pour ce faire, il a fallu aussi modifié cette méthode dans les autres stratégies déjà implémentées.
+
+Nous avons aussi modifié l'interface CréationNiveau pour ajouter cette stratégie, et l'IAFactory pour pouvoir l'ajouter au jeu.
+
